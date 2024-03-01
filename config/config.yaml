@@ -1,10 +1,7 @@
-samples: 'data/PGCOE_Datasheet - M.tuberculosis_Seq.csv' #list some .tsv file containing sample names
-#samples: ['']
+samples: 'data/PGCOE_Datasheet - M.tuberculosis_Seq.csv' #list .csv file containing sample names
 rundate: '2024-02-12'
 runname: 'TB001'
 reference: 'data/reference.fasta'
-scratchdir: '/home/cck25/palmer_scratch'
-primers: 'data/Reference_scheme.primer.bed'
-outdir: 'results' #put something specific to this run, eg the date or run #
-#read_subsamples: [0.05,0.1,0.15,0.2,0.25,0.5,1.0]
-read_subsamples: [0.05,0.1]
+primers: 'data/TBscheme.primer.bed'
+outdir: 'results' 
+read_subsamples: [0.05,0.1,0.15,0.2,0.25,0.5,1.0]
