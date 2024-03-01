@@ -19,7 +19,7 @@ READ_SUBSAMPLES=set(config['read_subsamples'])
 
 rule all:
     input:
-        coveragestats=expand(os.path.join(config['outdir'],'{sample}/{sample}_coveragestats_sub{subsample}.csv'),sample=SAMPLES,subsample=READ_SUBSAMPLES),
+        coveragestats=expand(os.path.join(config['outdir'],'{sample}/{sample}_coverage_sub{subsample}.tsv'),sample=SAMPLES,subsample=READ_SUBSAMPLES),
         vcf_filt=os.path.join(config['outdir'],config['runname'],"variants_filt.vcf.gz"),
         consensuses=expand(os.path.join(config['outdir'],'{sample}/{sample}_consensus.fa'),sample=SAMPLES),
         #snippyout=expand(os.path.join(config['outdir'],'{sample}/snippy_{sample}','snps.vcf'),sample=SAMPLES)
@@ -86,36 +86,47 @@ rule sort:
         samtools index {output.aln_trimmed_sorted} >> {log.stdout} 2>> {log.stderr}
         """
 
-rule coverageinfo:
+rule subsample:
     input:
         aln_trimmed_sorted= os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam')
     output:
-        coveragestats=os.path.join(config['outdir'],'{sample}/{sample}_coveragestats_sub{subsample}.csv'),
         subsamp=os.path.join(config['outdir'],'{sample}/{sample}_subsamp{subsample}.bam')
+    log:
+        stdout="logs/{sample}/sub{subsample}.out",
+        stderr="logs/{sample}/sub{subsample}.err",
+    message: "Selecting subsample of reads from {wildcards.sample}: {wildcards.subsample}"
+    shell:
+        """
+        samtools view -b -s {wildcards.subsample} {input.aln_trimmed_sorted} -o {output.subsamp} 1> {log.stdout} 2> {log.stderr}
+        """
+
+rule coverage:
+    input:
+        subsamp=os.path.join(config['outdir'],'{sample}/{sample}_subsamp{subsample}.bam')
+    output:
+        coveragestats=os.path.join(config['outdir'],'{sample}/{sample}_coverage_sub{subsample}.tsv')
     params:
         maxdepth=0,
         minmapqual=60,
         minbasequal=13
     log:
-        stdout="logs/{sample}/coverageinfo_sub{subsample}.out",
-        stderr="logs/{sample}/coverageinfo_sub{subsample}.err",
+        stderr="logs/{sample}/coverage_sub{subsample}.err"
     message: "Computing coverage of reference for sample {wildcards.sample} with a read subsample fraction of {wildcards.subsample}"
     shell:
         """
-        samtools view -b -s {wildcards.subsample} {input.aln_trimmed_sorted} -o {output.subsamp} 1> {log.stdout} 2> {log.stderr}
-        #echo -e "$(echo -e '{wildcards.sample}\t{wildcards.subsample}\t')\t" 1> {output.coveragestats} 2>> {log.stderr}
-        #samtools coverage -d {params.maxdepth} -q {params.minmapqual} -Q {params.minbasequal} --no-header {output.subsamp} 1>> {output.coveragestats} 2>> {log.stderr}
-        printf '\\n%s\\t%s\\t' {wildcards.sample} {wildcards.subsample} `samtools coverage -d {params.maxdepth} -q {params.minmapqual} -Q {params.minbasequal} --no-header {output.subsamp}` > {output.coveragestats} 2> {log.stderr}
+        printf '%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n' {wildcards.sample} {wildcards.subsample} `samtools coverage -d {params.maxdepth} -q {params.minmapqual} -Q {params.minbasequal} --no-header {input.subsamp}` > {output.coveragestats} 2> {log.stderr}
         """
 
 rule combinedcoverage:
     input:
-        coveragestats=expand(os.path.join(config['outdir'],'{sample}/{sample}_coveragestats_sub{subsample}.csv'),sample=SAMPLES,subsample=READ_SUBSAMPLES)
+        coveragestats=expand(os.path.join(config['outdir'],'{sample}/{sample}_coverage_sub{subsample}.tsv'),sample=SAMPLES,subsample=READ_SUBSAMPLES)
     output:
-        combinedcoverage=os.path.join(config['outdir'],'TB001/combinedcoverage.tsv')
+        combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv')
+    log:
+        stderr="logs/coverage.err"
     shell:
         """
-        {{ echo -e "sample\tsubsample\trname\tstartpos\tendpos\tnumreads\tcovbases\tcoverage\tmeandepth\tmeanbaseq\tmeanmapq";cat {input.coveragestats}; }} > {output.combinedcoverage}
+        {{ echo -e "sample\tsubsample\trname\tstartpos\tendpos\tnumreads\tcovbases\tcoverage\tmeandepth\tmeanbaseq\tmeanmapq";cat {input.coveragestats}; }} > {output.combinedcoverage} 2> {log.stderr}
         """
 
 rule indexbam:
