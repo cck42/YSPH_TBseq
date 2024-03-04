@@ -1,0 +1,3 @@
+Seq_ID,Original_ID,box_loc,Sample_Type,Sample_source,CT,Template_dilution,Primer_Conc,NGS_Prep_Method,amp_date,NGS primers,NGS_Run_ID,NGS_Date,Qubit_Pool1,Qubit_Pool2,Qubit_library,Reference_Genome,%Coverage_(20x),Samtool_avg _depth,BEDfile
+Yale-TB001_testdata,111-10300-18,A01,DNA,Moldova,11.0602184,,200uM,Mpox/Hybrid CovidSeq,2024-02-05,TBv1.0,TB001,2024-02-12,98.2,90.4,,,,,
+Yale-TB006_testdata,444-3403-18,B06,DNA,Moldova,15.6202977,,200uM,Mpox/Hybrid CovidSeq,2024-02-05,TBv1.0,TB001,2024-02-12,67.8,77.4,,,,,

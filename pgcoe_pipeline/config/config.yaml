@@ -1,4 +1,6 @@
-samples: 'data/PGCOE_Datasheet - M.tuberculosis_Seq.csv' #list .csv file containing sample names
+#samples: 'data/PGCOE_Datasheet - M.tuberculosis_Seq.csv' #list .csv file containing sample names
+samples: '../test_data/test_samples.txt'
+readdir: '../test_data/'
 rundate: '2024-02-12'
 runname: 'TB001'
 reference: 'data/reference.fasta'
