@@ -16,3 +16,4 @@ dependencies:
   - nextalign
   - mafft
   - mash
+  - bcftools
