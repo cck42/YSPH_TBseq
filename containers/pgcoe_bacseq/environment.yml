@@ -1,0 +1,18 @@
+name: root
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - biopython
+  - matplotlib
+  - numpy
+  - python=3.9
+  - snakemake-minimal
+  - bwa
+  - samtools
+  - bedtools
+  - ivar>=1.3.1
+  - nextalign
+  - mafft
+  - mash
