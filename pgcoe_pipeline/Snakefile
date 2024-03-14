@@ -25,8 +25,8 @@ rule all:
         coveragestats=expand(os.path.join(config['outdir'],'{sample}/{sample}_coverage_sub{subsample}.tsv'),sample=SAMPLES,subsample=READ_SUBSAMPLES),
         vcf_filt=os.path.join(config['outdir'],config['runname'],"variants_filt.vcf.gz"),
         consensuses=expand(os.path.join(config['outdir'],'{sample}/{sample}_consensus.fa'),sample=SAMPLES),
-        #snippyout=expand(os.path.join(config['outdir'],'{sample}/snippy_{sample}','snps.vcf'),sample=SAMPLES)
-        combinedcoverage=os.path.join(config['outdir'],'TB001/combinedcoverage.tsv')
+        snippyout=expand(os.path.join(config['outdir'],'{sample}/snippy_{sample}','snps.vcf'),sample=SAMPLES),
+        combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv')
     
 rule indexref:
     input:
@@ -200,10 +200,13 @@ rule consensus:
 
 rule snippy:
     input:
-        read_location=os.path.join(config['outdir'],'{sample}','Unaligned'),
+        #read_location=os.path.join(config['outdir'],'{sample}','Unaligned'),
+        #indexedref="data/reference.fasta.amb"
+        read_location=os.path.join(config['readdir'],'{sample}'),
         indexedref="data/reference.fasta.amb"
     params:
         ref=config['reference']
+    container: "docker://staphb/snippy"
     output:
         snippyout = os.path.join(config['outdir'],'{sample}/snippy_{sample}','snps.vcf') # .bam file output of aligned and sorted reads
     log:
