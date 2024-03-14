@@ -222,3 +222,23 @@ rule snippy:
             --outdir results/{wildcards.sample}/snippy_{wildcards.sample} \
             --force 1> {log.stdout} 2> {log.stderr}
         """
+
+rule snippy_core:
+    input:
+        snippyout = expand(config['outdir'].'/{sample}/snippy_{sample}/snps.tab',sample=SAMPLES)
+        indexedref="data/reference.fasta.amb"
+    params:
+        prefix=expand(config['outdir'].'/snippy/core'
+        indirs=expand(config['outdir'].'/{sample}/snippy_{sample},sample=SAMPLES)
+    container: "docker://staphb/snippy"
+    output:
+        coreout = expand(config['outdir'].'/snippy/core.{suffix}',suffix=['aln','tab','txt','vcf']) 
+    log:
+        stdout="logs/config['runname']/core.out",
+        stderr="logs/config['runname']/core.err"
+    message: "Running snippy core"
+    shell:
+        """
+        snippy-core --prefix {params.prefix} {params.indirs} \
+            1> {log.stdout} 2> {log.stderr}
+        """
