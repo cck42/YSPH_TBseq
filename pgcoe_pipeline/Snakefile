@@ -214,7 +214,7 @@ rule ivariants:
         consensus=os.path.join(config['outdir'],'{sample}/{sample}_ivariants.txt')
     resources:
         mem_gb: 8,
-        runtime: "04:00:00",
+        runtime: "04:00:00"
     log:
         stdout="logs/{sample}/consensus.out",
         stderr="logs/{sample}/consensus.err"
@@ -275,20 +275,23 @@ rule snippy_core:
 
 rule evorha:
     input:
-        tocall=expand(os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam'),sample=SAMPLES),
-        indexed=expand(os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam.bai'),sample=SAMPLES)
+        bam=config['outdir']+'{sample}/{sample}_aln_trimmed_sorted.bam',
+        idx=config['outdir']+'{sample}/{sample}_aln_trimmed_sorted.bam.bai'
     params:
         ref=config['reference'],
+        bamln=config['outdir']+'/evorha/{sample}.bam',
+        idxln=config['outdir']+'/evorha/{sample}.bam.bai',
         prefix=config['outdir']+'/evorha/',
         indirs=expand(config['outdir']+'/{sample}/snippy_{sample}',sample=SAMPLES)
-    container: "docker://staphb/snippy"
+    container: "docker://sethnr/pgcoe_evorha:0.01"
     output:
-        coreout = expand(config['outdir']+'/evorha/sample.{suffix}',suffix=['aln','tab','txt','vcf']) 
+        coreout = config['outdir']+'/evorha/{sample}.hapfreq',
     log:
-        stdout="logs/"+config['runname']+"/core.out",
-        stderr="logs/"+config['runname']+"/core.err"
+        stderr="logs/evorha/{sample}.err",
     message: "Running snippy core"
     shell:
         """
-        java --jar evorha.jar 
+        ln -s {input.bam} {params.bamln}
+        ln -s {input.idx} {params.idxln}
+    	java -jar evorha.jar completeAnalysis {params.ref} {params.bamln} 2>&1 > {log.stderr}
         """
