@@ -211,10 +211,10 @@ rule ivariants:
         depth=20,
         prefix=os.path.join(config['outdir'],'{sample}/{sample}_consensus')
     output:
-        consensus=os.path.join(config['outdir'],'{sample}/{sample}_ivariants.txt')
+        consensus=os.path.join(config['outdir'],'{sample}/{sample}_ivariants.txt'),
     resources:
-        mem_gb: 8,
-        runtime: "04:00:00",
+        mem_mb=8000,
+        runtime=240,
     log:
         stdout="logs/{sample}/consensus.out",
         stderr="logs/{sample}/consensus.err"
