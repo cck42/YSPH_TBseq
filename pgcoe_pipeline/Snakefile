@@ -212,6 +212,9 @@ rule ivariants:
         prefix=os.path.join(config['outdir'],'{sample}/{sample}_consensus')
     output:
         consensus=os.path.join(config['outdir'],'{sample}/{sample}_ivariants.txt')
+    resources:
+        mem_gb: 8,
+        runtime: "04:00:00",
     log:
         stdout="logs/{sample}/consensus.out",
         stderr="logs/{sample}/consensus.err"
@@ -268,4 +271,24 @@ rule snippy_core:
         """
         snippy-core --ref {params.ref}  --prefix {params.prefix} {params.indirs} \
             1> {log.stdout} 2> {log.stderr}
+        """
+
+rule evorha:
+    input:
+        tocall=expand(os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam'),sample=SAMPLES),
+        indexed=expand(os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam.bai'),sample=SAMPLES)
+    params:
+        ref=config['reference'],
+        prefix=config['outdir']+'/evorha/',
+        indirs=expand(config['outdir']+'/{sample}/snippy_{sample}',sample=SAMPLES)
+    container: "docker://staphb/snippy"
+    output:
+        coreout = expand(config['outdir']+'/evorha/sample.{suffix}',suffix=['aln','tab','txt','vcf']) 
+    log:
+        stdout="logs/"+config['runname']+"/core.out",
+        stderr="logs/"+config['runname']+"/core.err"
+    message: "Running snippy core"
+    shell:
+        """
+        java --jar evorha.jar 
         """
