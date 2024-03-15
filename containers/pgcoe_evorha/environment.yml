@@ -1,0 +1,10 @@
+name: root
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - numpy
+  - biopython
+  - python=3.9
+  - gsl

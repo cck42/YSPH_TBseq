@@ -1,0 +1,6 @@
+wget http://bioinformatics.intec.ugent.be/kmarchal/EVORhA/evorha.zip
+unzip evorha.zip 
+
+docker build --platform linux/amd64 -t sethnr/pgcoe_evorha:0.01 ./
+
+docker push sethnr/pgcoe_evorha:0.01
