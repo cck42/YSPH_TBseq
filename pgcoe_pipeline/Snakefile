@@ -25,6 +25,7 @@ rule all:
         coveragestats=expand(os.path.join(config['outdir'],'{sample}/{sample}_coverage_sub{subsample}.tsv'),sample=SAMPLES,subsample=READ_SUBSAMPLES),
         vcf_filt=os.path.join(config['outdir'],config['runname'],"variants_filt.vcf.gz"),
         consensuses=expand(os.path.join(config['outdir'],'{sample}/{sample}_consensus.fa'),sample=SAMPLES),
+        ivariants=expand(os.path.join(config['outdir'],'{sample}/{sample}_ivariants.txt'),sample=SAMPLES),
         snippyout=expand(os.path.join(config['outdir'],'{sample}/snippy_{sample}','snps.vcf'),sample=SAMPLES),
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv')
     
@@ -197,6 +198,29 @@ rule consensus:
         """
         samtools mpileup -aa -A -d 0 -Q 0 -f {params.ref} {input.tocall} | ivar consensus -t {params.threshold} -m {params.depth} -p {params.prefix} -i {wildcards.sample} 1> {log.stdout} 2> {log.stderr}
         """
+
+rule ivariants:
+    input:
+        tocall=os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam'),
+        indexed=os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam.bai')
+    params:
+        ref=config['reference'],
+        threshold=0.2,
+        depth=20,
+        prefix=os.path.join(config['outdir'],'{sample}/{sample}_consensus')
+    output:
+        consensus=os.path.join(config['outdir'],'{sample}/{sample}_ivariants.txt')
+    log:
+        stdout="logs/{sample}/consensus.out",
+        stderr="logs/{sample}/consensus.err"
+    shell:
+        """
+        samtools mpileup -aa -A -d 0 -Q 0 -f {params.ref} {input.tocall} | \
+         ivar variants -q 20 -r {params.ref} -t {params.threshold} \
+           -m {params.depth} -p {params.prefix}  1> {output.consensus} 2> {log.stderr}
+        
+        """
+
 
 rule snippy:
     input:
