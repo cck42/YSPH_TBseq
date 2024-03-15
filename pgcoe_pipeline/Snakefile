@@ -211,10 +211,10 @@ rule ivariants:
         depth=20,
         prefix=os.path.join(config['outdir'],'{sample}/{sample}_consensus')
     output:
-        consensus=os.path.join(config['outdir'],'{sample}/{sample}_ivariants.txt')
+        consensus=os.path.join(config['outdir'],'{sample}/{sample}_ivariants.txt'),
     resources:
-        mem_gb: 8,
-        runtime: "04:00:00"
+        mem_mb=8000,
+        runtime=240,
     log:
         stdout="logs/{sample}/consensus.out",
         stderr="logs/{sample}/consensus.err"
@@ -279,8 +279,8 @@ rule evorha:
         idx=config['outdir']+'{sample}/{sample}_aln_trimmed_sorted.bam.bai'
     params:
         ref=config['reference'],
-        bamln=config['outdir']+'/evorha/{sample}_sorted.bam',
-        idxln=config['outdir']+'/evorha/{sample}_sorted.bam.bai',
+        bamln=config['outdir']+'/evorha/{sample}.bam',
+        idxln=config['outdir']+'/evorha/{sample}.bam.bai',
         prefix=config['outdir']+'/evorha/',
         indirs=expand(config['outdir']+'/{sample}/snippy_{sample}',sample=SAMPLES)
     container: "docker://sethnr/pgcoe_evorha:0.01"
