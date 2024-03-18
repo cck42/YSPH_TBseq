@@ -67,10 +67,10 @@ rule align_to_ref:
 
 rule primerclip:
     input:
-        aligned = os.path.join(config['outdir'],'{sample}/{sample}_aligned.bam'),
+        aligned = os.path.join(config['outdir'],'align/{sample}_aligned.bam'),
         primers = config['primers']
     output:
-        aln_trimmed= os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed.bam')
+        aln_trimmed= os.path.join(config['outdir'],'align/{sample}_aln_itrim.bam')
     log:
         stdout="logs/ivar/{sample}_trim.out",
         stderr="logs/ivar/{sample}_trim.err"
@@ -82,22 +82,22 @@ rule primerclip:
 
 rule sort:
     input:
-        aln_trimmed= os.path.join(config['outdir'],'align/{sample}_aln_trimmed.bam')
+        aln_trimmed= os.path.join(config['outdir'],'align/{sample}_aln_itrim.bam')
     output:
-        aln_trimmed_sorted=os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam')
+        aln_itrim_sorted=os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam')
     log:
         stdout="logs/align/{sample}_sort.out",
         stderr="logs/align/{sample}_sort.err"
     message: "Sorting and indexing reads"
     shell:
         """
-        samtools sort {input.aln_trimmed} -o {output.aln_trimmed_sorted} > {log.stdout} 2> {log.stderr}
-        samtools index {output.aln_trimmed_sorted} >> {log.stdout} 2>> {log.stderr}
+        samtools sort {input.aln_trimmed} -o {output.aln_itrim_sorted} > {log.stdout} 2> {log.stderr}
+        samtools index {output.aln_itrim_sorted} >> {log.stdout} 2>> {log.stderr}
         """
 
 rule subsample:
     input:
-        aln_trimmed_sorted= os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam')
+        aln_itrim_sorted= os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam')
     output:
         subsamp=os.path.join(config['outdir'],'align/{sample}_subsamp{subsample}.bam')
     log:
@@ -106,7 +106,7 @@ rule subsample:
     message: "Selecting subsample of reads from {wildcards.sample}: {wildcards.subsample}"
     shell:
         """
-        samtools view -b -s {wildcards.subsample} {input.aln_trimmed_sorted} -o {output.subsamp} 1> {log.stdout} 2> {log.stderr}
+        samtools view -b -s {wildcards.subsample} {input.aln_itrim_sorted} -o {output.subsamp} 1> {log.stdout} 2> {log.stderr}
         """
 
 rule coverage:
@@ -154,8 +154,8 @@ rule indexbam:
 
 rule variantcalling:
     input:
-        tocall=expand(os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam'),sample=SAMPLES),
-        indexed=expand(os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam.bai'),sample=SAMPLES)
+        tocall=expand(os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam'),sample=SAMPLES),
+        indexed=expand(os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam.bai'),sample=SAMPLES)
     params:
         ref=config['reference']
     output:
@@ -186,8 +186,8 @@ rule variantfilter:
 
 rule pileup:
     input:
-        tocall=os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam'),
-        indexed=os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam.bai')
+        tocall=os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam'),
+        indexed=os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam.bai')
     params:
         ref=config['reference'],
         threshold=0.2,
@@ -296,8 +296,8 @@ rule snippy_core:
 
 rule evorha:
     input:
-        bam=config['outdir']+'align/{sample}_aln_trimmed_sorted.bam',
-        idx=config['outdir']+'align/{sample}_aln_trimmed_sorted.bam.bai'
+        bam=config['outdir']+'align/{sample}_aln_itrim_sorted.bam',
+        idx=config['outdir']+'align/{sample}_aln_itrim_sorted.bam.bai'
     params:
         ref=config['reference'],
     params:
