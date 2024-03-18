@@ -5,15 +5,17 @@ configfile: "config/config.yaml"
 include: "rules/common.py"
 
 #RUNDATE=config['rundate']
-SAMPLES = set(pd.read_table(config['samples'],header=0,dtype=str,delimiter=',').loc[lambda df: df['NGS_Date'] == config['rundate'], 'Seq_ID'].tolist())
 #SAMPLES = set(pd.read_table(config['samples'],header=0,dtype=str,delimiter=',')['Seq_ID']) #change from 'strain' as applicable
 #SAMPLES=config['samples'] #un-comment for testing with single samples
 #PATHS=set(pd.read_table(config['seq_data'],dtype=str))
 #REFERENCE=config['reference']
-# HOMEDIR=config['homedir'] #only if you want to set to something other than where this will be run from
+#HOMEDIR=config['homedir'] #only if you want to set to something other than where this will be run from
 #SCRATCH=config['scratchdir']
 #PRIMERS=config['primers']
 #OUTDIR=config['outdir']
+
+
+SAMPLES = set(pd.read_table(config['samples'],header=0,dtype=str,delimiter=',').loc[lambda df: df['NGS_Date'] == config['rundate'], 'Seq_ID'].tolist())
 READ_SUBSAMPLES=set(config['read_subsamples'])
 
 container: "docker://sethnr/pgcoe_bacseq:0.01"
@@ -25,9 +27,8 @@ rule all:
         coveragestats=expand(os.path.join(config['outdir'],'{sample}/{sample}_coverage_sub{subsample}.tsv'),
 	                     sample=SAMPLES,subsample=READ_SUBSAMPLES),
         vcf_filt=os.path.join(config['outdir'],config['runname'],"variants_filt.vcf.gz"),
-        consensuses=expand(os.path.join(config['outdir'],'{sample}/{sample}_consensus.fa'),sample=SAMPLES),
-        ivariants=expand(os.path.join(config['outdir'],'{sample}/{sample}_ivariants.tsv'),sample=SAMPLES),
-        #snippyout=expand(os.path.join(config['outdir'],'{sample}/snippy_{sample}','snps.vcf'),sample=SAMPLES),
+        consensuses=expand(os.path.join(config['outdir'],'ivar/{sample}_consensus.fa'),sample=SAMPLES),
+        ivariants=expand(os.path.join(config['outdir'],'ivar/{sample}_ivariants.txt'),sample=SAMPLES),
         snippycore=config['outdir']+'/snippy/core.txt',
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
         evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES)
@@ -51,10 +52,10 @@ rule align_to_ref:
     params:
         ref=config['reference']
     output:
-        aligned = os.path.join(config['outdir'],'{sample}/{sample}_aligned.bam') # .bam file output of aligned and sorted reads
+        aligned = os.path.join(config['outdir'],'bwa/{sample}_aligned.bam') # .bam file output of aligned and sorted reads
     log:
-        stdout="logs/{sample}/aln.out",
-        stderr="logs/{sample}/aln.err"
+        stdout="logs/bwa/{sample}_aln.out",
+        stderr="logs/bwa/{sample}_aln.err"
     container: "docker://sethnr/pgcoe_bacseq:0.01"
     message: "Aligning reads to H37Rv and sorting output for sample {wildcards.sample}"
     shell:
@@ -71,8 +72,8 @@ rule primerclip:
     output:
         aln_trimmed= os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed.bam')
     log:
-        stdout="logs/{sample}/trim.out",
-        stderr="logs/{sample}/trim.err"
+        stdout="logs/ivar/{sample}_trim.out",
+        stderr="logs/ivar/{sample}_trim.err"
     message: "QC and soft-clipping primers using iVar"
     shell:
         """
@@ -81,12 +82,12 @@ rule primerclip:
 
 rule sort:
     input:
-        aln_trimmed= os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed.bam')
+        aln_trimmed= os.path.join(config['outdir'],'align/{sample}_aln_trimmed.bam')
     output:
-        aln_trimmed_sorted=os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam')
+        aln_trimmed_sorted=os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam')
     log:
-        stdout="logs/{sample}/sort.out",
-        stderr="logs/{sample}/sort.err"
+        stdout="logs/align/{sample}_sort.out",
+        stderr="logs/align/{sample}_sort.err"
     message: "Sorting and indexing reads"
     shell:
         """
@@ -96,12 +97,12 @@ rule sort:
 
 rule subsample:
     input:
-        aln_trimmed_sorted= os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam')
+        aln_trimmed_sorted= os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam')
     output:
-        subsamp=os.path.join(config['outdir'],'{sample}/{sample}_subsamp{subsample}.bam')
+        subsamp=os.path.join(config['outdir'],'align/{sample}_subsamp{subsample}.bam')
     log:
-        stdout="logs/{sample}/sub{subsample}.out",
-        stderr="logs/{sample}/sub{subsample}.err",
+        stdout="logs/align/{sample}_sub_{subsample}.out",
+        stderr="logs/align/{sample}_sub_{subsample}.err",
     message: "Selecting subsample of reads from {wildcards.sample}: {wildcards.subsample}"
     shell:
         """
@@ -110,15 +111,15 @@ rule subsample:
 
 rule coverage:
     input:
-        subsamp=os.path.join(config['outdir'],'{sample}/{sample}_subsamp{subsample}.bam')
+        subsamp=os.path.join(config['outdir'],'align/{sample}_subsamp{subsample}.bam')
     output:
-        coveragestats=os.path.join(config['outdir'],'{sample}/{sample}_coverage_sub{subsample}.tsv')
+        coveragestats=os.path.join(config['outdir'],'align/{sample}_coverage_sub{subsample}.tsv')
     params:
         maxdepth=0,
         minmapqual=60,
         minbasequal=13
     log:
-        stderr="logs/{sample}/coverage_sub{subsample}.err"
+        stderr="logs/align/{sample}_sub{subsample}.err"
     message: "Computing coverage of reference for sample {wildcards.sample} with a read subsample fraction of {wildcards.subsample}"
     shell:
         """
@@ -153,12 +154,12 @@ rule indexbam:
 
 rule variantcalling:
     input:
-        tocall=expand(os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam'),sample=SAMPLES),
-        indexed=expand(os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam.bai'),sample=SAMPLES)
+        tocall=expand(os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam'),sample=SAMPLES),
+        indexed=expand(os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam.bai'),sample=SAMPLES)
     params:
         ref=config['reference']
     output:
-        vcf=os.path.join(config['outdir'],config['runname'],"variants_unfilt.vcf.gz")
+        vcf=os.path.join(config['outdir'],'pileup',"all_variants_unfilt.vcf.gz")
     log:
         stdout="logs/variantcalling.out",
         stderr="logs/variantcalling.err"
@@ -174,7 +175,7 @@ rule variantfilter:
     input:
         vcf={rules.variantcalling.output.vcf}
     output:
-        vcf_filt=os.path.join(config['outdir'],config['runname'],"variants_filt.vcf.gz")
+        vcf_filt=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz")
     log:
         stdout="logs/variantfilter.out",
         stderr="logs/variantfilter.err"
@@ -183,47 +184,66 @@ rule variantfilter:
         bcftools filter -O z -o {output.vcf_filt} -i 'QUAL>10 & DP>10' {input.vcf} 1> {log.stdout} 2> {log.stderr}
         """
 
-rule consensus:
+rule pileup:
     input:
-        tocall=os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam'),
-        indexed=os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam.bai')
+        tocall=os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam'),
+        indexed=os.path.join(config['outdir'],'align/{sample}_aln_trimmed_sorted.bam.bai')
     params:
         ref=config['reference'],
         threshold=0.2,
         depth=20,
-        prefix=os.path.join(config['outdir'],'{sample}/{sample}_consensus')
+        prefix=os.path.join(config['outdir'],'ivar/{sample}_consensus')
     output:
-        consensus=os.path.join(config['outdir'],'{sample}/{sample}_consensus.fa')
+        pileup=os.path.join(config['outdir'],'pileup/{sample}.pileup')
+    log:
+        stderr="logs/pileup/{sample}.err"
+    shell:
+        """
+        samtools mpileup -aa -A -d 0 -Q 0 -f {params.ref} {input.tocall} 1> {output.pileup} 2> {log.stderr}
+        """
+
+
+rule consensus:
+    input:
+        pileup=os.path.join(config['outdir'],'pileup/{sample}.pileup')
+    params:
+        ref=config['reference'],
+        threshold=0.2,
+        depth=20,
+        prefix=os.path.join(config['outdir'],'ivar/{sample}_consensus')
+    output:
+        consensus=os.path.join(config['outdir'],'ivar/{sample}_consensus.fa')
     log:
         stdout="logs/{sample}/consensus.out",
         stderr="logs/{sample}/consensus.err"
     shell:
         """
-        samtools mpileup -aa -A -d 0 -Q 0 -f {params.ref} {input.tocall} | ivar consensus -t {params.threshold} -m {params.depth} -p {params.prefix} -i {wildcards.sample} 1> {log.stdout} 2> {log.stderr}
+        cat {input.pileup} | ivar consensus -t {params.threshold} \
+           -m {params.depth} -p {params.prefix} -i {wildcards.sample} \
+           1> {log.stdout} 2> {log.stderr}
         """
 
 rule ivariants:
     input:
-        tocall=os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam'),
-        indexed=os.path.join(config['outdir'],'{sample}/{sample}_aln_trimmed_sorted.bam.bai')
+        pileup=os.path.join(config['outdir'],'pileup/{sample}.pileup')
     params:
         ref=config['reference'],
         threshold=0.2,
         depth=20,
-        prefix=os.path.join(config['outdir'],'{sample}/{sample}_ivariants')
+        qual=20,
+        prefix=os.path.join(config['outdir'],'ivar/{sample}_ivariants')
     output:
-        ivariants=os.path.join(config['outdir'],'{sample}/{sample}_ivariants.tsv'),
+        ivariants=os.path.join(config['outdir'],'ivar/{sample}_ivariants.txt'),
     resources:
         mem_mb=8000,
         runtime=240,
     log:
-        stderr="logs/{sample}/ivariants.err"
+        stderr="logs/ivar/{sample}_consensus.err"
     shell:
         """
-        samtools mpileup -aa -A -d 0 -Q 0 -f {params.ref} {input.tocall} | \
-         ivar variants -q 20 -r {params.ref} -t {params.threshold} \
-           -m {params.depth} -p {params.prefix}  2>&1 > {log.stderr}
-        
+        cat {input.pileup} | \
+         ivar variants -q {params.qual} -r {params.ref} -t {params.threshold} \
+           -m {params.depth} -p {params.prefix}  1> {output.ivariants} 2> {log.stderr}        
         """
 
 
@@ -239,8 +259,8 @@ rule snippy:
     output:
         snippyout = os.path.join(config['outdir'],'{sample}/snippy_{sample}','snps.vcf') # .bam file output of aligned and sorted reads
     log:
-        stdout="logs/{sample}/snippy.out",
-        stderr="logs/{sample}/snippy.err"
+        stdout="logs/snippy/{sample}.out",
+        stderr="logs/snippy/{sample}.err"
     message: "Running snippy on sample: {wildcards.sample}"
     shell:
         """
@@ -276,8 +296,9 @@ rule snippy_core:
 
 rule evorha:
     input:
-        bam=config['outdir']+'/{sample}/{sample}_aln_trimmed_sorted.bam',
-        idx=config['outdir']+'/{sample}/{sample}_aln_trimmed_sorted.bam.bai',
+        bam=config['outdir']+'align/{sample}_aln_trimmed_sorted.bam',
+        idx=config['outdir']+'align/{sample}_aln_trimmed_sorted.bam.bai'
+    params:
         ref=config['reference'],
     params:
         bamln=config['outdir']+'/evorha/{sample}_sorted.bam',
