@@ -32,7 +32,7 @@ rule all:
         # snippyvcf=config['outdir']+'/snippy/core.vcf',
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
         basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
-        metrics=expand(config['outdir']+'/'+config['runname']+'/config['runname']_{site}_{program}_{metric}.txt',
+        metrics=expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.txt',
                 program=["pileup","snippy"], 
                 site=["primers","amplicons"],
                 metric=["meandp","covpc","pi"]),
@@ -357,13 +357,13 @@ rule get_metrics:
         primers='data/TBscheme.primer.bed',
         amps='data/TBscheme.insert.bed',
     output:
-        expand(config['outdir']+'/'+config['runname']+'/config['runname']_{site}_{program}_{metric}.txt',
+        expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.txt',
                program=["pileup","snippy"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
     params:
-        spprefix=config['outdir']+'/'+config['runname']+'/config['runname']_snippy_primers',
-        saprefix=config['outdir']+'/'+config['runname']+'/config['runname']_snippy_amplicons',
-        ppprefix=config['outdir']+'/'+config['runname']+'/config['runname']_pileup_primers',
-        paprefix=config['outdir']+'/'+config['runname']+'/config['runname']_pileup_amplicons',
+        spprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_snippy_primers',
+        saprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_snippy_amplicons',
+        ppprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_pileup_primers',
+        paprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_pileup_amplicons',
     shell:
         """
 	    cp {input.snippyvcf} {output.snippyvcf}
