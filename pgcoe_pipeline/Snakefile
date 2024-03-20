@@ -30,8 +30,6 @@ rule all:
         ivariants=expand(os.path.join(config['outdir'],'ivar/{sample}_ivariants.tsv'),sample=SAMPLES),
         pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
         snippyvcf=config['outdir']+'/snippy/core.vcf',
-        ivariants=expand(os.path.join(config['outdir'],'ivar/{sample}_ivariants.txt'),sample=SAMPLES),
-        snippycore=config['outdir']+'/snippy/core.vcf',
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
         basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
         evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES)
