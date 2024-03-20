@@ -26,22 +26,20 @@ rule all:
     input:
         #coveragestats=expand(os.path.join(config['outdir'],'align/{sample}_coverage_sub{subsample}.tsv'),
 	#                     sample=SAMPLES,subsample=READ_SUBSAMPLES),
-        consensuses=expand(os.path.join(config['outdir'],'ivar/{sample}_consensus.fa'),sample=SAMPLES),
-        ivariants=expand(os.path.join(config['outdir'],'ivar/{sample}_ivariants.tsv'),sample=SAMPLES),
-        pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
-        snippyvcf=config['outdir']+'/snippy/core.vcf',
+        # consensuses=expand(os.path.join(config['outdir'],'ivar/{sample}_consensus.fa'),sample=SAMPLES),
+        # ivariants=expand(os.path.join(config['outdir'],'ivar/{sample}_ivariants.tsv'),sample=SAMPLES),
+        # pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
+        # snippyvcf=config['outdir']+'/snippy/core.vcf',
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
         basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
-        evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES)
-    output:
+        metrics=expand(config['outdir']+'/'+config['runname']+'/config['runname']_{site}_{program}_{metric}.txt',
+                program=["pileup","snippy"], 
+                site=["primers","amplicons"],
+                metric=["meandp","covpc","pi"]),
         snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
         pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
-    shell:
-        """
-	cp {input.snippyvcf} {output.snippyvcf}
-	cp {input.pileupvcf} {output.pileupvcf}
-	"""
-
+        evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES)
+        
 
 rule indexref:
     input:
