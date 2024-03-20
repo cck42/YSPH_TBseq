@@ -348,3 +348,31 @@ rule evorha:
 	    java -jar /jars/evorha.jar completeAnalysis {input.ref} {params.bamln} 2>&1 >> {log.stderr}
         #java -jar /jars/evorha.jar completeAnalysis {input.ref} {input.bam} 2>&1 >> {log.stderr}
         """
+
+
+rule get_metrics:
+    input:
+        pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
+        snippyvcf=config['outdir']+'/snippy/core.vcf',
+        combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
+        basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
+        primers='data/TBscheme.primer.bed',
+        amps='data/TBscheme.insert.bed',
+    output:
+        expand(config['outdir']+'/'+config['runname']+'/config['runname']_{site}_{program}_{metric}.txt',
+               program=["pileup","snippy"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
+    params:
+        spprefix=config['outdir']+'/'+config['runname']+'/config['runname']_snippy_primers',
+        saprefix=config['outdir']+'/'+config['runname']+'/config['runname']_snippy_amplicons',
+        ppprefix=config['outdir']+'/'+config['runname']+'/config['runname']_pileup_primers',
+        paprefix=config['outdir']+'/'+config['runname']+'/config['runname']_pileup_amplicons',
+    shell:
+        """
+	    cp {input.snippyvcf} {output.snippyvcf}
+	    cp {input.pileupvcf} {output.pileupvcf}
+        python scripts/get_pidp_ranges.py --vcf {input.snippyvcf} --depth {input.depth} --bed {input.primers} --out {params.spprefix}
+        python scripts/get_pidp_ranges.py --vcf {input.snippyvcf} --depth {input.depth} --bed {input.amplicons} --out {params.saprefix}
+
+        python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.primers} --out {params.ppprefix}
+        python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.amplicons} --out {params.paprefix}
+        """
