@@ -29,7 +29,7 @@ rule all:
         vcf_filt=os.path.join(config['outdir'],config['runname'],"variants_filt.vcf.gz"),
         consensuses=expand(os.path.join(config['outdir'],'ivar/{sample}_consensus.fa'),sample=SAMPLES),
         ivariants=expand(os.path.join(config['outdir'],'ivar/{sample}_ivariants.txt'),sample=SAMPLES),
-        snippycore=config['outdir']+'/snippy/core.txt',
+        snippycore=config['outdir']+'/snippy/core.vcf',
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
         evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES)
 	
@@ -314,9 +314,9 @@ rule evorha:
     shell:
         """
         if [ ! -L {params.bamln} ]; then
-	  ln {input.bam} {params.bamln}
-          ln {input.idx} {params.idxln}
-	fi
-	java -jar /jars/evorha.jar completeAnalysis {input.ref} {params.bamln} 2>&1 >> {log.stderr}
+	        ln {input.bam} {params.bamln}
+            ln {input.idx} {params.idxln}
+	    fi
+	    java -jar /jars/evorha.jar completeAnalysis {input.ref} {params.bamln} 2>&1 >> {log.stderr}
         #java -jar /jars/evorha.jar completeAnalysis {input.ref} {input.bam} 2>&1 >> {log.stderr}
         """
