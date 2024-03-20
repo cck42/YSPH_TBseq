@@ -359,6 +359,8 @@ rule get_metrics:
     output:
         expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.txt',
                program=["pileup","snippy"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
+        snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
+        pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
     params:
         spprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_snippy_primers',
         saprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_snippy_amplicons',
