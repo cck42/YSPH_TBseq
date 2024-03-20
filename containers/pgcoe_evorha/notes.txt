@@ -5,6 +5,9 @@ unzip evorha.zip
 #GET PredictHaplo
 wget https://github.com/cbg-ethz/PredictHaplo/archive/refs/tags/2.1.4.tar.gz
 tar xvf 2.1.4.tar.gz
+wget https://github.com/cbg-ethz/PredictHaplo/archive/refs/heads/master.zip
+unzip master.zip
+
 
 docker build --platform linux/amd64 -t sethnr/pgcoe_evorha:0.02 ./
 
