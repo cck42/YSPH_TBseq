@@ -30,15 +30,17 @@ rule all:
         # ivariants=expand(os.path.join(config['outdir'],'ivar/{sample}_ivariants.tsv'),sample=SAMPLES),
         # pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
         # snippyvcf=config['outdir']+'/snippy/core.vcf',
-        combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
-        basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
-        metrics=expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.txt',
-                program=["pileup","snippy"], 
-                site=["primers","amplicons"],
-                metric=["meandp","covpc","pi"]),
-        snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
-        pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
-        evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES)
+        #combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
+        #basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
+        #metrics=expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.txt',
+        #        program=["pileup","snippy"], 
+        #        site=["primers","amplicons"],
+        #        metric=["meandp","covpc","pi"]),
+        #snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
+        #pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
+        #evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES),
+        mykrobepredict=expand(config['outdir']+'/mykrobe/{sample}_mykrobe.json',sample=SAMPLES),
+        mykrobecombined=config['outdir']+'/mykrobe/combined.csv'
         
 
 rule indexref:
@@ -375,4 +377,42 @@ rule get_metrics:
 
         python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.primers} --out {params.ppprefix}
         python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.amplicons} --out {params.paprefix}
+        """
+
+rule mykrobe:
+    input:
+        read_location=os.path.join(config['readdir'],'{sample}/Unaligned')
+    params:
+        outprefix=os.path.join(config['outdir'],'mykrobe/{sample}_mykrobe'),
+    output:
+        mykrobepredict_json=os.path.join(config['outdir'],'mykrobe/{sample}_mykrobe.json'),
+        mykrobepredict_csv=os.path.join(config['outdir'],'mykrobe/{sample}_mykrobe.csv')
+    log:
+        stdout="logs/mykrobe/{sample}.out",
+        stderr="logs/mykrobe/{sample}.err"
+    shell:
+        """
+        mykrobe predict \
+        --sample {wildcards.sample} \
+        --species tb \
+        --output {params.outprefix} \
+        --format json_and_csv \
+        --seq {input.read_location}/*R1* {input.read_location}/*R2* 1> {log.stdout} 2> {log.stderr}
+        """
+
+rule combine_mykrobe:
+    input:
+        mykrobepredict=expand(config['outdir']+'/mykrobe/{sample}_mykrobe.csv',sample=SAMPLES)
+    params:
+    output:
+        mykrobe_combined=os.path.join(config['outdir'],'mykrobe/combined.csv')
+    log:
+        stdout="logs/mykrobe/combine.out",
+        stderr="logs/mykrobe/combine.err"
+    shell:
+        """
+        echo -e '"sample","drug","susceptibility","variants (dna_variant-AA_variant:ref_kmer_count:alt_kmer_count:conf) [use --format json for more info]","genes (prot_mut-ref_mut:percent_covg:depth) [use --format json for more info]","mykrobe_version","files","probe_sets","genotype_model","kmer_size","phylo_group","species","lineage","phylo_group_per_covg","species_per_covg","lineage_per_covg","phylo_group_depth","species_depth","lineage_depth"' > {output.mykrobe_combined}
+        for file in {input.mykrobepredict}; do
+            tail -n +2 "$file" >> {output.mykrobe_combined}
+        done 2> {log.stderr}
         """
