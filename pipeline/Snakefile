@@ -15,8 +15,11 @@ include: "rules/common.py"
 #OUTDIR=config['outdir']
 
 
-SAMPLES = set(pd.read_table(config['samples'],header=0,dtype=str,delimiter=',').loc[lambda df: df['NGS_Date'] == config['rundate'], 'Seq_ID'].tolist())
+#SAMPLES = set(pd.read_table(config['samples'],header=0,dtype=str,delimiter=',')['Seq_ID'])
+#SAMPLES = set(pd.read_table(config['samples'],header=0,dtype=str,delimiter=',').loc[lambda df: df['NGS_Date'] == config['rundate'], 'Seq_ID'].tolist())
 READ_SUBSAMPLES=set(config['read_subsamples'])
+
+SAMPLES = [line.strip() for line in open(config['samples'], 'r')]
 
 container: "docker://sethnr/pgcoe_bacseq:0.01"
 
@@ -32,13 +35,15 @@ rule all:
         # snippyvcf=config['outdir']+'/snippy/core.vcf',
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
         basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
-        metrics=expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.txt',
-                program=["pileup","snippy"], 
-                site=["primers","amplicons"],
-                metric=["meandp","covpc","pi"]),
-        snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
+        # metrics=expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.txt',
+        #        program=["pileup","snippy"], 
+        #        site=["primers","amplicons"],
+        #        metric=["meandp","covpc","pi"]),
+        #snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
         pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
-        evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES)
+        # evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES),
+        #mykrobepredict=expand(config['outdir']+'/mykrobe/{sample}_mykrobe.json',sample=SAMPLES),
+        mykrobecombined=config['outdir']+'/mykrobe/combined.csv'
         
 
 rule indexref:
@@ -53,14 +58,49 @@ rule indexref:
         bwa index {input.reference}
         """
 
-rule align_to_ref:
+
+rule cp_local_fq:
     input:
         read_location=os.path.join(config['readdir'],'{sample}'),
+    output:
+        R1 = 'results/rawdata/{sample}_R1.fastq.gz',
+        R2 = 'results/rawdata/{sample}_R2.fastq.gz'
+    log:
+        log = "logs/datacopy/{sample}.log"
+    group: "cplocal"
+    resources:
+        mem_mb="2G",
+        cpus_per_task=1,
+        runtime=60
+    container: None
+    shell:"""
+        #find {input.read_location}
+
+        R1=` find {input.read_location} | grep _R1_ `
+        R2=` find {input.read_location} | grep _R2_ `
+
+        echo cp $R1 {output.R1}
+        cp $R1 {output.R1}
+        
+        echo cp $R2 {output.R2}
+        cp $R2 {output.R2}
+        
+        """
+
+rule align_to_ref:
+    input:
+        #read_location=os.path.join(config['readdir'],'{sample}'),
+        R1 = 'results/rawdata/{sample}_R1.fastq.gz',
+        R2 = 'results/rawdata/{sample}_R2.fastq.gz',
         indexedref="data/reference.fasta.amb"
-    params:
-        ref=config['reference']
     output:
         aligned = os.path.join(config['outdir'],'align/{sample}_aligned.bam') # .bam file output of aligned and sorted reads
+    params:
+        ref=config['reference']
+    resources:
+        runtime=600,
+        mem_mb=lambda wc, input: max(2 * input.size_mb, 4000),
+	    cores=4,
     log:
         stdout="logs/bwa/{sample}_aln.out",
         stderr="logs/bwa/{sample}_aln.err"
@@ -68,9 +108,10 @@ rule align_to_ref:
     message: "Aligning reads to H37Rv and sorting output for sample {wildcards.sample}"
     shell:
         """
-        echo "Aligning reads for {wildcards.sample} to H37Rv reference strain\n"
-        echo 'bwa mem {params.ref} {input.read_location}/*R1* {input.read_location}/*R2* | samtools view -b -F 4 -F 2048 | samtools sort -o {wildcards.sample}_aln.bam\n' 
-        bwa mem {params.ref} {input.read_location}/*R1* {input.read_location}/*R2* | samtools view -b -F 4 -F 2048 | samtools sort -o {output.aligned} >> {log.stdout} 2>> {log.stderr}
+        echo "Aligning reads for {wildcards.sample} to {params.ref}\n"
+        echo 'bwa mem -o {output.aligned} {params.ref} {input.R1} {input.R2} \n' 
+        bwa mem -t {resources.cores} {params.ref} {input.R1} {input.R2} \
+            1> {output.aligned}  2> {log.stderr}
         """
 
 rule primerclip:
@@ -79,6 +120,9 @@ rule primerclip:
         primers = config['primers']
     output:
         aln_trimmed= os.path.join(config['outdir'],'align/{sample}_aln_itrim.bam')
+    resources:
+            mem_mb=8000,
+            runtime=1440,
     log:
         stdout="logs/ivar/{sample}_trim.out",
         stderr="logs/ivar/{sample}_trim.err"
@@ -93,13 +137,17 @@ rule sort:
         aln_trimmed= os.path.join(config['outdir'],'align/{sample}_aln_itrim.bam')
     output:
         aln_itrim_sorted=os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam')
+    resources:
+        mem_mb=16000,
+        runtime=180,
+	cores=4,
     log:
         stdout="logs/align/{sample}_sort.out",
         stderr="logs/align/{sample}_sort.err"
     message: "Sorting and indexing reads"
     shell:
         """
-        samtools sort {input.aln_trimmed} -o {output.aln_itrim_sorted} > {log.stdout} 2> {log.stderr}
+        samtools sort {input.aln_trimmed} -@ {resources.cores} -o {output.aln_itrim_sorted} > {log.stdout} 2> {log.stderr}
         samtools index {output.aln_itrim_sorted} >> {log.stdout} 2>> {log.stderr}
         """
 
@@ -108,6 +156,9 @@ rule subsample:
         aln_itrim_sorted= os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam')
     output:
         subsamp=os.path.join(config['outdir'],'align/{sample}_subsamp{subsample}.bam')
+    resources:
+        mem_mb=8000,
+        runtime=180,
     log:
         stdout="logs/align/{sample}_sub_{subsample}.out",
         stderr="logs/align/{sample}_sub_{subsample}.err",
@@ -122,6 +173,9 @@ rule coverage:
         subsamp=os.path.join(config['outdir'],'align/{sample}_subsamp{subsample}.bam')
     output:
         coveragestats=os.path.join(config['outdir'],'align/{sample}_coverage_sub{subsample}.tsv')
+    resources:
+        mem_mb=8000,
+        runtime=180,
     params:
         maxdepth=0,
         minmapqual=60,
@@ -139,6 +193,9 @@ rule mdepth:
         bams=expand(os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam'),sample=SAMPLES)
     output:
         config['outdir']+'/'+config['runname']+'/all_depth.txt'
+    resources:
+        mem_mb=8000,
+        runtime=180,
     params:
         maxdepth=0,
         minmapqual=60,
@@ -156,6 +213,9 @@ rule combinedcoverage:
         coveragestats=expand(os.path.join(config['outdir'],'align/{sample}_coverage_sub{subsample}.tsv'),sample=SAMPLES,subsample=READ_SUBSAMPLES)
     output:
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv')
+    resources:
+        mem_mb=8000,
+        runtime=180,
     log:
         stderr="logs/coverage.err"
     shell:
@@ -183,6 +243,9 @@ rule variantcalling:
         indexed=expand(os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam.bai'),sample=SAMPLES)
     params:
         ref=config['reference']
+    resources:
+        mem_mb=8000,
+        runtime=240,
     output:
         vcf=os.path.join(config['outdir'],'pileup',"all_variants_unfilt.vcf.gz")
     log:
@@ -202,6 +265,9 @@ rule variantfilter:
         vcf={rules.variantcalling.output.vcf}
     output:
         vcf_filt=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz")
+    resources:
+        mem_mb=8000,
+        runtime=180,
     log:
         stdout="logs/variantfilter.out",
         stderr="logs/variantfilter.err"
@@ -282,6 +348,10 @@ rule snippy:
     params:
         ref=config['reference']
     container: "docker://staphb/snippy"
+    resources:
+            mem_mb=32000,
+            runtime=240,
+	    cores=4,
     output:
         vcf = os.path.join(config['outdir'],'snippy/snippy_{sample}','snps.vcf'),
         tab = os.path.join(config['outdir'],'snippy/snippy_{sample}','snps.tab')
@@ -293,6 +363,7 @@ rule snippy:
         """
         snippy \
             --ref {params.ref} \
+            --cpus {resources.cores} \
             --R1 {input.read_location}/*R1* \
             --R2 {input.read_location}/*R2* \
             --outdir results/snippy/snippy_{wildcards.sample} \
@@ -308,6 +379,9 @@ rule snippy_core:
         prefix=config['outdir']+'/snippy/core',
         indirs=expand(config['outdir']+'/snippy/snippy_{sample}',sample=SAMPLES)
     container: "docker://staphb/snippy"
+    resources:
+            mem_mb=32000,
+            runtime=240,
     output:
         coreout = expand(config['outdir']+'/snippy/core.{suffix}',suffix=['aln','tab','txt','vcf']) 
     log:
@@ -325,12 +399,15 @@ rule evorha:
     input:
         bam=config['outdir']+'/align/{sample}_aln_itrim_sorted.bam',
         idx=config['outdir']+'/align/{sample}_aln_itrim_sorted.bam.bai',
-        ref=config['reference']
     params:
+        ref=config['reference'],
         bamln=config['outdir']+'/evorha/{sample}_sorted.bam',
         idxln=config['outdir']+'/evorha/{sample}_sorted.bam.bai',
         prefix=config['outdir']+'/evorha/',
         indirs=expand(config['outdir']+'/snippy/snippy_{sample}',sample=SAMPLES)
+    resources:
+        mem_mb=8000,
+        runtime=1440,
     container: "docker://sethnr/pgcoe_evorha:0.01"
     output:
         coreout = config['outdir']+'/evorha/{sample}.hapfreq',
@@ -339,40 +416,78 @@ rule evorha:
     message: "Running evorha"
     shell:
         """
-        if [ ! -f {params.bamln} ]; then
-	        ln {input.bam} {params.bamln}
-            ln {input.idx} {params.idxln}
-	    fi
-	    java -jar /jars/evorha.jar completeAnalysis {input.ref} {params.bamln} 2>&1 >> {log.stderr}
-        #java -jar /jars/evorha.jar completeAnalysis {input.ref} {input.bam} 2>&1 >> {log.stderr}
+	    ln -f {input.bam} {params.bamln}
+            ln -f {input.idx} {params.idxln}
+            java -jar /jars/evorha.jar completeAnalysis {params.ref} {params.bamln} 2>&1 >> {log.stderr}
         """
 
 
 rule get_metrics:
     input:
         pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
-        snippyvcf=config['outdir']+'/snippy/core.vcf',
+        #snippyvcf=config['outdir']+'/snippy/core.vcf',
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
-        basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
+        depth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
         primers='data/TBscheme.primer.bed',
-        amps='data/TBscheme.insert.bed',
+        amplicons='data/TBscheme.insert.bed',
     output:
-        expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.txt',
-               program=["pileup","snippy"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
-        snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
+        #expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.tsv',
+        #       program=["pileup","snippy"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
+        #snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
+        expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.tsv',
+               program=["pileup"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
         pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
+    container: "docker://sethnr/pgcoe_analysis:0.01"
     params:
-        spprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_snippy_primers',
-        saprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_snippy_amplicons',
-        ppprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_pileup_primers',
-        paprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_pileup_amplicons',
+        spprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_primers_snippy',
+        saprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_amplicons_snippy',
+        ppprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_primers_pileup',
+        paprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_amplicons_pileup',
     shell:
         """
-	    cp {input.snippyvcf} {output.snippyvcf}
-	    cp {input.pileupvcf} {output.pileupvcf}
-        python scripts/get_pidp_ranges.py --vcf {input.snippyvcf} --depth {input.depth} --bed {input.primers} --out {params.spprefix}
-        python scripts/get_pidp_ranges.py --vcf {input.snippyvcf} --depth {input.depth} --bed {input.amplicons} --out {params.saprefix}
+	#cp {{input.snippyvcf}} {{output.snippyvcf}}
+        #python scripts/get_pidp_ranges.py --vcf {{input.snippyvcf}} --depth {input.depth} --bed {input.primers} --out {params.spprefix}
+        #python scripts/get_pidp_ranges.py --vcf {{input.snippyvcf}} --depth {input.depth} --bed {input.amplicons} --out {params.saprefix}
 
+	cp {input.pileupvcf} {output.pileupvcf}
         python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.primers} --out {params.ppprefix}
         python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.amplicons} --out {params.paprefix}
+        """
+
+rule mykrobe:
+    input:
+        read_location=os.path.join(config['readdir'],'{sample}/Unaligned')
+    params:
+        outprefix=os.path.join(config['outdir'],'mykrobe/{sample}_mykrobe'),
+    output:
+        mykrobepredict_json=os.path.join(config['outdir'],'mykrobe/{sample}_mykrobe.json'),
+        mykrobepredict_csv=os.path.join(config['outdir'],'mykrobe/{sample}_mykrobe.csv')
+    log:
+        stdout="logs/mykrobe/{sample}.out",
+        stderr="logs/mykrobe/{sample}.err"
+    shell:
+        """
+        mykrobe predict \
+        --sample {wildcards.sample} \
+        --species tb \
+        --output {params.outprefix} \
+        --format json_and_csv \
+        --seq {input.read_location}/*R1* {input.read_location}/*R2* 1> {log.stdout} 2> {log.stderr}
+        """
+
+rule combine_mykrobe:
+    input:
+        mykrobepredict=expand(config['outdir']+'/mykrobe/{sample}_mykrobe.csv',sample=SAMPLES)
+    params:
+    output:
+        mykrobe_combined=os.path.join(config['outdir'],'mykrobe/combined.csv')
+    log:
+        stdout="logs/mykrobe/combine.out",
+        stderr="logs/mykrobe/combine.err"
+    shell:
+        """
+        echo -e '"sample","drug","susceptibility","variants (dna_variant-AA_variant:ref_kmer_count:alt_kmer_count:conf) [use --format json for more info]","genes (prot_mut-ref_mut:percent_covg:depth) [use --format json for more info]","mykrobe_version","files","probe_sets","genotype_model","kmer_size","phylo_group","species","lineage","phylo_group_per_covg","species_per_covg","lineage_per_covg","phylo_group_depth","species_depth","lineage_depth"' > {output.mykrobe_combined}
+        for file in {input.mykrobepredict}; do
+            tail -n +2 "$file" >> {output.mykrobe_combined}
+        done 2> {log.stderr}
         """

@@ -1,9 +1,9 @@
 #samples: 'data/PGCOE_Datasheet - M.tuberculosis_Seq.csv' #list .csv file containing sample names
-samples: '../test_data/test_samples.txt'
-readdir: '../test_data/'
-rundate: '2024-02-12'
-runname: 'TB001'
+samples: '/home/snr28/project/rawdata/TB/TB005/TB005_samples.txt'
+readdir: '/home/snr28/project/rawdata/TB/TB005/'
+rundate: '2024-07-19'
+runname: 'TB005'
 reference: 'data/reference.fasta'
 primers: 'data/TBscheme.primer.bed'
 outdir: 'results' 
-read_subsamples: [0.05,0.1,0.15,0.2,0.25,0.5,1.0]
+read_subsamples: [1.0]
