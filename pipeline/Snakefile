@@ -465,6 +465,7 @@ rule mykrobe:
     log:
         stdout="logs/mykrobe/{sample}.out",
         stderr="logs/mykrobe/{sample}.err"
+    container: "docker://sethnr/pgcoe_bacseq:0.02"
     shell:
         """
         mykrobe predict \
