@@ -13,7 +13,7 @@ RUN conda install -c conda-forge mash
 RUN conda install -c bioconda bcftools
 RUN conda install -c conda-forge gsl
 #RUN conda install -c bioconda -c conda-forge -c defaults bioconda::snippy
-
+RUN conda install -c bioconda mykrobe
 
 ENV PATH="${PATH}:/opt/miniconda/bin:/opt/miniconda/lib"
 ENV LD_LIBRARY_PATH="${PATH}"

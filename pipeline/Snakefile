@@ -15,9 +15,11 @@ include: "rules/common.py"
 #OUTDIR=config['outdir']
 
 
-SAMPLES = set(pd.read_table(config['samples'],header=0,dtype=str,delimiter=',')['Seq_ID'])
+#SAMPLES = set(pd.read_table(config['samples'],header=0,dtype=str,delimiter=',')['Seq_ID'])
 #SAMPLES = set(pd.read_table(config['samples'],header=0,dtype=str,delimiter=',').loc[lambda df: df['NGS_Date'] == config['rundate'], 'Seq_ID'].tolist())
 READ_SUBSAMPLES=set(config['read_subsamples'])
+
+SAMPLES = [line.strip() for line in open(config['samples'], 'r')]
 
 container: "docker://sethnr/pgcoe_bacseq:0.01"
 
@@ -37,7 +39,7 @@ rule all:
         #        program=["pileup","snippy"], 
         #        site=["primers","amplicons"],
         #        metric=["meandp","covpc","pi"]),
-        snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
+        #snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
         pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
         # evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES),
         #mykrobepredict=expand(config['outdir']+'/mykrobe/{sample}_mykrobe.json',sample=SAMPLES),
@@ -56,17 +58,49 @@ rule indexref:
         bwa index {input.reference}
         """
 
-rule align_to_ref:
+
+rule cp_local_fq:
     input:
         read_location=os.path.join(config['readdir'],'{sample}'),
+    output:
+        R1 = 'results/rawdata/{sample}_R1.fastq.gz',
+        R2 = 'results/rawdata/{sample}_R2.fastq.gz'
+    log:
+        log = "logs/datacopy/{sample}.log"
+    group: "cplocal"
+    resources:
+        mem_mb="2G",
+        cpus_per_task=1,
+        runtime=60
+    container: None
+    shell:"""
+        #find {input.read_location}
+
+        R1=` find {input.read_location} | grep _R1_ `
+        R2=` find {input.read_location} | grep _R2_ `
+
+        echo cp $R1 {output.R1}
+        cp $R1 {output.R1}
+        
+        echo cp $R2 {output.R2}
+        cp $R2 {output.R2}
+        
+        """
+
+rule align_to_ref:
+    input:
+        #read_location=os.path.join(config['readdir'],'{sample}'),
+        R1 = 'results/rawdata/{sample}_R1.fastq.gz',
+        R2 = 'results/rawdata/{sample}_R2.fastq.gz',
         indexedref="data/reference.fasta.amb"
+    output:
+        aligned = os.path.join(config['outdir'],'align/{sample}_aligned.bam') # .bam file output of aligned and sorted reads
     params:
         ref=config['reference']
     resources:
-            mem_mb=8000,
-            runtime=240,
-    output:
-        aligned = os.path.join(config['outdir'],'align/{sample}_aligned.bam') # .bam file output of aligned and sorted reads
+        runtime=600,
+        mem_mb=lambda wc, input: max(2 * input.size_mb, 4000),
+	    cores=4,
     log:
         stdout="logs/bwa/{sample}_aln.out",
         stderr="logs/bwa/{sample}_aln.err"
@@ -74,9 +108,10 @@ rule align_to_ref:
     message: "Aligning reads to H37Rv and sorting output for sample {wildcards.sample}"
     shell:
         """
-        echo "Aligning reads for {wildcards.sample} to H37Rv reference strain\n"
-        echo 'bwa mem {params.ref} {input.read_location}/*R1* {input.read_location}/*R2* | samtools view -b -F 4 -F 2048 | samtools sort -o {wildcards.sample}_aln.bam\n' 
-        bwa mem {params.ref} {input.read_location}/*R1* {input.read_location}/*R2* | samtools view -b -F 4 -F 2048 | samtools sort -o {output.aligned} >> {log.stdout} 2>> {log.stderr}
+        echo "Aligning reads for {wildcards.sample} to {params.ref}\n"
+        echo 'bwa mem -o {output.aligned} {params.ref} {input.R1} {input.R2} \n' 
+        bwa mem -t {resources.cores} {params.ref} {input.R1} {input.R2} \
+            1> {output.aligned}  2> {log.stderr}
         """
 
 rule primerclip:
