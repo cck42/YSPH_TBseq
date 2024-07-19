@@ -12,6 +12,7 @@ RUN conda install -c conda-forge python=3.9
 RUN conda install -c conda-forge mash
 RUN conda install -c bioconda bcftools
 RUN conda install -c conda-forge gsl
+RUN conda install -c bioconda cutadapt
 #RUN conda install -c bioconda -c conda-forge -c defaults bioconda::snippy
 
 
