@@ -5,7 +5,7 @@ import numpy as np
 
 import re
 import sys
-
+import argparse 
 import pandas as pd
 
 from plotnine import *
@@ -28,7 +28,7 @@ parser.add_argument('--depth', '-d', help='depth file (samtools / txt)')
 parser.add_argument('--out', '-o', help='outfile prefix')
 
 args = parser.parse_args()
-fafile = args.fasta
+fafile = args.fa
 bedfile = args.bed
 vcffile = args.vcf
 depthfile = args.depth
@@ -74,7 +74,7 @@ for i in range(0,len(ranges)):
     meandepth.iloc[i,:] = [st,en]+locdepth
 
 
-meandepth.to_csv(outfile+"_meandepth.tsv",sep="\t")
+meandepth.to_csv(outfile+"_meandp.tsv",sep="\t")
 covpc.to_csv(outfile+"_covpc.tsv",sep="\t")
 pi.to_csv(outfile+"_pi.tsv",sep="\t")
 
