@@ -20,30 +20,37 @@ include: "rules/common.py"
 READ_SUBSAMPLES=set(config['read_subsamples'])
 
 SAMPLES = [line.strip() for line in open(config['samples'], 'r')]
+SAMPLE1 = SAMPLES[0]
 
 container: "docker://sethnr/pgcoe_bacseq:0.01"
 
+include: "rules/ivar.smk"
 
+include: "rules/snippy.smk"
+
+include: "rules/mykrobe.smk"
 
 rule all:
     input:
-        #coveragestats=expand(os.path.join(config['outdir'],'align/{sample}_coverage_sub{subsample}.tsv'),
-	#                     sample=SAMPLES,subsample=READ_SUBSAMPLES),
-        # consensuses=expand(os.path.join(config['outdir'],'ivar/{sample}_consensus.fa'),sample=SAMPLES),
-        # ivariants=expand(os.path.join(config['outdir'],'ivar/{sample}_ivariants.tsv'),sample=SAMPLES),
-        # pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
-        # snippyvcf=config['outdir']+'/snippy/core.vcf',
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
         basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
         # metrics=expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.txt',
         #        program=["pileup","snippy"], 
         #        site=["primers","amplicons"],
         #        metric=["meandp","covpc","pi"]),
-        #snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
         pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
         # evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES),
-        #mykrobepredict=expand(config['outdir']+'/mykrobe/{sample}_mykrobe.json',sample=SAMPLES),
         mykrobecombined=config['outdir']+'/mykrobe/combined.csv'
+        
+        # mykrobepredict=expand(config['outdir']+'/mykrobe/{sample}_mykrobe.json',sample=SAMPLES),
+        #coveragestats=expand(os.path.join(config['outdir'],'align/{sample}_coverage_sub{subsample}.tsv'),
+	    #                     sample=SAMPLES,subsample=READ_SUBSAMPLES),
+        # consensuses=expand(os.path.join(config['outdir'],'ivar/{sample}_consensus.fa'),sample=SAMPLES),
+        # ivariants=expand(os.path.join(config['outdir'],'ivar/{sample}_ivariants.tsv'),sample=SAMPLES),
+        # pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
+        # snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
+        # snippyvcf=config['outdir']+'/snippy/core.vcf',
+        
         
 
 rule indexref:
@@ -237,6 +244,8 @@ rule indexbam:
         samtools index {input.bam} > {log.stdout} 2> {log.stderr}
         """
 
+
+
 rule variantcalling:
     input:
         tocall=expand(os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam'),sample=SAMPLES),
@@ -276,125 +285,6 @@ rule variantfilter:
         bcftools filter -O z -o {output.vcf_filt} -i 'QUAL>10 & DP>10' {input.vcf} 1> {log.stdout} 2> {log.stderr}
         """
 
-rule pileup:
-    input:
-        tocall=os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam'),
-        indexed=os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam.bai')
-    params:
-        ref=config['reference'],
-        threshold=0.2,
-        depth=20,
-        prefix=os.path.join(config['outdir'],'ivar/{sample}_consensus')
-    output:
-        pileup=os.path.join(config['outdir'],'pileup/{sample}.pileup')
-    log:
-        stderr="logs/pileup/{sample}.err"
-    shell:
-        """
-        samtools mpileup -aa -A -d 0 -Q 0 -f {params.ref} {input.tocall} 1> {output.pileup} 2> {log.stderr}
-        """
-
-
-rule consensus:
-    input:
-        pileup=os.path.join(config['outdir'],'pileup/{sample}.pileup')
-    params:
-        ref=config['reference'],
-        threshold=0.2,
-        depth=20,
-        prefix=os.path.join(config['outdir'],'ivar/{sample}_consensus')
-    output:
-        consensus=os.path.join(config['outdir'],'ivar/{sample}_consensus.fa')
-    log:
-        stdout="logs/{sample}/consensus.out",
-        stderr="logs/{sample}/consensus.err"
-    shell:
-        """
-        cat {input.pileup} | ivar consensus -t {params.threshold} \
-           -m {params.depth} -p {params.prefix} -i {wildcards.sample} \
-           1> {log.stdout} 2> {log.stderr}
-        """
-
-rule ivariants:
-    input:
-        pileup=os.path.join(config['outdir'],'pileup/{sample}.pileup')
-    params:
-        ref=config['reference'],
-        threshold=0.2,
-        depth=20,
-        qual=20,
-        prefix=os.path.join(config['outdir'],'ivar/{sample}_ivariants')
-    output:
-        ivariants=os.path.join(config['outdir'],'ivar/{sample}_ivariants.tsv'),
-    resources:
-        mem_mb=8000,
-        runtime=240,
-    log:
-        stderr="logs/ivar/{sample}_consensus.err"
-    shell:
-        """
-        cat {input.pileup} | \
-         ivar variants -q {params.qual} -r {params.ref} -t {params.threshold} \
-           -m {params.depth} -p {params.prefix}  2>&1 >  {log.stderr}        
-        """
-
-
-rule snippy:
-    input:
-        #read_location=os.path.join(config['outdir'],'{sample}','Unaligned'),
-        #indexedref="data/reference.fasta.amb"
-        read_location=os.path.join(config['readdir'],'{sample}'),
-        indexedref="data/reference.fasta.amb"
-    params:
-        ref=config['reference']
-    container: "docker://staphb/snippy"
-    resources:
-            mem_mb=32000,
-            runtime=240,
-	    cores=4,
-    output:
-        vcf = os.path.join(config['outdir'],'snippy/snippy_{sample}','snps.vcf'),
-        tab = os.path.join(config['outdir'],'snippy/snippy_{sample}','snps.tab')
-    log:
-        stdout="logs/snippy/{sample}.out",
-        stderr="logs/snippy/{sample}.err"
-    message: "Running snippy on sample: {wildcards.sample}"
-    shell:
-        """
-        snippy \
-            --ref {params.ref} \
-            --cpus {resources.cores} \
-            --R1 {input.read_location}/*R1* \
-            --R2 {input.read_location}/*R2* \
-            --outdir results/snippy/snippy_{wildcards.sample} \
-            --force 1> {log.stdout} 2> {log.stderr}
-        """
-
-rule snippy_core:
-    input:
-        snippyout=expand(config['outdir']+'/snippy/snippy_{sample}/snps.tab',sample=SAMPLES),
-        indexedref="data/reference.fasta.amb"
-    params:
-        ref=config['reference'],
-        prefix=config['outdir']+'/snippy/core',
-        indirs=expand(config['outdir']+'/snippy/snippy_{sample}',sample=SAMPLES)
-    container: "docker://staphb/snippy"
-    resources:
-            mem_mb=32000,
-            runtime=240,
-    output:
-        coreout = expand(config['outdir']+'/snippy/core.{suffix}',suffix=['aln','tab','txt','vcf']) 
-    log:
-        stdout="logs/"+config['runname']+"/core.out",
-        stderr="logs/"+config['runname']+"/core.err"
-    message: "Running snippy core"
-    shell:
-        """
-        snippy-core --ref {params.ref}  --prefix {params.prefix} \
-            {params.indirs} \
-            1> {log.stdout} 2> {log.stderr}
-        """
-
 rule evorha:
     input:
         bam=config['outdir']+'/align/{sample}_aln_itrim_sorted.bam',
@@ -422,6 +312,7 @@ rule evorha:
         """
 
 
+
 rule get_metrics:
     input:
         pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
@@ -438,6 +329,10 @@ rule get_metrics:
                program=["pileup"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
         pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
     container: "docker://sethnr/pgcoe_analysis:0.01"
+    resources:
+        mem_mb=8000,
+        runtime=240,
+	    cores=1,
     params:
         spprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_primers_snippy',
         saprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_amplicons_snippy',
@@ -445,50 +340,7 @@ rule get_metrics:
         paprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_amplicons_pileup',
     shell:
         """
-	#cp {{input.snippyvcf}} {{output.snippyvcf}}
-        #python scripts/get_pidp_ranges.py --vcf {{input.snippyvcf}} --depth {input.depth} --bed {input.primers} --out {params.spprefix}
-        #python scripts/get_pidp_ranges.py --vcf {{input.snippyvcf}} --depth {input.depth} --bed {input.amplicons} --out {params.saprefix}
-
-	cp {input.pileupvcf} {output.pileupvcf}
+	    cp {input.pileupvcf} {output.pileupvcf}
         python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.primers} --out {params.ppprefix}
         python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.amplicons} --out {params.paprefix}
-        """
-
-rule mykrobe:
-    input:
-        read_location=os.path.join(config['readdir'],'{sample}/Unaligned')
-    params:
-        outprefix=os.path.join(config['outdir'],'mykrobe/{sample}_mykrobe'),
-    output:
-        mykrobepredict_json=os.path.join(config['outdir'],'mykrobe/{sample}_mykrobe.json'),
-        mykrobepredict_csv=os.path.join(config['outdir'],'mykrobe/{sample}_mykrobe.csv')
-    log:
-        stdout="logs/mykrobe/{sample}.out",
-        stderr="logs/mykrobe/{sample}.err"
-    container: "docker://sethnr/pgcoe_bacseq:0.02"
-    shell:
-        """
-        mykrobe predict \
-        --sample {wildcards.sample} \
-        --species tb \
-        --output {params.outprefix} \
-        --format json_and_csv \
-        --seq {input.read_location}/*R1* {input.read_location}/*R2* 1> {log.stdout} 2> {log.stderr}
-        """
-
-rule combine_mykrobe:
-    input:
-        mykrobepredict=expand(config['outdir']+'/mykrobe/{sample}_mykrobe.csv',sample=SAMPLES)
-    params:
-    output:
-        mykrobe_combined=os.path.join(config['outdir'],'mykrobe/combined.csv')
-    log:
-        stdout="logs/mykrobe/combine.out",
-        stderr="logs/mykrobe/combine.err"
-    shell:
-        """
-        echo -e '"sample","drug","susceptibility","variants (dna_variant-AA_variant:ref_kmer_count:alt_kmer_count:conf) [use --format json for more info]","genes (prot_mut-ref_mut:percent_covg:depth) [use --format json for more info]","mykrobe_version","files","probe_sets","genotype_model","kmer_size","phylo_group","species","lineage","phylo_group_per_covg","species_per_covg","lineage_per_covg","phylo_group_depth","species_depth","lineage_depth"' > {output.mykrobe_combined}
-        for file in {input.mykrobepredict}; do
-            tail -n +2 "$file" >> {output.mykrobe_combined}
-        done 2> {log.stderr}
         """
