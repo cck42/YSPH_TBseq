@@ -1,0 +1,11 @@
+
+
+*.DS_Store
+*.npy
+*.Rhistory
+*.ipynb_checkpoints
+*.snakemake
+
+*.bam
+*.fastq.gz
+*.fq.gz
