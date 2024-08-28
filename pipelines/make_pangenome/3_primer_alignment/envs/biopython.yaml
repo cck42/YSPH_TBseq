@@ -1,0 +1,13 @@
+name: biopython
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - r
+dependencies:
+  - biopython
+  - numpy
+  - pandas
+  - pip
+  - matplotlib
+

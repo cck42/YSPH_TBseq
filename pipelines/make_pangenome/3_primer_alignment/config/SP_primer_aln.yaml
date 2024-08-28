@@ -1,0 +1,39 @@
+samples:
+  AP023349: seqs/SP/AP023349.fasta
+  GPSC22: seqs/SP/GPSC22_reference.fasta
+  GPSC3: seqs/SP/GPSC3_reference.fasta
+  GPSC10: seqs/SP/GPSC10_reference.fasta
+  GPSC23: seqs/SP/GPSC23_reference.fasta
+  GPSC40: seqs/SP/GPSC40_reference.fasta
+  GPSC11: seqs/SP/GPSC11_reference.fasta
+  GPSC25: seqs/SP/GPSC25_reference.fasta
+  GPSC43: seqs/SP/GPSC43_reference.fasta
+  GPSC13: seqs/SP/GPSC13_reference.fasta
+  GPSC26: seqs/SP/GPSC26_reference.fasta
+  GPSC47: seqs/SP/GPSC47_reference.fasta
+  GPSC14: seqs/SP/GPSC14_reference.fasta
+  GPSC27: seqs/SP/GPSC27_reference.fasta
+  GPSC4: seqs/SP/GPSC4_reference.fasta
+  GPSC15: seqs/SP/GPSC15_reference.fasta
+  GPSC2: seqs/SP/GPSC2_reference.fasta
+  GPSC5: seqs/SP/GPSC5_reference.fasta
+  GPSC16: seqs/SP/GPSC16_reference.fasta
+  GPSC30: seqs/SP/GPSC30_reference.fasta
+  GPSC6: seqs/SP/GPSC6_reference.fasta
+  GPSC17: seqs/SP/GPSC17_reference.fasta
+  GPSC31: seqs/SP/GPSC31_reference.fasta
+  GPSC7: seqs/SP/GPSC7_reference.fasta
+  GPSC18: seqs/SP/GPSC18_reference.fasta
+  GPSC32: seqs/SP/GPSC32_reference.fasta
+  GPSC8: seqs/SP/GPSC8_reference.fasta
+  GPSC19: seqs/SP/GPSC19_reference.fasta
+  GPSC33: seqs/SP/GPSC33_reference.fasta
+  GPSC9: seqs/SP/GPSC9_reference.fasta
+  GPSC1: seqs/SP/GPSC1_reference.fasta
+  GPSC34: seqs/SP/GPSC34_reference.fasta
+  NC_017592: seqs/SP/NC_017592.fasta
+  GPSC21: seqs/SP/GPSC21_reference.fasta
+  GPSC37: seqs/SP/GPSC37_reference.fasta
+
+genera: "SP"
+bed: "SP.scheme.primer.bed"

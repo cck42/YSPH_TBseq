@@ -1,0 +1,6 @@
+tree: "/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/results/TB/roary/tree.newick"
+max_num: 12
+radius: [0.0005,0.0004,0.0003,0.0002,0.0001]
+genera: "TB"
+ref: "H37Rv"
+outgroup: "NC_019950"

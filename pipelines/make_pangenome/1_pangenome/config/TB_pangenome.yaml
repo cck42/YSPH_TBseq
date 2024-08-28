@@ -1,0 +1,4 @@
+target: "Mycobacterium"
+genera: "TB"
+ref: "seqs/TB/H37Rv.fa"
+txt: "txt/TB_reps.txt"

@@ -1,0 +1,6 @@
+tree: "/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/results/SP/roary/tree.newick"
+max_num: 12
+radius: [0.0005,0.0004,0.0003,0.0002,0.0001]
+genera: "SP"
+ref: "NC_017592"
+outgroup: "AP023349"

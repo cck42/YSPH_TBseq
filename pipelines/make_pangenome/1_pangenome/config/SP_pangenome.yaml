@@ -1,0 +1,4 @@
+target: "Streptococcus"
+genera: "SP"
+ref: "seqs/SP_reps/NC_017592.fasta"
+txt: "txt/SP_reps.txt"

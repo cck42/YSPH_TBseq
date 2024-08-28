@@ -1,0 +1,15 @@
+sample_id	seq_path
+AP023349	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/AP023349.fasta
+GPSC15_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC15_reference.fasta
+GPSC21_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC21_reference.fasta
+GPSC22_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC22_reference.fasta
+GPSC26_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC26_reference.fasta
+GPSC31_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC31_reference.fasta
+GPSC32_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC32_reference.fasta
+GPSC34_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC34_reference.fasta
+GPSC37_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC37_reference.fasta
+GPSC3_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC3_reference.fasta
+GPSC40_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC40_reference.fasta
+GPSC4_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC4_reference.fasta
+GPSC8_reference	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/GPSC8_reference.fasta
+NC_017592	/vast/palmer/scratch/turner/flg9/snakemake_workflows/pangenome_alignment/GitHub/pipelines/genome_annotation/seqs/SP_reps/NC_017592.fasta

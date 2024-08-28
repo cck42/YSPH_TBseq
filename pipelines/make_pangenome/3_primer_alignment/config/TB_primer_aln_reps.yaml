@@ -1,0 +1,18 @@
+samples:
+  H37Rv: seqs/TB_reps/H37Rv.fa 
+  SRR1172044: seqs/TB_reps/SRR1172044.fa 
+  SRR671749: seqs/TB_reps/SRR671749.fa 
+  ERR234202: seqs/TB_reps/ERR234202.fa 
+  NC_019950: seqs/TB_reps/NC_019950.fa 
+  ERR144577: seqs/TB_reps/ERR144577.fa 
+  ERR161044: seqs/TB_reps/ERR161044.fa 
+  SRR1019139: seqs/TB_reps/SRR1019139.fa 
+  SRR1173640: seqs/TB_reps/SRR1173640.fa 
+  ERR181435: seqs/TB_reps/ERR181435.fa 
+  SRR998654: seqs/TB_reps/SRR998654.fa 
+  SRR1180462: seqs/TB_reps/SRR1180462.fa 
+  ERR212146: seqs/TB_reps/ERR212146.fa 
+  SRR1163294: seqs/TB_reps/SRR1163294.fa 
+
+genera: "TB"
+bed: "TB.scheme.primer.bed"

@@ -1,0 +1,18 @@
+samples:
+  AP023349: seqs/SP_reps/AP023349.fasta
+  GPSC31: seqs/SP_reps/GPSC31_reference.fasta
+  GPSC40: seqs/SP_reps/GPSC40_reference.fasta
+  GPSC15: seqs/SP_reps/GPSC15_reference.fasta
+  GPSC32: seqs/SP_reps/GPSC32_reference.fasta
+  GPSC4: seqs/SP_reps/GPSC4_reference.fasta
+  GPSC21: seqs/SP_reps/GPSC21_reference.fasta 
+  GPSC34: seqs/SP_reps/GPSC34_reference.fasta
+  GPSC8: seqs/SP_reps/GPSC8_reference.fasta
+  GPSC22: seqs/SP_reps/GPSC22_reference.fasta
+  GPSC37: seqs/SP_reps/GPSC37_reference.fasta
+  GPSC26: seqs/SP_reps/GPSC26_reference.fasta
+  GPSC3: seqs/SP_reps/GPSC3_reference.fasta
+  NC_017592: seqs/SP_reps/NC_017592.fasta
+
+genera: "SP"
+bed: "SP.scheme.primer.bed"
