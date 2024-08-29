@@ -1,0 +1,74 @@
+{
+ "title": "MTBC complex - Sequencing",
+ "maintainers": [
+   {"name": "Chaney Kalinich", "url": "https://github.com/cck42"}
+ ],
+ "build_url": "https://github.com/nextstrain/tb",
+ "colorings": [
+  {
+   "key": "gt",
+   "title": "Genotype",
+   "type": "categorical"
+  },
+  {
+   "key": "num_date",
+   "title": "Sampling date",
+   "type": "continuous"
+  },
+  {
+   "key": "clade_membership",
+   "title": "Lineage (Nextstrain)",
+   "type": "categorical"
+  },
+  {
+    "key":"lineage",
+    "title":"Lineage (established)",
+    "type":"categorical"
+  },
+  {
+    "key":"mykrobe_lineage",
+    "title":"Lineage (Mykrobe)",
+    "type":"categorical"
+  },
+  {
+    "key": "country",
+    "title": "Country",
+    "type": "categorical"
+  },
+  {
+    "key":"spoligotype",
+    "title":"Spoligotype",
+    "type":"categorical"
+  },
+  {
+    "key":"res_profile",
+    "title":"Resistance profile",
+    "type":"categorical"
+  },
+  {
+    "key":"Drug_Resistance",
+    "title":"# Resistance mutations",
+    "type":"ordinal"
+  },
+  {
+    "key":"study",
+    "title":"Study",
+    "type":"categorical"
+  }
+ ],
+ "geo_resolutions": [
+   "country",
+   "region"
+ ],
+ "filters": [
+  "country",
+  "clade_membership",
+  "study"
+ ],
+ "display_defaults": {
+    "color_by": "clade_membership",
+    "distance_measure": "div",
+    "geo_resolution": "country",
+    "map_triplicate": true
+  }
+}
