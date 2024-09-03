@@ -3,14 +3,21 @@ library(readr)
 library(cowplot)
 library(rlang)
 library(forcats)
+library(readxl)
+library(stringr)
 
 
-tb003_mykrobe <- read.csv('/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/figures/4_heatmap/data/TB003_mykrobe.csv')
-tb004_mykrobe <- read.csv('/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/figures/4_heatmap/data/TB004_mykrobe.csv')
-tb005_mykrobe <- read.csv('/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/figures/4_heatmap/data/TB005_mykrobe.csv')
-sample_metadata <-read.csv('/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/metadata/M.tuberculosis.csv',
+tb003_mykrobe <- read.csv('data/TB003_mykrobe.csv')
+tb004_mykrobe <- read.csv('data/TB004_mykrobe.csv')
+tb005_mykrobe <- read.csv('data/TB005_mykrobe.csv')
+sample_metadata <-read.csv('data/M.tuberculosis.csv',
                            na.strings=c("","NaN","NA"))
-
+sputum_extracts_summary <- read_excel('data/sputum_extraction_summary.xlsx',sheet=1) %>%
+  mutate("Heat_inactivation"=as_factor(Heat_inactivation))%>%
+  mutate("Chemical_inactivation"=as_factor(Chemical_inactivation))%>%
+  mutate("liquefaction"=as_factor(liquefaction))%>%
+  mutate("fastprep"=as_factor(fastprep))%>%
+  mutate("pt_sample_num"=as_factor(pt_sample_num))
 
 all_mykrobe <- tb003_mykrobe %>%
   bind_rows(tb004_mykrobe,tb005_mykrobe) 
@@ -38,18 +45,44 @@ heatmap_res_DNA <- mykrobe_combined %>%
        y='Drug') +
   theme_half_open()+
   theme(axis.text.x=element_text(angle=-90,vjust=0.5,hjust=0.1),
-        panel.background = element_rect(fill='gray'),
-        legend.position='none') +
+        panel.background = element_rect(fill='gray')) +
   facet_wrap("Original_ID",strip.position="bottom",nrow=1)
 plot(heatmap_res_DNA)
 
+save_plot("supp_dilutions-heatmap.svg",heatmap_res_DNA,base_width=12.5,base_height=4)
 
-heatmap_res_sputum <- mykrobe_combined %>%
-  filter(Sample_Type=="Sputum extract") %>%
-  complete(drug,sample) %>%
+mykrobe_sputum_combined <- mykrobe_combined %>%
+  right_join(sputum_extracts_summary, by=c('sample'="Yale-ID"))
+
+heatmap_res_sputum_small <- mykrobe_sputum_combined %>%
+  #filter(Sample_Type=="Sputum extract") %>%
+  #complete(drug,sample,pt_sample_num) %>%
   filter(!is.na(drug)) %>%
+  filter(liquefaction=="NALC 0.5% - NaOH"&fastprep=="40s") %>%
   ggplot()+
-  geom_tile(aes(x=sample,y=drug,fill=susceptibility))+ 
+  geom_tile(aes(x=pt_sample_num,y=drug,fill=susceptibility))+ 
+  scale_fill_manual(
+    values=c("#B20026","#006D2C"),
+    name="Susceptibility",
+    labels=c("Resistant","Susceptible"),
+    na.value='gray'
+  ) +
+  labs(x='Sample',
+       y='Drug') +
+  theme_half_open()+
+  theme(axis.text.x=element_text(angle=-90,vjust=0.5,hjust=0.1),
+        panel.background = element_rect(fill='gray')) 
+plot(heatmap_res_sputum_small)
+
+save_plot("Fig4_heatmap.svg",heatmap_res_sputum_small)
+
+heatmap_res_sputum <- mykrobe_sputum_combined %>%
+  #filter(Sample_Type=="Sputum extract") %>%
+  #complete(expand(.,drug,sample)) %>%
+  filter(!is.na(drug)) %>%
+  #filter(!is.na(sample)) %>%
+  ggplot()+
+  geom_tile(aes(x=pt_sample_num,y=drug,fill=susceptibility))+ 
   scale_fill_manual(
     values=c("#FFC561","#B20026","#006D2C"),
     name="Susceptibility",
@@ -59,24 +92,53 @@ heatmap_res_sputum <- mykrobe_combined %>%
   labs(x='Sample',
        y='Drug') +
   theme_half_open()+
-  theme(axis.text.x=element_text(angle=-90,vjust=0.5,hjust=0.1)) 
+  theme(axis.text.x=element_text(angle=-90,vjust=0.5,hjust=0.1),
+        panel.background = element_rect(fill='gray')) +
+  #facet_wrap(c('liquefaction','fastprep'),dir="v",shrink=FALSE,nrow=2,drop=TRUE,scales="free_x")
+  facet_grid(extraction ~ batch, scales="free",switch="y",labeller=label_context) +
+  theme(strip.text.y=element_blank(),
+        panel.spacing.y=unit(2,"lines"))
 plot(heatmap_res_sputum)
 
 reslegend <- get_legend(
   heatmap_res_sputum+
-    theme(legend.box.margin = margin(0,0,0,0),
-                           legend_position="bottom")
+    theme(legend.box.margin = margin(0,0,0,50))
 )
 
-heatmap_res <- plot_grid(heatmap_res_DNA,
-                         heatmap_res_sputum+theme(legend.position='none'), 
+#Make a boxplot showing average CT by extraction type
+CT_avg <- sputum_extracts_summary %>%
+  ggplot() +
+  geom_boxplot(aes(x=group,y=Ct,fill=group))+
+  theme_half_open() +
+  scale_fill_brewer(palette="Dark2",
+    name="Extraction method"
+  ) +
+  labs(x="Method",
+       y="Ct")
+plot(CT_avg)
+
+extrlegend <- get_legend(
+  CT_avg+
+    theme(legend.box.margin = margin(0,0,20,50))
+)
+
+legends_CT <- plot_grid(reslegend,extrlegend,
+                        CT_avg+theme(legend.position='none'),
+                        ncol=1,
+                        rel_heights = c(1,1,3),
+                        labels=c("","","B"))
+legends_CT
+
+heatmap_res <- plot_grid(heatmap_res_sputum+theme(legend.position='none'),
+                         legends_CT, 
                          #labels=c("DNA","Sputum extracts"),
                          #label_y=1.05,
-                         labels='AUTO',
-                         ncol=1,align='h')
+                         labels=c("A",""),
+                         ncol=2)
 heatmap_res
-heatmap_res_legend <- plot_grid(heatmap_res,reslegend,rel_widths = c(10,1.5))
-heatmap_res_legend
+save_plot("Supp_heatmap_all.svg",heatmap_res,
+          base_height=8,base_width=12)
+
 
 save_plot("/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/figures/4_heatmap/Fig4_heatmap.png",
           heatmap_res_legend,

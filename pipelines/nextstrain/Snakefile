@@ -3,7 +3,7 @@ rule all:
         auspice_json = "auspice/tb_seq.json",
 
 # names of files used in the analysis
-seq_file = "data/sequences_20240829_reheader.vcf.gz"
+seq_file = "data/sequences_20240829_reheader.vcf"
 ref_file = "data/reference.fasta"
 meta_file = "data/metadata_merged.csv"
 exclude_file = "config/dropped_strains.txt"
