@@ -1,0 +1,10 @@
+SampleID,SampleType,Original_ID,Template_Dilution,Pathogen,SequenceType,aroE,gdh,gki,recP,spi,xpt,ddl
+CS00030,Culture isolate,CDC,1.00E-03,SPn,180,7,15,2,10,6,1,22
+CS00032,Culture isolate,H54,1.00E-03,SPn,-,611,8,-,4,6,-,1
+CS00034,Culture isolate,H74,1.00E-03,SPn,180,7,15,2,10,6,1,22
+CS00036,Culture isolate,H122,1.00E-03,SPn,180,7,15,2,10,6,1,22
+CS00038,Culture isolate,H136,1.00E-03,SPn,-,-,15,2,10,6,1,22
+CS00040,Culture isolate,H141,1.00E-03,SPn,180,7,15,2,10,6,1,22
+CS00174,Culture isolate,W1527,1.00E-03,SPn,-,7,757,2,10,692,1,22
+CS00175,Culture isolate,W3317,1.00E-03,SPn,-,-,-,-,-,-,-,-
+CS00176,Culture isolate,W4034,1.00E-03,SPn,-,-,767,2,10,6,-,22
