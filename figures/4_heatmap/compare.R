@@ -140,15 +140,10 @@ save_plot("Supp_heatmap_all.svg",heatmap_res,
           base_height=8,base_width=12)
 
 
-save_plot("/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/figures/4_heatmap/Fig4_heatmap.png",
-          heatmap_res_legend,
-          base_height=7.75,base_width=12.15)
-
-
 #Now I'm going to reformat the metadata a bit so it works nicely in nextstrain
-TB004_coverage <- read.delim('/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/figures/4_heatmap/data/TB004_coverage.tsv')
-TB005_coverage <-read.delim('/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/figures/4_heatmap/data/TB005_coverage.tsv')
-TB003_coverage <- read.delim('/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/figures/3_read_coverage/data/TB.coverage.tsv')
+TB004_coverage <- read.delim('data/TB004_coverage.tsv')
+TB005_coverage <-read.delim('data/TB005_coverage.tsv')
+TB003_coverage <- read.delim('../3_read_coverage/data/TB.coverage.tsv')
 all_coverage <- TB003_coverage %>%
   rename(sample=Seq_ID) %>%
   bind_rows(TB004_coverage,TB005_coverage) %>%
@@ -164,7 +159,8 @@ metadata_ns <- sample_metadata %>%
   filter(!(NGS_Run_ID %in% excluded_runs)) %>% #Remove some sequencing runs
   filter(Sample_Type!='Water') %>% #remove NTCs
   select(Seq_ID,drug,Original_ID,Sample_Type,Sample_source,collection_date,CT,starting_quant,Primer_Conc,
-         NGS_Run_ID,numreads,covbases,coverage,meandepth,susceptibility,lineage)%>%
+         NGS_Run_ID,numreads,covbases,coverage,meandepth,susceptibility,lineage,Template_dilution)%>%
+  filter(is.na(Template_dilution) | Template_dilution==.01) %>% #remove sample duplicates (don't include a bunch of dilutions)
   complete(drug,Seq_ID) %>% #Explicitly write out NA for anything where drug susceptibility was not possible
   pivot_wider(names_from=drug,values_from=susceptibility) %>%
   filter(!is.na(Sample_source)) %>%
@@ -179,7 +175,7 @@ metadata_ns <- sample_metadata %>%
   mutate(study="Glab")
 
 #COmbined this with the reference nextstrain metadata
-context_metadata <- read.delim('/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/pipelines/nextstrain/data/input_metadata.tsv') %>%
+context_metadata <- read.delim('../../pipelines/nextstrain/data/input_metadata.tsv') %>%
   mutate(across(all_of(newdrugs),as.factor))
 merged_metadata_ns <- context_metadata %>%
   full_join(metadata_ns,by=c(strain='Seq_ID',date='collection_date','EMB','ETH','INH','KAN','OFL','PZA','RIF','STR',
@@ -189,6 +185,6 @@ merged_metadata_ns <- context_metadata %>%
 glab_merged <- merged_metadata_ns %>%
   filter(country=="Peru")
 
-write.csv(merged_metadata_ns,file='/Users/chaneykalinich/Documents/PGCoE/github/pgcoe_pipeline/pipelines/nextstrain/data/metadata_merged.csv')
+write.csv(merged_metadata_ns,file='../../pipelines/nextstrain/data/metadata_merged.csv')
 
 
