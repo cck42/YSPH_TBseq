@@ -99,38 +99,100 @@ heatmap_res_sputum <- mykrobe_sputum_combined %>%
   theme(strip.text.y=element_blank(),
         panel.spacing.y=unit(2,"lines"))
 plot(heatmap_res_sputum)
+save_plot("heatmap_res_sputum_all.pdf",heatmap_res_sputum,
+          base_width=12,base_height=8)
 
 reslegend <- get_legend(
   heatmap_res_sputum+
     theme(legend.box.margin = margin(0,0,0,50))
 )
 
-#Make a boxplot showing average CT by extraction type
-CT_avg <- sputum_extracts_summary %>%
+
+
+#calculate mean and SD (SQ and coverage) for each extraction method
+extr_stats <- sputum_extracts_summary %>%
+  group_by(group) %>%
+  summarize(meanquant=mean(starting_quant),std_dev_quant=sd(starting_quant),std_err_quant=(sd(starting_quant)/sqrt(n())),
+            meancov=mean(coverage),std_dev_cov=sd(coverage),std_err_cov=(sd(coverage)/sqrt(n()))) %>%
+  rename("method"=group)
+write_tsv(extr_stats,"extraction_eff_by_method.tsv")
+
+#SQ by extraction type
+sq_median <- sputum_extracts_summary %>%
   ggplot() +
-  geom_boxplot(aes(x=group,y=Ct,fill=group))+
+  geom_boxplot(aes(x=group,y=starting_quant,fill=group))+
   theme_half_open() +
   scale_fill_brewer(palette="Dark2",
-    name="Extraction method"
+    name="Extraction \nmethod"
+  ) +
+  scale_y_log10()+
+  labs(x="Method",
+       y="Starting quantity (GE/uL)")
+plot(sq_median)
+
+sq_avg <- extr_stats %>%
+  ggplot() +
+  geom_pointrange(aes(x=method,y=meanquant,ymin=meanquant-std_err_quant,ymax=meanquant+std_err_quant,color=method))+
+  theme_half_open() +
+  scale_color_brewer(palette="Dark2",
+                    name="Extraction method"
+  ) +
+  scale_y_log10(limits= c(1,10000000))+
+  labs(x="Method",
+       y="Starting quantity (GE/uL)")
+plot(sq_avg)
+
+#Coverage by extraction type
+cov_median <- sputum_extracts_summary %>%
+  ggplot() +
+  geom_boxplot(aes(x=group,y=coverage,fill=group))+
+  theme_half_open() +
+  scale_fill_brewer(palette="Dark2",
+                    name="Extraction \nmethod"
   ) +
   labs(x="Method",
-       y="Ct")
-plot(CT_avg)
+       y="Coverage (%)")
+plot(cov_median)
+
+cov_avg <- extr_stats %>%
+  ggplot() +
+  geom_pointrange(aes(x=method,y=meancov,ymin=meancov-std_err_cov,ymax=meancov+std_err_cov,color=method))+
+  theme_half_open() +
+  scale_color_brewer(palette="Dark2",
+                     name="Extraction method"
+  ) +
+  ylim(0,100)+
+  labs(x="Method",
+       y="Coverage (%)")
+plot(cov_avg)
 
 extrlegend <- get_legend(
-  CT_avg+
-    theme(legend.box.margin = margin(0,0,20,50))
+  sq_median+
+    theme(legend.box.margin = margin(0,0,300,50))
 )
 
-legends_CT <- plot_grid(reslegend,extrlegend,
-                        CT_avg+theme(legend.position='none'),
+extr_summ <- plot_grid(sq_avg+theme(legend.position='none'),
+                     sq_median+theme(legend.position='none'),
+                     cov_avg+theme(legend.position='none'),
+                     cov_median+theme(legend.position='none'),
+                     #extrlegend,
+                     nrow=2,
+                     labels=c("Mean (+/- SE)","Median (+/- 1.5 IQR)",
+                              "Mean (+/- SE)","Median (+/- 1.5 IQR)"),
+                     rel_widths=c(1,1,.25),
+                     label_x=.05)
+extr_summ
+save_plot("extr_summary.jpg",extr_summ,base_height=8,base_width=14)
+
+legends_sq <- plot_grid(reslegend,extrlegend,
+                        sq_avg+theme(legend.position='none'),
                         ncol=1,
                         rel_heights = c(1,1,3),
                         labels=c("","","B"))
-legends_CT
+legends_sq
 
 heatmap_res <- plot_grid(heatmap_res_sputum+theme(legend.position='none'),
-                         legends_CT, 
+                         legends_sq, 
                          #labels=c("DNA","Sputum extracts"),
                          #label_y=1.05,
                          labels=c("A",""),
