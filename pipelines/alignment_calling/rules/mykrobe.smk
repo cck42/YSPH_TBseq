@@ -63,7 +63,8 @@ rule mykrobe_combine:
         mykrobepredict=expand(config['outdir']+'/mykrobe/{sample}_mykrobe.csv',sample=SAMPLES)
     params:
     output:
-        mykrobe_combined=os.path.join(config['outdir'],'mykrobe/combined.csv')
+        mykrobe_combined=os.path.join(config['outdir'],'mykrobe/combined.csv'),
+        fin="results/mykrobe/complete"
     log:
         stdout="logs/mykrobe/combine.out",
         stderr="logs/mykrobe/combine.err"
@@ -73,4 +74,7 @@ rule mykrobe_combine:
         for file in {input.mykrobepredict}; do
             tail -n +2 "$file" >> {output.mykrobe_combined}
         done 2> {log.stderr}
+
+
+        touch {output.fin}
         """
