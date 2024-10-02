@@ -77,9 +77,10 @@ rule primerclip:
         primers = config['primers']
     output:
         aln_trimmed= os.path.join(config['outdir'],'align/{sample}_aln_itrim.bam')
+    group: "align"
     resources:
             mem_mb=8000,
-            runtime=1440,
+            runtime=600,
     log:
         stdout="logs/ivar/{sample}_trim.out",
         stderr="logs/ivar/{sample}_trim.err"
@@ -99,6 +100,7 @@ rule sort:
         mem_mb=16000,
         runtime=180,
 	cores=4,
+    group: "align"
     log:
         stdout="logs/align/{sample}_sort.out",
         stderr="logs/align/{sample}_sort.err"
@@ -118,6 +120,7 @@ rule subsample:
     resources:
         mem_mb=8000,
         runtime=180,
+    group: "align"
     log:
         stdout="logs/align/{sample}_sub_{subsample}.out",
         stderr="logs/align/{sample}_sub_{subsample}.err",

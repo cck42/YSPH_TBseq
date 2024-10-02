@@ -17,6 +17,11 @@ rule mykrobe_skeleton:
         stdout="logs/mykrobe/skeleton.out",
         stderr="logs/mykrobe/skeleton.err"
     container: "docker://sethnr/pgcoe_bacseq:0.02"
+    resources:
+        disk_mb=10000,
+        mem_mb=16000,
+        runtime=120,
+        cores=1
     shell:
         """
         mykrobe predict \
@@ -45,6 +50,11 @@ rule mykrobe:
         stdout="logs/mykrobe/{sample}.out",
         stderr="logs/mykrobe/{sample}.err"
     container: "docker://sethnr/pgcoe_bacseq:0.02"
+    resources:
+        disk_mb=10000,
+        mem_mb=16000,
+        runtime=120,
+        cores=1
     shell:
         """
         mykrobe predict \

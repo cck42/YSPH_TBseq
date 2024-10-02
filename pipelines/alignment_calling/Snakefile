@@ -19,9 +19,9 @@ include: "rules/snippy.smk"
 
 include: "rules/mykrobe.smk"
 
-include: "rules/lineage.smk"
+#include: "rules/lineage.smk"
 
-localrules: all, cp_local_fq, poppunkFile, srstDB
+localrules: all, cp_local_fq
 
 
 rule all:
@@ -30,8 +30,8 @@ rule all:
         basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
         #pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
         #lineages="results/poppunk/complete"
-        lineages="results/srst/complete"
-        # mykrobecombined=config['outdir']+'/mykrobe/combined.csv'
+        #lineages="results/srst/complete"
+        mykrobecombined=config['outdir']+'/mykrobe/combined.csv'
         
         # evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES),
         
@@ -48,6 +48,7 @@ rule coverage:
         maxdepth=0,
         minmapqual=60,
         minbasequal=13
+    container: "docker://sethnr/pgcoe_bacseq:0.01"
     log:
         stderr="logs/align/{sample}_sub{subsample}.err"
     message: "Computing coverage of reference for sample {wildcards.sample} with a read subsample fraction of {wildcards.subsample}"
@@ -68,6 +69,7 @@ rule mdepth:
         maxdepth=0,
         minmapqual=60,
         minbasequal=13
+    container: "docker://sethnr/pgcoe_bacseq:0.01"
     log:
         stderr="logs/depth/"+config['runname']+".err"
     shell:
@@ -96,6 +98,7 @@ rule indexbam:
         bam = '{samplename}.bam'
     output:
         indexedbam = '{samplename}.bam.bai'
+    container: "docker://sethnr/pgcoe_bacseq:0.01"
     log:
         stdout="logs/bamindex/{samplename}.out",
         stderr="logs/bamindex/{samplename}.err"
@@ -122,6 +125,7 @@ rule variantcalling:
         stdout="logs/variantcalling.out",
         stderr="logs/variantcalling.err"
     message: "Calling variants for all samples"
+    container: "docker://sethnr/pgcoe_bacseq:0.01"
     shell:
         """
         bcftools mpileup -Ou -o variants.bcf -f {params.ref} {input.tocall} 1> {log.stdout} 2> {log.stderr}
@@ -141,6 +145,7 @@ rule variantfilter:
     log:
         stdout="logs/variantfilter.out",
         stderr="logs/variantfilter.err"
+    container: "docker://sethnr/pgcoe_bacseq:0.01"
     shell:
         """
         bcftools filter -O z -o {output.vcf_filt} -i 'QUAL>10 & DP>10' {input.vcf} 1> {log.stdout} 2> {log.stderr}
