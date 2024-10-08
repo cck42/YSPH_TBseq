@@ -16,19 +16,10 @@ TB_assemblyfile   <- "./data/TB_assembly_lengths.csv"
 TB_divergencefile <- "./data/TB_divergence_fastani.out"
 TB_pangenomefile  <- "./data/TB_gene_presence_absence.csv"
 
-SP_treefile       <- "./data/supp/SP_ml_tree.newick"
-SP_ampliconfile   <- "./data/supp/SP_amplicon_positions.csv"
-SP_assemblyfile   <- "./data/supp/SP_assembly_lengths.csv"
-SP_divergencefile <- "./data/supp/SP_divergence_fastani.out"
-SP_pangenomefile  <- "./data/supp/SP_gene_presence_absence.csv"
-TB_treefile       <- "./data/supp/TB_ml_tree.newick"
-TB_ampliconfile   <- "./data/supp/TB_amplicon_positions.csv"
-TB_assemblyfile   <- "./data/supp/TB_assembly_lengths.csv"
-TB_divergencefile <- "./data/supp/TB_divergence_fastani.out"
-TB_pangenomefile  <- "./data/supp/TB_gene_presence_absence.csv"
 
 outpng        <- "./Fig2_combined_pangenome_plot.png"
 outpdf        <- "./Fig2_combined_pangenome_plot.pdf"
+outsvg        <- "./Fig2_combined_pangenome_plot.svg"
 
 
 
@@ -169,7 +160,8 @@ SP_treeplot + SP_panplot + SP_ampplot +
 TB_treeplot + TB_panplot + TB_ampplot + 
   plot_layout(widths=c(2.5,3,3),ncol=3)
 
-ggsave(outpng, width=500,height=500,dpi=400,units="mm")
+ggsave(outpng, width=300,height=300,dpi=400,units="mm")
 ggsave(outpdf, width=500,height=500,dpi=400,units="mm")
+ggsave(outsvg, width=500,height=500,dpi=400,units="mm")
 
 
