@@ -81,7 +81,7 @@ grey_cols <- setNames(grey_scale, non_streptococcus_taxa)
 all_cols <- c(cols, grey_cols)
 
 
-SPsampletab$taxon_name <- factor(SPsampletab$taxon_name, levels=rev(names(all_cols)), ordered=T)
+SPsampletab$taxon <- factor(SPsampletab$taxon_name, levels=rev(names(all_cols)), ordered=T)
 SPsampletab$ngs_prep_method <- fct_recode(SPsampletab$ngs_prep_method,
                                        "no amplification"="Nextera XT (GLab)","amplicon"="COVIDseq")
 SPsampletab$ngs_prep_method <- factor(SPsampletab$ngs_prep_method,levels=c("no amplification","amplicon"),ordered=T)
@@ -90,7 +90,7 @@ SPsampletab$ngs_prep_method <- factor(SPsampletab$ngs_prep_method,levels=c("no a
 
 
 # plot
-sampletypeplot <- ggplot(SPsampletab, aes(x = original_id, y = NT_rpm, fill = taxon_name)) + 
+sampletypeplot <- ggplot(SPsampletab, aes(x = original_id, y = NT_rpm, fill = taxon)) + 
   geom_bar(stat = "identity") + 
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right",
@@ -118,7 +118,7 @@ ampfil <- scale_fill_manual(values=c("no amplification"="blue","amplicon"="dark 
 amptab = rbind(metadataSP,metadataTB) %>% 
   mutate(seq_id=gsub("Yale-","",seq_id)) %>% 
   #filter(sample_type=="NP swab") %>% 
-  filter(sample_type=="Saliva") %>% 
+  #filter(sample_type=="Saliva") %>% 
   filter(is.na(sample_dilution)) %>% 
   merge(covtabSP,by="seq_id") %>% 
   mutate(group=paste(original_id,ngs_prep_method))
@@ -127,15 +127,23 @@ amptab$ngs_prep_method <- fct_recode(amptab$ngs_prep_method,
                                      "no amplification"="Hybrid CovidSeq without amplification",
                                      "no amplification"="Nextera XT (GLab)",
                                      "amplicon"="Mpox/Hybrid CovidSeq",
-                                     "amplicon"="COVIDseq",)
+                                     "amplicon"="COVIDseq",
+                                     "amplicon"="Hybrid COVIDseq")
 
+#View(amptab)
 
 crosssamples <-  amptab %>% 
   filter(is.na(sample_dilution)) %>% 
-  filter(sample_type=="Saliva") %>% 
-                pull(original_id)
+  filter(sample_type %in% c("Saliva","NP swab","Culture Isolate")) %>% 
+  filter(original_id %in% c("A889-NP", "B042-NP", "C677-NP",
+                            "A889-S","B042-S","C677-S",
+                            "W1527-CI","W3317-CI","W4034-CI")) %>% 
+  pull(original_id)
 
-amptabcf <- subset(amptab,original_id %in% crosssamples)
+
+amptabcf <- subset(amptab,original_id %in% crosssamples)  %>% 
+#                 filter(!grepl("CS",seq_id)) #remove earlier CS run to avoid duplicates
+                  filter(!seq_id %in% c("CS00171","CS00162","CS00172","CS00163","CS00173","CS00164"))
 
 
 samporder <- amptabcf %>% 
@@ -144,6 +152,7 @@ samporder <- amptabcf %>%
   pull(original_id)
 
 amptabcf$original_id <- factor(amptabcf$original_id,levels=samporder,ordered=T)
+amptabcf$ngs_prep_method <- factor(amptabcf$ngs_prep_method,levels=c("no amplification","amplicon"),ordered=T)
 
 
 spcovbox  <- ggplot(amptabcf,aes(x=ngs_prep_method,y=coverage,color=ngs_prep_method,group=ngs_prep_method)) + 
@@ -151,6 +160,7 @@ spcovbox  <- ggplot(amptabcf,aes(x=ngs_prep_method,y=coverage,color=ngs_prep_met
   geom_point() + 
   geom_line(aes(group=original_id),color="grey") + 
   theme(axis.title.x=element_blank(),
+        axis.text.x=element_text(angle=45,hjust=1),
         legend.position="none") + ampcol +
   ylim(0,100) +
   facet_grid(. ~ sample_type)
@@ -216,27 +226,27 @@ dilutionplotSP
 
 # get mean cts for samples ------------------------------------------------
 
-meancttab <- rbind(metadataSP,metadataTB) %>% 
-  filter(!is.na(ct)) %>% 
-  filter(is.na(sample_dilution)) %>% 
-  filter(!sample_type %in% c("Culture isolate")) %>% 
-  group_by(species,sample_type) %>% 
-  summarize(mean = mean(ct,na.rm = T),
-            lq = quantile(ct,c(0.25),na.rm = T),
-            med = quantile(ct,c(0.5),na.rm = T),
-            uq = quantile(ct,c(0.75),na.rm = T),
-  )
-meancttab
-
-dilutionplot2 <- ggplot(dilutiontab,aes(x=ct,y=coverage,group=group,color=ngs_prep_method)) + 
-  geom_rect(data=meancttab,aes(xmin=lq,xmax=uq,ymin=0,ymax=100),alpha=0.3, inherit.aes=F) +
-  geom_smooth(se = F,linewidth=0.3) + 
-  geom_point() + 
-  ylab("genome coverage") + xlab("CT ( -> genome copies / ul)") +
-  facet_grid(species ~ .)
-
-dilutionplot2
-
+# meancttab <- rbind(metadataSP,metadataTB) %>% 
+#   filter(!is.na(ct)) %>% 
+#   filter(is.na(sample_dilution)) %>% 
+#   filter(!sample_type %in% c("Culture isolate")) %>% 
+#   group_by(species,sample_type) %>% 
+#   summarize(mean = mean(ct,na.rm = T),
+#             lq = quantile(ct,c(0.25),na.rm = T),
+#             med = quantile(ct,c(0.5),na.rm = T),
+#             uq = quantile(ct,c(0.75),na.rm = T),
+#   )
+# meancttab
+# 
+# dilutionplot2 <- ggplot(dilutiontab,aes(x=ct,y=coverage,group=group,color=ngs_prep_method)) + 
+#   geom_rect(data=meancttab,aes(xmin=lq,xmax=uq,ymin=0,ymax=100),alpha=0.3, inherit.aes=F) +
+#   geom_smooth(se = F,linewidth=0.3) + 
+#   geom_point() + 
+#   ylab("genome coverage") + xlab("CT ( -> genome copies / ul)") +
+#   facet_grid(species ~ .)
+# 
+# dilutionplot2
+# 
 
 
 # TB amp vs unamp ---------------------------------------------------------
@@ -291,6 +301,7 @@ tbcovbox  <- ggplot(amptabcf,aes(x=ngs_prep_method,y=coverage,color=ngs_prep_met
   geom_point() + 
   geom_line(aes(group=original_id),color="grey") + 
   theme(axis.title.x=element_blank(),
+        axis.text.x=element_text(angle=45,hjust=1),
         legend.position="none") + ampcol +
   ylim(0,100) +
   facet_grid(. ~ sample_type)
@@ -376,11 +387,17 @@ sputumplot + tbcovbox + dilutionplotTB + guide_area() + plot_layout(design = pla
 ggsave("2_combined_coverage_plot_TB.png",dpi=400,units="mm",width=300,height=200)
 
 
+playout <- "AADBB
+CCCCC"
+
 sampletypeplot + spcovbox + dilutionplotSP + guide_area() + plot_layout(design = playout,guides="collect")
 ggsave("2_combined_coverage_plot_SP.png",dpi=400,units="mm",width=300,height=200)
 
 
-
+spcomb <- sampletypeplot + spcovbox + guide_area() + plot_layout(design = "AACBB",guides="collect")
+tbcomb <- sputumplot + tbcovbox + guide_area() + plot_layout(design = "AACB",guides="collect")
+spcomb / tbcomb
+ggsave("2_combined_coverage_plot_preprint.png",dpi=400,units="mm",width=300,height=200)
 
 
 
