@@ -399,5 +399,6 @@ tbcomb <- sputumplot + tbcovbox + guide_area() + plot_layout(design = "AACB",gui
 spcomb / tbcomb
 ggsave("2_combined_coverage_plot_preprint.png",dpi=400,units="mm",width=300,height=200)
 
+ggsave("2_combined_coverage_plot_preprint.svg",dpi=400,units="mm",width=300,height=200)
 
 

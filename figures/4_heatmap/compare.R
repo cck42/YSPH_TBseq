@@ -36,16 +36,16 @@ heatmap_res_DNA <- mykrobe_combined %>%
   ggplot() +
   geom_tile(aes(x=Template_dilution,y=drug,fill=susceptibility)) + 
   scale_fill_manual(
-    values=c("#FFC561","#B20026","#006D2C"),
+    values=c("#FFC561","#B20026","gray"),
     name="Susceptibility",
     labels=c("Partial resistance","Resistant","Susceptible"),
-    na.value='gray'
+    na.value='#555555'
   ) +
   labs(x='Sample',
        y='Drug') +
   theme_half_open()+
   theme(axis.text.x=element_text(angle=-90,vjust=0.5,hjust=0.1),
-        panel.background = element_rect(fill='gray')) +
+        panel.background = element_rect(fill='#555555')) +
   facet_wrap("Original_ID",strip.position="bottom",nrow=1)
 plot(heatmap_res_DNA)
 
@@ -60,9 +60,9 @@ heatmap_res_sputum_small <- mykrobe_sputum_combined %>%
   filter(!is.na(drug)) %>%
   filter(liquefaction=="NALC 0.5% - NaOH"&fastprep=="40s") %>%
   ggplot()+
-  geom_tile(aes(x=pt_sample_num,y=drug,fill=susceptibility))+ 
+  geom_tile(aes(x=ID,y=drug,fill=susceptibility,height=0.95,width=0.95))+ 
   scale_fill_manual(
-    values=c("#B20026","#006D2C"),
+    values=c("#B20026","gray"),
     name="Susceptibility",
     labels=c("Resistant","Susceptible"),
     na.value='gray'
@@ -70,11 +70,15 @@ heatmap_res_sputum_small <- mykrobe_sputum_combined %>%
   labs(x='Sample',
        y='Drug') +
   theme_half_open()+
-  theme(axis.text.x=element_text(angle=-90,vjust=0.5,hjust=0.1),
-        panel.background = element_rect(fill='gray')) 
+  theme(axis.title=element_blank(),
+        axis.text.x=element_text(angle=45,vjust=1,hjust=1),
+        panel.background = element_rect(fill='white')) 
 plot(heatmap_res_sputum_small)
 
+ggsave("Fig4_heatmap.png",width=220,height=150,units="mm")
+
 save_plot("Fig4_heatmap.svg",heatmap_res_sputum_small)
+
 
 heatmap_res_sputum <- mykrobe_sputum_combined %>%
   #filter(Sample_Type=="Sputum extract") %>%
@@ -84,16 +88,16 @@ heatmap_res_sputum <- mykrobe_sputum_combined %>%
   ggplot()+
   geom_tile(aes(x=pt_sample_num,y=drug,fill=susceptibility))+ 
   scale_fill_manual(
-    values=c("#FFC561","#B20026","#006D2C"),
+    values=c("#FFC561","#B20026","grey"),
     name="Susceptibility",
     labels=c("Partial resistance","Resistant","Susceptible"),
-    na.value='gray'
+    na.value='#555555'
   ) +
   labs(x='Sample',
        y='Drug') +
   theme_half_open()+
   theme(axis.text.x=element_text(angle=-90,vjust=0.5,hjust=0.1),
-        panel.background = element_rect(fill='gray')) +
+        panel.background = element_rect(fill='#555555')) +
   #facet_wrap(c('liquefaction','fastprep'),dir="v",shrink=FALSE,nrow=2,drop=TRUE,scales="free_x")
   facet_grid(extraction ~ batch, scales="free",switch="y",labeller=label_context) +
   theme(strip.text.y=element_blank(),
