@@ -14,16 +14,16 @@ TB_ampliconfile   <- "./data/TB_amplicon_positions.csv"
 TB_assemblyfile   <- "./data/TB_assembly_lengths.csv"
 TB_divergencefile <- "./data/TB_divergence_fastani.out"
 TB_pangenomefile  <- "./data/TB_gene_presence_absence.csv"
-SP_treefile       <- "./data/supp/SP_ml_tree.newick"
-SP_ampliconfile   <- "./data/supp/SP_amplicon_positions.csv"
-SP_assemblyfile   <- "./data/supp/SP_assembly_lengths.csv"
-SP_divergencefile <- "./data/supp/SP_divergence_fastani.out"
-SP_pangenomefile  <- "./data/supp/SP_gene_presence_absence.csv"
-TB_treefile       <- "./data/supp/TB_ml_tree.newick"
-TB_ampliconfile   <- "./data/supp/TB_amplicon_positions.csv"
-TB_assemblyfile   <- "./data/supp/TB_assembly_lengths.csv"
-TB_divergencefile <- "./data/supp/TB_divergence_fastani.out"
-TB_pangenomefile  <- "./data/supp/TB_gene_presence_absence.csv"
+# SP_treefile       <- "./data/supp/SP_ml_tree.newick"
+# SP_ampliconfile   <- "./data/supp/SP_amplicon_positions.csv"
+# SP_assemblyfile   <- "./data/supp/SP_assembly_lengths.csv"
+# SP_divergencefile <- "./data/supp/SP_divergence_fastani.out"
+# SP_pangenomefile  <- "./data/supp/SP_gene_presence_absence.csv"
+# TB_treefile       <- "./data/supp/TB_ml_tree.newick"
+# TB_ampliconfile   <- "./data/supp/TB_amplicon_positions.csv"
+# TB_assemblyfile   <- "./data/supp/TB_assembly_lengths.csv"
+# TB_divergencefile <- "./data/supp/TB_divergence_fastani.out"
+# TB_pangenomefile  <- "./data/supp/TB_gene_presence_absence.csv"
 outpng        <- "./Fig2_combined_pangenome_plot.png"
 outpdf        <- "./Fig2_combined_pangenome_plot.pdf"
 # tree plot ---------------------------------------------------------------
@@ -41,7 +41,7 @@ get_tree_plot <- function(treefile) {
   treeplot <- ggtree(tree,ladderize=F) +
     #geom_nodelab(aes(label=""), size=1, nudge_x=-0.01, nudge_y=0.25) +
     geom_tiplab(align=T, offset = treesize*0.01, linetype="dotted", 
-                linesize = 0.4,size=5) + 
+                linesize = 0.4, size=2.5 ) + 
     scale_x_continuous(expand=c(0,treesize*0.35))
   treeplot
 }
@@ -153,3 +153,13 @@ SP_treeplot + SP_panplot + SP_ampplot +
 
 ggsave(outpng, width=500,height=350,dpi=400,units="mm")
 ggsave(outpdf, width=500,height=350,dpi=400,units="mm")
+
+SP_treeplot + SP_panplot+theme(legend.position="none") + SP_ampplot + 
+  plot_layout(widths=c(2.5,3,3),ncol=3)
+ggsave("S1_SP_pangenome_full.svg", width=297,height=210,dpi=400,units="mm")
+ggsave("S1_SP_pangenome_full.png", width=297,height=210,dpi=400,units="mm")
+
+TB_treeplot + TB_panplot+theme(legend.position="none") + TB_ampplot + 
+  plot_layout(widths=c(2.5,3,3),ncol=3) 
+ggsave("S1_TB_pangenome_full.svg", width=297,height=210,dpi=400,units="mm")
+ggsave("S1_TB_pangenome_full.png", width=297,height=210,dpi=400,units="mm")
