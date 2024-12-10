@@ -12,36 +12,36 @@ Yale-CS00037,H136,Culture Isolate,1.00E-03,Hybrid PCR v1.2,10uM,Hybrid COVIDseq,
 Yale-CS00038,H136,Culture Isolate,1.00E-03,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,4/13/23,77.8,92.8,21.7,22.9,Ampllicon
 Yale-CS00039,H141,Culture Isolate,1.00E-03,Hybrid PCR v1.2,10uM,Hybrid COVIDseq,4/13/23,50.2,33.4,,,Ampllicon
 Yale-CS00040,H141,Culture Isolate,1.00E-03,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,4/13/23,84.4,92.4,21.2,22,Ampllicon
-Yale-CS00047,CDC,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,25.77,26.25,Ampllicon
-Yale-CS00048,CDC,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,28.21,28.38,Ampllicon
-Yale-CS00049,CDC,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,31.46,31.83,Ampllicon
-Yale-CS00050,CDC,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,32.95,33.34,Ampllicon
-Yale-CS00051,CDC,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,37.06,37.48,Ampllicon
-Yale-CS00052,H54,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,25.03,25.51,Ampllicon
-Yale-CS00053,H54,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,27.81,28.33,Ampllicon
-Yale-CS00054,H54,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,29.86,31.11,Ampllicon
-Yale-CS00055,H54,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,33.35,33.84,Ampllicon
-Yale-CS00056,H54,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,35.8,37.91,Ampllicon
-Yale-CS00057,H74,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,23.35,24.01,Ampllicon
-Yale-CS00058,H74,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,26.05,26.14,Ampllicon
-Yale-CS00059,H74,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,28.29,28.62,Ampllicon
-Yale-CS00060,H74,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,30.96,31.27,Ampllicon
-Yale-CS00061,H74,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,34.31,34.44,Ampllicon
-Yale-CS00062,H122,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,25.72,26.45,Ampllicon
-Yale-CS00063,H122,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,31.75,32.79,Ampllicon
-Yale-CS00064,H122,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,35.27,36.17,Ampllicon
-Yale-CS00065,H122,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,35.27,36.17,Ampllicon
-Yale-CS00066,H122,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,39.62,NaN,Ampllicon
-Yale-CS00067,H136,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,23.85,25.38,Ampllicon
-Yale-CS00068,H136,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,26.63,28.89,Ampllicon
-Yale-CS00069,H136,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,30.06,31.24,Ampllicon
-Yale-CS00070,H136,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,33.55,34.64,Ampllicon
-Yale-CS00071,H136,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,37.11,39.62,Ampllicon
-Yale-CS00072,H141,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,24.26,24.66,Ampllicon
-Yale-CS00073,H141,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,27.43,28.06,Ampllicon
-Yale-CS00074,H141,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,30.83,31.61,Ampllicon
-Yale-CS00075,H141,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,34.38,35.69,Ampllicon
-Yale-CS00076,H141,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,05/11/2023,,,38.31,38.52,Ampllicon
+Yale-CS00047,CDC,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,25.77,26.25,Ampllicon
+Yale-CS00048,CDC,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,28.21,28.38,Ampllicon
+Yale-CS00049,CDC,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,31.46,31.83,Ampllicon
+Yale-CS00050,CDC,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,32.95,33.34,Ampllicon
+Yale-CS00051,CDC,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,37.06,37.48,Ampllicon
+Yale-CS00052,H54,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,25.03,25.51,Ampllicon
+Yale-CS00053,H54,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,27.81,28.33,Ampllicon
+Yale-CS00054,H54,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,29.86,31.11,Ampllicon
+Yale-CS00055,H54,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,33.35,33.84,Ampllicon
+Yale-CS00056,H54,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,35.8,37.91,Ampllicon
+Yale-CS00057,H74,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,23.35,24.01,Ampllicon
+Yale-CS00058,H74,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,26.05,26.14,Ampllicon
+Yale-CS00059,H74,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,28.29,28.62,Ampllicon
+Yale-CS00060,H74,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,30.96,31.27,Ampllicon
+Yale-CS00061,H74,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,34.31,34.44,Ampllicon
+Yale-CS00062,H122,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,25.72,26.45,Ampllicon
+Yale-CS00063,H122,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,31.75,32.79,Ampllicon
+Yale-CS00064,H122,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,35.27,36.17,Ampllicon
+Yale-CS00065,H122,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,35.27,36.17,Ampllicon
+Yale-CS00066,H122,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,39.62,NaN,Ampllicon
+Yale-CS00067,H136,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,23.85,25.38,Ampllicon
+Yale-CS00068,H136,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,26.63,28.89,Ampllicon
+Yale-CS00069,H136,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,30.06,31.24,Ampllicon
+Yale-CS00070,H136,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,33.55,34.64,Ampllicon
+Yale-CS00071,H136,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,37.11,39.62,Ampllicon
+Yale-CS00072,H141,Culture Isolate,1.00E-04,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,24.26,24.66,Ampllicon
+Yale-CS00073,H141,Culture Isolate,1.00E-05,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,27.43,28.06,Ampllicon
+Yale-CS00074,H141,Culture Isolate,1.00E-06,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,30.83,31.61,Ampllicon
+Yale-CS00075,H141,Culture Isolate,1.00E-07,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,34.38,35.69,Ampllicon
+Yale-CS00076,H141,Culture Isolate,1.00E-08,Hybrid PCR v1.2,100uM,Hybrid COVIDseq,5/11/23,,,38.31,38.52,Ampllicon
 Yale-CS00153,A889-CE,Culture enriched,,,100uM,COVIDseq,7/27/23,64.8,,25.22,,Ampllicon
 Yale-CS00154,B042-CE,Culture enriched,,,100uM,COVIDseq,7/27/23,73.6,,27.16,,Ampllicon
 Yale-CS00155,C677-CE,Culture enriched,,,100uM,COVIDseq,7/27/23,74.4,,24.67,,Ampllicon
@@ -85,46 +85,46 @@ Yale-CS00192,NEC1,Water,,,100uM,COVIDseq,7/27/23,58,,,,Ampllicon
 Yale-CS00193,NEC2,Water,,,100uM,COVIDseq,7/27/23,56,,,,Ampllicon
 Yale-CS00194,NEC3,Water,,,100uM,COVIDseq,7/27/23,53.2,,,,Ampllicon
 Yale-CS00195,NEC4,Water,,,100uM,COVIDseq,7/27/23,50.2,,,,Ampllicon
-Yale-SP00001,CDC,Culture Isolate,1.00E-03,231016_bacseq,100uM,COVIDseq,11/02/2023,107,,,,Ampllicon
-Yale-SP00002,CDC,Culture Isolate,1.00E-04,231016_bacseq,100uM,COVIDseq,11/02/2023,19.4,,,,Ampllicon
-Yale-SP00003,CDC,Culture Isolate,1.00E-05,231016_bacseq,100uM,COVIDseq,11/02/2023,6.4,,,,Ampllicon
-Yale-SP00004,CDC,Culture Isolate,1.00E-06,231016_bacseq,100uM,COVIDseq,11/02/2023,5.9,,,,Ampllicon
-Yale-SP00005,CDC,Culture Isolate,1.00E-07,231016_bacseq,100uM,COVIDseq,11/02/2023,6,,,,Ampllicon
-Yale-SP00006,CDC,Culture Isolate,1.00E-08,231016_bacseq,100uM,COVIDseq,11/02/2023,5.7,,,,Ampllicon
-Yale-SP00007,PCR_ctrl016a,Water,,231016_bacseq,100uM,COVIDseq,11/02/2023,5.7,,,,Ampllicon
-Yale-SP00008,PCR_ctrl016b,Water,,231016_bacseq,100uM,COVIDseq,11/02/2023,9.6,,,,Ampllicon
-Yale-SP00009,CDC,Culture Isolate,1.00E-03,231016_bacseq,50uM,COVIDseq,11/02/2023,111,,,,Ampllicon
-Yale-SP00010,CDC,Culture Isolate,1.00E-04,231016_bacseq,50uM,COVIDseq,11/02/2023,8.6,,,,Ampllicon
-Yale-SP00011,CDC,Culture Isolate,1.00E-05,231016_bacseq,50uM,COVIDseq,11/02/2023,2.9,,,,Ampllicon
-Yale-SP00012,CDC,Culture Isolate,1.00E-06,231016_bacseq,50uM,COVIDseq,11/02/2023,2.6,,,,Ampllicon
-Yale-SP00013,CDC,Culture Isolate,1.00E-07,231016_bacseq,50uM,COVIDseq,11/02/2023,2.7,,,,Ampllicon
-Yale-SP00014,CDC,Culture Isolate,1.00E-08,231016_bacseq,50uM,COVIDseq,11/02/2023,2.8,,,,Ampllicon
-Yale-SP00015,PCR_ctrl016c,Water,,231016_bacseq,50uM,COVIDseq,11/02/2023,2.9,,,,Ampllicon
-Yale-SP00016,PCR_ctrl016d,Water,,231016_bacseq,50uM,COVIDseq,11/02/2023,2.9,,,,Ampllicon
-Yale-SP00017,CDC,Culture Isolate,1.00E-03,231016_bacseq,5uM,COVIDseq,11/02/2023,3.1,,,,Ampllicon
-Yale-SP00018,CDC,Culture Isolate,1.00E-04,231016_bacseq,5uM,COVIDseq,11/02/2023,0.2,,,,Ampllicon
-Yale-SP00019,CDC,Culture Isolate,1.00E-05,231016_bacseq,5uM,COVIDseq,11/02/2023,0.2,,,,Ampllicon
-Yale-SP00020,CDC,Culture Isolate,1.00E-06,231016_bacseq,5uM,COVIDseq,11/02/2023,0.2,,,,Ampllicon
-Yale-SP00021,CDC,Culture Isolate,1.00E-07,231016_bacseq,5uM,COVIDseq,11/02/2023,0.2,,,,Ampllicon
-Yale-SP00022,CDC,Culture Isolate,1.00E-08,231016_bacseq,5uM,COVIDseq,11/02/2023,0.2,,,,Ampllicon
-Yale-SP00023,PCR_ctrl016e,Water,,231016_bacseq,5uM,COVIDseq,11/02/2023,0.2,,,,Ampllicon
-Yale-SP00024,PCR_ctrl016f,Water,,231016_bacseq,5uM,COVIDseq,11/02/2023,0.2,,,,Ampllicon
-Yale-SP00025,CDC,Culture Isolate,1.00E-03,231016_bacseq,0.5uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00026,CDC,Culture Isolate,1.00E-04,231016_bacseq,0.5uM,COVIDseq,11/02/2023,0,,,,Ampllicon
-Yale-SP00027,CDC,Culture Isolate,1.00E-05,231016_bacseq,0.5uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00028,CDC,Culture Isolate,1.00E-06,231016_bacseq,0.5uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00029,CDC,Culture Isolate,1.00E-07,231016_bacseq,0.5uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00030,CDC,Culture Isolate,1.00E-08,231016_bacseq,0.5uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00031,PCR_ctrl016g,Water,,231016_bacseq,0.5uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00032,PCR_ctrl016h,Water,,231016_bacseq,0.5uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00033,CDC,Culture Isolate,1.00E-03,231016_bacseq,0.05uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00034,CDC,Culture Isolate,1.00E-04,231016_bacseq,0.05uM,COVIDseq,11/02/2023,0,,,,Ampllicon
-Yale-SP00035,CDC,Culture Isolate,1.00E-05,231016_bacseq,0.05uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00036,CDC,Culture Isolate,1.00E-06,231016_bacseq,0.05uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00037,CDC,Culture Isolate,1.00E-07,231016_bacseq,0.05uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00038,CDC,Culture Isolate,1.00E-08,231016_bacseq,0.05uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00039,PCR_ctrl016i,Water,,231016_bacseq,0.05uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
-Yale-SP00040,PCR_ctrl016j,Water,,231016_bacseq,0.05uM,COVIDseq,11/02/2023,0.1,,,,Ampllicon
+Yale-SP00001,CDC,Culture Isolate,1.00E-03,231016_bacseq,100uM,COVIDseq,11/2/23,107,,,,Ampllicon
+Yale-SP00002,CDC,Culture Isolate,1.00E-04,231016_bacseq,100uM,COVIDseq,11/2/23,19.4,,,,Ampllicon
+Yale-SP00003,CDC,Culture Isolate,1.00E-05,231016_bacseq,100uM,COVIDseq,11/2/23,6.4,,,,Ampllicon
+Yale-SP00004,CDC,Culture Isolate,1.00E-06,231016_bacseq,100uM,COVIDseq,11/2/23,5.9,,,,Ampllicon
+Yale-SP00005,CDC,Culture Isolate,1.00E-07,231016_bacseq,100uM,COVIDseq,11/2/23,6,,,,Ampllicon
+Yale-SP00006,CDC,Culture Isolate,1.00E-08,231016_bacseq,100uM,COVIDseq,11/2/23,5.7,,,,Ampllicon
+Yale-SP00007,PCR_ctrl016a,Water,,231016_bacseq,100uM,COVIDseq,11/2/23,5.7,,,,Ampllicon
+Yale-SP00008,PCR_ctrl016b,Water,,231016_bacseq,100uM,COVIDseq,11/2/23,9.6,,,,Ampllicon
+Yale-SP00009,CDC,Culture Isolate,1.00E-03,231016_bacseq,50uM,COVIDseq,11/2/23,111,,,,Ampllicon
+Yale-SP00010,CDC,Culture Isolate,1.00E-04,231016_bacseq,50uM,COVIDseq,11/2/23,8.6,,,,Ampllicon
+Yale-SP00011,CDC,Culture Isolate,1.00E-05,231016_bacseq,50uM,COVIDseq,11/2/23,2.9,,,,Ampllicon
+Yale-SP00012,CDC,Culture Isolate,1.00E-06,231016_bacseq,50uM,COVIDseq,11/2/23,2.6,,,,Ampllicon
+Yale-SP00013,CDC,Culture Isolate,1.00E-07,231016_bacseq,50uM,COVIDseq,11/2/23,2.7,,,,Ampllicon
+Yale-SP00014,CDC,Culture Isolate,1.00E-08,231016_bacseq,50uM,COVIDseq,11/2/23,2.8,,,,Ampllicon
+Yale-SP00015,PCR_ctrl016c,Water,,231016_bacseq,50uM,COVIDseq,11/2/23,2.9,,,,Ampllicon
+Yale-SP00016,PCR_ctrl016d,Water,,231016_bacseq,50uM,COVIDseq,11/2/23,2.9,,,,Ampllicon
+Yale-SP00017,CDC,Culture Isolate,1.00E-03,231016_bacseq,5uM,COVIDseq,11/2/23,3.1,,,,Ampllicon
+Yale-SP00018,CDC,Culture Isolate,1.00E-04,231016_bacseq,5uM,COVIDseq,11/2/23,0.2,,,,Ampllicon
+Yale-SP00019,CDC,Culture Isolate,1.00E-05,231016_bacseq,5uM,COVIDseq,11/2/23,0.2,,,,Ampllicon
+Yale-SP00020,CDC,Culture Isolate,1.00E-06,231016_bacseq,5uM,COVIDseq,11/2/23,0.2,,,,Ampllicon
+Yale-SP00021,CDC,Culture Isolate,1.00E-07,231016_bacseq,5uM,COVIDseq,11/2/23,0.2,,,,Ampllicon
+Yale-SP00022,CDC,Culture Isolate,1.00E-08,231016_bacseq,5uM,COVIDseq,11/2/23,0.2,,,,Ampllicon
+Yale-SP00023,PCR_ctrl016e,Water,,231016_bacseq,5uM,COVIDseq,11/2/23,0.2,,,,Ampllicon
+Yale-SP00024,PCR_ctrl016f,Water,,231016_bacseq,5uM,COVIDseq,11/2/23,0.2,,,,Ampllicon
+Yale-SP00025,CDC,Culture Isolate,1.00E-03,231016_bacseq,0.5uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00026,CDC,Culture Isolate,1.00E-04,231016_bacseq,0.5uM,COVIDseq,11/2/23,0,,,,Ampllicon
+Yale-SP00027,CDC,Culture Isolate,1.00E-05,231016_bacseq,0.5uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00028,CDC,Culture Isolate,1.00E-06,231016_bacseq,0.5uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00029,CDC,Culture Isolate,1.00E-07,231016_bacseq,0.5uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00030,CDC,Culture Isolate,1.00E-08,231016_bacseq,0.5uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00031,PCR_ctrl016g,Water,,231016_bacseq,0.5uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00032,PCR_ctrl016h,Water,,231016_bacseq,0.5uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00033,CDC,Culture Isolate,1.00E-03,231016_bacseq,0.05uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00034,CDC,Culture Isolate,1.00E-04,231016_bacseq,0.05uM,COVIDseq,11/2/23,0,,,,Ampllicon
+Yale-SP00035,CDC,Culture Isolate,1.00E-05,231016_bacseq,0.05uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00036,CDC,Culture Isolate,1.00E-06,231016_bacseq,0.05uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00037,CDC,Culture Isolate,1.00E-07,231016_bacseq,0.05uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00038,CDC,Culture Isolate,1.00E-08,231016_bacseq,0.05uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00039,PCR_ctrl016i,Water,,231016_bacseq,0.05uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
+Yale-SP00040,PCR_ctrl016j,Water,,231016_bacseq,0.05uM,COVIDseq,11/2/23,0.1,,,,Ampllicon
 Yale-SP00041,A889-NP,NP swab,,mNGS,,Nextera XT (GLab),10/31/23,4.54,Contaminated ,,,mNGS
 Yale-SP00042,B042-NP,NP swab,,mNGS,,Nextera XT (GLab),10/31/23,7.88,Contaminated ,,,mNGS
 Yale-SP00043,C677-NP,NP swab,,mNGS,,Nextera XT (GLab),10/31/23,10.7,Contaminated ,,,mNGS
@@ -154,102 +154,102 @@ Yale-SP00066,C677-S,Saliva,,,100uM,COVIDseq,,73.8,75.8,28.78,,Ampllicon
 Yale-SP00067,CDC,Culture Isolate,,,100uM,COVIDseq,,74.4,75.8,23.5,,Ampllicon
 Yale-SP00068,H141,Culture Isolate,,,100uM,COVIDseq,,83.4,78.6,21.2,,Ampllicon
 Yale-SP00069,NTC,Water,,,100uM,COVIDseq,,75,78,,,Ampllicon
-Yale-SP00110,A889-CE,Culture enriched,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,9.2,N/A,,,
-Yale-SP00111,B042-CE,Culture enriched,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,25.2,N/A,,,
-Yale-SP00112,C677-CE,Culture enriched,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,21.8,N/A,,,
-Yale-SP00113,W1526-CE,Culture enriched,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,14.8,N/A,,,
-Yale-SP00114,W1527-D,Culture enriched,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,2.32,N/A,,,
-Yale-SP00115,W1695-CE,Culture enriched,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,15.4,N/A,,,
-Yale-SP00116,W3317-D,Culture enriched,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,1.88,N/A,,,
-Yale-SP00117,W3371-CE,Culture enriched,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,7.04,N/A,,,
-Yale-SP00118,W4034-CE,Culture enriched,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,16.5,N/A,,,
-Yale-SP00119,A889-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.24,N/A,,,
-Yale-SP00120,B042-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.34,N/A,,,
-Yale-SP00121,C677-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,1.17,N/A,,,
-Yale-SP00122,W1526-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.09,N/A,,,
-Yale-SP00123,W1527-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,1.84,N/A,,,
-Yale-SP00124,W1695-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.09,N/A,,,
-Yale-SP00125,W3317-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,3.82,N/A,,,
-Yale-SP00126,W3371-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.4,N/A,,,
-Yale-SP00127,W4034-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.19,N/A,,,
-Yale-SP00128,A889-NP,NP swab,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.07,N/A,,,
-Yale-SP00129,B042-NP,NP swab,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.06,N/A,,,
-Yale-SP00130,C677-NP,NP swab,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.07,N/A,,,
-Yale-SP00131,W1527-CI,Culture Isolate,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,3.6,N/A,,,
-Yale-SP00132,W3317-CI,Culture Isolate,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,4.02,N/A,,,
-Yale-SP00133,W4034-CI,Culture Isolate,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,4.66,N/A,,,
-Yale-SP00134,B013-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,6.56,N/A,,,
-Yale-SP00135,B595-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.33,N/A,,,
-Yale-SP00136,B015-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,3.48,N/A,,,
-Yale-SP00137,W2987-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,6.4,N/A,,,
-Yale-SP00138,B687-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,2.88,N/A,,,
-Yale-SP00139,W1075-S,Saliva,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,1.54,N/A,,,
-Yale-SP00140,B687N-NP,NP swab,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.13,N/A,,,
-Yale-SP00141,B013N-NP,NP swab,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,2.22,N/A,,,
-Yale-SP00142,B015N-NP,NP swab,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.3,N/A,,,
-Yale-SP00143,B595-D,DNA,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,4.74,N/A,,,
-Yale-SP00144,B013-D,DNA,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,30.6,N/A,,,
-Yale-SP00145,B015-D,DNA,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,24.2,N/A,,,
-Yale-SP00146,W1075-D,DNA,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,19.5,N/A,,,
-Yale-SP00147,W2987-D,DNA,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,30.6,N/A,,,
-Yale-SP00148,B687,Unknown,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.81,N/A,,,
-Yale-SP00149,NEC1-GREEN,,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.02,N/A,,,
-Yale-SP00150,NEC2-THICK,,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.04,N/A,,,
-Yale-SP00151,NEC3-THIN,,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.06,N/A,,,
-Yale-SP00152,NEC4-YELLOW,,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.07,N/A,,,
-Yale-SP00153,CDC,Culture Isolate,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,1.57,N/A,,,
-Yale-SP00154,H54,Culture Isolate,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,6.82,N/A,,,
-Yale-SP00155,H74,Culture Isolate,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,1.78,N/A,,,
-Yale-SP00156,H141,Culture Isolate,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,2.9,N/A,,,
-Yale-SP00157,H136,Culture Isolate,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,1.64,N/A,,,
-Yale-SP00158,H122,Culture Isolate,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,1.23,N/A,,,
-Yale-SP00159,NTC021,,,None,No Primer Amplification,Hybrid CovidSeq without amplification,10/09/2024,0.07,N/A,,,
-Yale-SP00160,CDC,Culture Isolate,1.00E-02,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.09,N/A,,,
-Yale-SP00161,CDC,Culture Isolate,1.00E-03,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00162,CDC,Culture Isolate,1.00E-04,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.03,N/A,,,
-Yale-SP00163,CDC,Culture Isolate,1.00E-05,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.02,N/A,,,
-Yale-SP00164,CDC,Culture Isolate,1.00E-06,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00165,CDC,Culture Isolate,1.00E-07,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.01,N/A,,,
-Yale-SP00166,CDC,Culture Isolate,1.00E-08,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0,N/A,,,
-Yale-SP00167,CDC,Culture Isolate,1.00E-09,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00168,H54,Culture Isolate,1.00E-02,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00169,H54,Culture Isolate,1.00E-03,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.05,N/A,,,
-Yale-SP00170,H54,Culture Isolate,1.00E-04,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00171,H54,Culture Isolate,1.00E-05,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.03,N/A,,,
-Yale-SP00172,H54,Culture Isolate,1.00E-06,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00173,H54,Culture Isolate,1.00E-07,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.01,N/A,,,
-Yale-SP00174,H54,Culture Isolate,1.00E-08,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.01,N/A,,,
-Yale-SP00175,H54,Culture Isolate,1.00E-09,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.05,N/A,,,
-Yale-SP00176,H74,Culture Isolate,1.00E-02,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.13,N/A,,,
-Yale-SP00177,H74,Culture Isolate,1.00E-03,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.1,N/A,,,
-Yale-SP00178,H74,Culture Isolate,1.00E-04,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.05,N/A,,,
-Yale-SP00179,H74,Culture Isolate,1.00E-05,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.05,N/A,,,
-Yale-SP00180,H74,Culture Isolate,1.00E-06,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00181,H74,Culture Isolate,1.00E-07,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.02,N/A,,,
-Yale-SP00182,H74,Culture Isolate,1.00E-08,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.01,N/A,,,
-Yale-SP00183,H74,Culture Isolate,1.00E-09,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00184,H122,Culture Isolate,1.00E-02,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.03,N/A,,,
-Yale-SP00185,H122,Culture Isolate,1.00E-03,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.05,N/A,,,
-Yale-SP00186,H122,Culture Isolate,1.00E-04,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.05,N/A,,,
-Yale-SP00187,H122,Culture Isolate,1.00E-05,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00188,H122,Culture Isolate,1.00E-06,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.08,N/A,,,
-Yale-SP00189,H122,Culture Isolate,1.00E-07,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.02,N/A,,,
-Yale-SP00190,H122,Culture Isolate,1.00E-08,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0,N/A,,,
-Yale-SP00191,H122,Culture Isolate,1.00E-09,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.05,N/A,,,
-Yale-SP00192,H136,Culture Isolate,1.00E-02,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.09,N/A,,,
-Yale-SP00193,H136,Culture Isolate,1.00E-03,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.06,N/A,,,
-Yale-SP00194,H136,Culture Isolate,1.00E-04,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.07,N/A,,,
-Yale-SP00195,H136,Culture Isolate,1.00E-05,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.05,N/A,,,
-Yale-SP00196,H136,Culture Isolate,1.00E-06,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00197,H136,Culture Isolate,1.00E-07,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.03,N/A,,,
-Yale-SP00198,H136,Culture Isolate,1.00E-08,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0,N/A,,,
-Yale-SP00199,H136,Culture Isolate,1.00E-09,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00200,H141,Culture Isolate,1.00E-02,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.1,N/A,,,
-Yale-SP00201,H141,Culture Isolate,1.00E-03,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.07,N/A,,,
-Yale-SP00202,H141,Culture Isolate,1.00E-04,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00203,H141,Culture Isolate,1.00E-05,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.03,N/A,,,
-Yale-SP00204,H141,Culture Isolate,1.00E-06,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00205,H141,Culture Isolate,1.00E-07,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.02,N/A,,,
-Yale-SP00206,H141,Culture Isolate,1.00E-08,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0,N/A,,,
-Yale-SP00207,H141,Culture Isolate,1.00E-09,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.04,N/A,,,
-Yale-SP00208,CS022_NTC,Water,,None,No Primer Amplification,Hybrid CovidSeq without amplification,08/10/2024,0.09,N/A,,,
+Yale-SP00110,A889-CE,Culture enriched,,None,0,Hybrid CovidSeq without amplification,10/9/24,9.2,N/A,,,
+Yale-SP00111,B042-CE,Culture enriched,,None,0,Hybrid CovidSeq without amplification,10/9/24,25.2,N/A,,,
+Yale-SP00112,C677-CE,Culture enriched,,None,0,Hybrid CovidSeq without amplification,10/9/24,21.8,N/A,,,
+Yale-SP00113,W1526-CE,Culture enriched,,None,0,Hybrid CovidSeq without amplification,10/9/24,14.8,N/A,,,
+Yale-SP00114,W1527-D,Culture enriched,,None,0,Hybrid CovidSeq without amplification,10/9/24,2.32,N/A,,,
+Yale-SP00115,W1695-CE,Culture enriched,,None,0,Hybrid CovidSeq without amplification,10/9/24,15.4,N/A,,,
+Yale-SP00116,W3317-D,Culture enriched,,None,0,Hybrid CovidSeq without amplification,10/9/24,1.88,N/A,,,
+Yale-SP00117,W3371-CE,Culture enriched,,None,0,Hybrid CovidSeq without amplification,10/9/24,7.04,N/A,,,
+Yale-SP00118,W4034-CE,Culture enriched,,None,0,Hybrid CovidSeq without amplification,10/9/24,16.5,N/A,,,
+Yale-SP00119,A889-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.24,N/A,,,
+Yale-SP00120,B042-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.34,N/A,,,
+Yale-SP00121,C677-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,1.17,N/A,,,
+Yale-SP00122,W1526-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.09,N/A,,,
+Yale-SP00123,W1527-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,1.84,N/A,,,
+Yale-SP00124,W1695-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.09,N/A,,,
+Yale-SP00125,W3317-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,3.82,N/A,,,
+Yale-SP00126,W3371-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.4,N/A,,,
+Yale-SP00127,W4034-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.19,N/A,,,
+Yale-SP00128,A889-NP,NP swab,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.07,N/A,,,
+Yale-SP00129,B042-NP,NP swab,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.06,N/A,,,
+Yale-SP00130,C677-NP,NP swab,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.07,N/A,,,
+Yale-SP00131,W1527-CI,Culture Isolate,,None,0,Hybrid CovidSeq without amplification,10/9/24,3.6,N/A,,,
+Yale-SP00132,W3317-CI,Culture Isolate,,None,0,Hybrid CovidSeq without amplification,10/9/24,4.02,N/A,,,
+Yale-SP00133,W4034-CI,Culture Isolate,,None,0,Hybrid CovidSeq without amplification,10/9/24,4.66,N/A,,,
+Yale-SP00134,B013-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,6.56,N/A,,,
+Yale-SP00135,B595-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.33,N/A,,,
+Yale-SP00136,B015-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,3.48,N/A,,,
+Yale-SP00137,W2987-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,6.4,N/A,,,
+Yale-SP00138,B687-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,2.88,N/A,,,
+Yale-SP00139,W1075-S,Saliva,,None,0,Hybrid CovidSeq without amplification,10/9/24,1.54,N/A,,,
+Yale-SP00140,B687N-NP,NP swab,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.13,N/A,,,
+Yale-SP00141,B013N-NP,NP swab,,None,0,Hybrid CovidSeq without amplification,10/9/24,2.22,N/A,,,
+Yale-SP00142,B015N-NP,NP swab,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.3,N/A,,,
+Yale-SP00143,B595-D,DNA,,None,0,Hybrid CovidSeq without amplification,10/9/24,4.74,N/A,,,
+Yale-SP00144,B013-D,DNA,,None,0,Hybrid CovidSeq without amplification,10/9/24,30.6,N/A,,,
+Yale-SP00145,B015-D,DNA,,None,0,Hybrid CovidSeq without amplification,10/9/24,24.2,N/A,,,
+Yale-SP00146,W1075-D,DNA,,None,0,Hybrid CovidSeq without amplification,10/9/24,19.5,N/A,,,
+Yale-SP00147,W2987-D,DNA,,None,0,Hybrid CovidSeq without amplification,10/9/24,30.6,N/A,,,
+Yale-SP00148,B687,Unknown,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.81,N/A,,,
+Yale-SP00149,NEC1-GREEN,,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.02,N/A,,,
+Yale-SP00150,NEC2-THICK,,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.04,N/A,,,
+Yale-SP00151,NEC3-THIN,,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.06,N/A,,,
+Yale-SP00152,NEC4-YELLOW,,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.07,N/A,,,
+Yale-SP00153,CDC,Culture Isolate,,None,0,Hybrid CovidSeq without amplification,10/9/24,1.57,N/A,,,
+Yale-SP00154,H54,Culture Isolate,,None,0,Hybrid CovidSeq without amplification,10/9/24,6.82,N/A,,,
+Yale-SP00155,H74,Culture Isolate,,None,0,Hybrid CovidSeq without amplification,10/9/24,1.78,N/A,,,
+Yale-SP00156,H141,Culture Isolate,,None,0,Hybrid CovidSeq without amplification,10/9/24,2.9,N/A,,,
+Yale-SP00157,H136,Culture Isolate,,None,0,Hybrid CovidSeq without amplification,10/9/24,1.64,N/A,,,
+Yale-SP00158,H122,Culture Isolate,,None,0,Hybrid CovidSeq without amplification,10/9/24,1.23,N/A,,,
+Yale-SP00159,NTC021,,,None,0,Hybrid CovidSeq without amplification,10/9/24,0.07,N/A,,,
+Yale-SP00160,CDC,Culture Isolate,1.00E-02,None,0,Hybrid CovidSeq without amplification,8/10/24,0.09,N/A,,,
+Yale-SP00161,CDC,Culture Isolate,1.00E-03,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00162,CDC,Culture Isolate,1.00E-04,None,0,Hybrid CovidSeq without amplification,8/10/24,0.03,N/A,,,
+Yale-SP00163,CDC,Culture Isolate,1.00E-05,None,0,Hybrid CovidSeq without amplification,8/10/24,0.02,N/A,,,
+Yale-SP00164,CDC,Culture Isolate,1.00E-06,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00165,CDC,Culture Isolate,1.00E-07,None,0,Hybrid CovidSeq without amplification,8/10/24,0.01,N/A,,,
+Yale-SP00166,CDC,Culture Isolate,1.00E-08,None,0,Hybrid CovidSeq without amplification,8/10/24,0,N/A,,,
+Yale-SP00167,CDC,Culture Isolate,1.00E-09,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00168,H54,Culture Isolate,1.00E-02,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00169,H54,Culture Isolate,1.00E-03,None,0,Hybrid CovidSeq without amplification,8/10/24,0.05,N/A,,,
+Yale-SP00170,H54,Culture Isolate,1.00E-04,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00171,H54,Culture Isolate,1.00E-05,None,0,Hybrid CovidSeq without amplification,8/10/24,0.03,N/A,,,
+Yale-SP00172,H54,Culture Isolate,1.00E-06,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00173,H54,Culture Isolate,1.00E-07,None,0,Hybrid CovidSeq without amplification,8/10/24,0.01,N/A,,,
+Yale-SP00174,H54,Culture Isolate,1.00E-08,None,0,Hybrid CovidSeq without amplification,8/10/24,0.01,N/A,,,
+Yale-SP00175,H54,Culture Isolate,1.00E-09,None,0,Hybrid CovidSeq without amplification,8/10/24,0.05,N/A,,,
+Yale-SP00176,H74,Culture Isolate,1.00E-02,None,0,Hybrid CovidSeq without amplification,8/10/24,0.13,N/A,,,
+Yale-SP00177,H74,Culture Isolate,1.00E-03,None,0,Hybrid CovidSeq without amplification,8/10/24,0.1,N/A,,,
+Yale-SP00178,H74,Culture Isolate,1.00E-04,None,0,Hybrid CovidSeq without amplification,8/10/24,0.05,N/A,,,
+Yale-SP00179,H74,Culture Isolate,1.00E-05,None,0,Hybrid CovidSeq without amplification,8/10/24,0.05,N/A,,,
+Yale-SP00180,H74,Culture Isolate,1.00E-06,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00181,H74,Culture Isolate,1.00E-07,None,0,Hybrid CovidSeq without amplification,8/10/24,0.02,N/A,,,
+Yale-SP00182,H74,Culture Isolate,1.00E-08,None,0,Hybrid CovidSeq without amplification,8/10/24,0.01,N/A,,,
+Yale-SP00183,H74,Culture Isolate,1.00E-09,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00184,H122,Culture Isolate,1.00E-02,None,0,Hybrid CovidSeq without amplification,8/10/24,0.03,N/A,,,
+Yale-SP00185,H122,Culture Isolate,1.00E-03,None,0,Hybrid CovidSeq without amplification,8/10/24,0.05,N/A,,,
+Yale-SP00186,H122,Culture Isolate,1.00E-04,None,0,Hybrid CovidSeq without amplification,8/10/24,0.05,N/A,,,
+Yale-SP00187,H122,Culture Isolate,1.00E-05,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00188,H122,Culture Isolate,1.00E-06,None,0,Hybrid CovidSeq without amplification,8/10/24,0.08,N/A,,,
+Yale-SP00189,H122,Culture Isolate,1.00E-07,None,0,Hybrid CovidSeq without amplification,8/10/24,0.02,N/A,,,
+Yale-SP00190,H122,Culture Isolate,1.00E-08,None,0,Hybrid CovidSeq without amplification,8/10/24,0,N/A,,,
+Yale-SP00191,H122,Culture Isolate,1.00E-09,None,0,Hybrid CovidSeq without amplification,8/10/24,0.05,N/A,,,
+Yale-SP00192,H136,Culture Isolate,1.00E-02,None,0,Hybrid CovidSeq without amplification,8/10/24,0.09,N/A,,,
+Yale-SP00193,H136,Culture Isolate,1.00E-03,None,0,Hybrid CovidSeq without amplification,8/10/24,0.06,N/A,,,
+Yale-SP00194,H136,Culture Isolate,1.00E-04,None,0,Hybrid CovidSeq without amplification,8/10/24,0.07,N/A,,,
+Yale-SP00195,H136,Culture Isolate,1.00E-05,None,0,Hybrid CovidSeq without amplification,8/10/24,0.05,N/A,,,
+Yale-SP00196,H136,Culture Isolate,1.00E-06,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00197,H136,Culture Isolate,1.00E-07,None,0,Hybrid CovidSeq without amplification,8/10/24,0.03,N/A,,,
+Yale-SP00198,H136,Culture Isolate,1.00E-08,None,0,Hybrid CovidSeq without amplification,8/10/24,0,N/A,,,
+Yale-SP00199,H136,Culture Isolate,1.00E-09,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00200,H141,Culture Isolate,1.00E-02,None,0,Hybrid CovidSeq without amplification,8/10/24,0.1,N/A,,,
+Yale-SP00201,H141,Culture Isolate,1.00E-03,None,0,Hybrid CovidSeq without amplification,8/10/24,0.07,N/A,,,
+Yale-SP00202,H141,Culture Isolate,1.00E-04,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00203,H141,Culture Isolate,1.00E-05,None,0,Hybrid CovidSeq without amplification,8/10/24,0.03,N/A,,,
+Yale-SP00204,H141,Culture Isolate,1.00E-06,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00205,H141,Culture Isolate,1.00E-07,None,0,Hybrid CovidSeq without amplification,8/10/24,0.02,N/A,,,
+Yale-SP00206,H141,Culture Isolate,1.00E-08,None,0,Hybrid CovidSeq without amplification,8/10/24,0,N/A,,,
+Yale-SP00207,H141,Culture Isolate,1.00E-09,None,0,Hybrid CovidSeq without amplification,8/10/24,0.04,N/A,,,
+Yale-SP00208,CS022_NTC,Water,,None,0,Hybrid CovidSeq without amplification,8/10/24,0.09,N/A,,,

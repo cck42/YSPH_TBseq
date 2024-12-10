@@ -8,21 +8,29 @@ library(ggtext)
 
 # data import  ------------------------------------------------------------
 
+qpcr_results <- read.table("data/qpcr_data.tsv",sep="\t",header=T) %>%
+  select(c(Sample_ID,starting_quantity))
+
 metadataSP <- read.csv("data/S.pneumoniae.csv") %>% 
   select(c("Seq_ID", "Original_ID", "Sample_Type", 
            "Sample_Dilution", "Primer_Conc", 
            "NGS_Prep_Method", "Ct1")) %>% 
   rename("CT"="Ct1") %>%
   rename_with(tolower) %>%
+  left_join(qpcr_results, by=c(original_id='Sample_ID'),multiple="last") %>%
+  mutate(sample_dilution=replace_na(sample_dilution,1)) %>%
+  mutate(starting_quantity=sample_dilution*starting_quantity) %>%
+  rename(start_quant=starting_quantity) %>%
   mutate("species"="S.pneumoniae")
 
 metadataTB <- read.csv("data/M.tuberculosis.csv") %>% 
   rename("Sample_Dilution"="Template_dilution") %>% 
   select(c("Seq_ID", "Original_ID", "Sample_Type", 
            "Sample_Dilution",  "Primer_Conc",  
-           "NGS_Prep_Method", "CT")) %>% 
+           "NGS_Prep_Method", "CT","starting_quant")) %>% 
+  rename(start_quant=starting_quant) %>%
   rename_with(tolower) %>%
-  mutate("species"="M.tuberculosis")
+  mutate("species"="M.tuberculosis") 
 
 
 heattabSP <- read.table("data/SP_CZID_heatmap_240812.csv",sep=",",header=1) %>% 
@@ -46,10 +54,18 @@ covtabTB2 <- read.table("data/TB005-6_combinedcoverage.txt",sep="\t",header=T) %
 covtabTB <- rbind(covtabTB1,covtabTB2)
 
 
-covtabSP <- read.table("data/SP.coverage.tsv",sep="\t",header=T) %>% 
+covtabSP1 <- read.table("data/SP.coverage.tsv",sep="\t",header=T) %>% 
   rename_with(tolower) %>% 
   mutate(subsample = as.numeric(subsample)) %>% 
   filter(subsample==1.0)
+
+covtabSP2 <- read.delim("data/SPn_UnAmplified_DilutionSeries_Coverage.tsv",sep="\t",header=T)%>% 
+  rename_with(tolower) %>% 
+  mutate(subsample = as.numeric(subsample)) %>% 
+  filter(subsample==1.0)%>%
+  rename(seq_id = sample)
+
+covtabSP <- rbind(covtabSP1,covtabSP2)
 
 #View(covtabSP)
 
@@ -119,7 +135,7 @@ amptab = rbind(metadataSP,metadataTB) %>%
   mutate(seq_id=gsub("Yale-","",seq_id)) %>% 
   #filter(sample_type=="NP swab") %>% 
   #filter(sample_type=="Saliva") %>% 
-  filter(is.na(sample_dilution)) %>% 
+  #filter(is.na(sample_dilution)) %>% 
   merge(covtabSP,by="seq_id") %>% 
   mutate(group=paste(original_id,ngs_prep_method))
 
@@ -133,7 +149,7 @@ amptab$ngs_prep_method <- fct_recode(amptab$ngs_prep_method,
 #View(amptab)
 
 crosssamples <-  amptab %>% 
-  filter(is.na(sample_dilution)) %>% 
+  #filter(is.na(sample_dilution)) %>% 
   filter(sample_type %in% c("Saliva","NP swab","Culture Isolate")) %>% 
   filter(original_id %in% c("A889-NP", "B042-NP", "C677-NP",
                             "A889-S","B042-S","C677-S",
@@ -184,40 +200,46 @@ covtab <- rbind(covtabSP,covtabTB) %>%
 metatab <- rbind(metadataSP,metadataTB) %>% 
   mutate(seq_id=gsub("Yale-","",seq_id)) %>%
   filter(primer_conc %in% c("100uM","200uM","0")) %>% 
-  filter(!is.na(ct)) %>% 
+  filter(!is.na(start_quant)) %>% 
   filter(!is.na(sample_dilution)) %>%
-  filter(!original_id %in% c("111-2565-18"))
+  filter(!original_id %in% c("111-2565-18")) %>%
+  filter(sample_type %in% c("Culture Isolate","DNA"))
 
 dilutiontab <- merge(metatab,covtab,by="seq_id") %>% mutate(group=paste(original_id,ngs_prep_method))
 
 dilutiontab$ngs_prep_method <- fct_recode(dilutiontab$ngs_prep_method,
                                           "no amplification"="Hybrid CovidSeq without amplification",
                                           "amplicon"="Hybrid COVIDseq",
-                                          "amplicon"="Mpox/Hybrid CovidSeq",)
+                                          "amplicon"="Mpox/Hybrid CovidSeq",
+                                          "amplicon"="COVIDseq")
 
 
 
-dilutionplot <- ggplot(dilutiontab,aes(x=ct,y=coverage,group=group,color=ngs_prep_method)) + 
+dilutionplot <- ggplot(dilutiontab,aes(x=start_quant,y=coverage,group=group,color=ngs_prep_method)) + 
+  scale_x_log10() +
   geom_smooth(se = F,linewidth=0.3) + 
-  ylab("genome coverage") + xlab("CT ( -> genome copies / ul)") +
+  ylab("genome coverage") + xlab("Concentreation (genome copies / ul)") +
+  #scale_x_log10() +
   geom_point() + facet_grid(species ~ .) + ampcol
 
 dilutionplot
 
 
 
-dilutionplotTB <- ggplot(subset(dilutiontab,species=="M.tuberculosis"),aes(x=ct,y=coverage,group=group,color=ngs_prep_method)) + 
+dilutionplotTB <- ggplot(subset(dilutiontab,species=="M.tuberculosis"),aes(x=start_quant,y=coverage,group=group,color=ngs_prep_method)) + 
+  scale_x_log10() +
   geom_smooth(se = F,linewidth=0.3) + 
-  ylab("genome coverage") + xlab("CT ( -> genome copies / ul)") +
+  ylab("genome coverage") + xlab("Concentration (genome copies / ul)") +
   geom_point() + facet_grid(species ~ .) + ampcol
 
 dilutionplotTB
 
 
 
-dilutionplotSP <- ggplot(subset(dilutiontab,species=="S.pneumoniae"),aes(x=ct,y=coverage,group=group,color=ngs_prep_method)) + 
+dilutionplotSP <- ggplot(subset(dilutiontab,species=="S.pneumoniae"),aes(x=start_quant,y=coverage,group=group,color=ngs_prep_method)) + 
+  scale_x_log10() +
   geom_smooth(se = F,linewidth=0.3) + 
-  ylab("genome coverage") + xlab("CT ( -> genome copies / ul)") +
+  ylab("genome coverage") + xlab("Concentration (genome copies / ul)") +
   geom_point() + facet_grid(species ~ .) + ampcol
 
 dilutionplotSP
