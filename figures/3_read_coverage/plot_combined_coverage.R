@@ -5,7 +5,6 @@ library(RColorBrewer)
 library(patchwork)
 library(ggtext)
 
-
 # data import  ------------------------------------------------------------
 
 qpcr_results <- read.table("data/qpcr_data.tsv",sep="\t",header=T) %>%
@@ -108,6 +107,7 @@ SPsampletab$ngs_prep_method <- factor(SPsampletab$ngs_prep_method,levels=c("no a
 # plot
 sampletypeplot <- ggplot(SPsampletab, aes(x = original_id, y = NT_rpm, fill = taxon)) + 
   geom_bar(stat = "identity") + 
+  theme_half_open() + panel_border() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right",
         axis.title.x = element_blank()) + 
@@ -126,8 +126,10 @@ sampletypeplot
 
 # amplicon coverage colors ------------------------------------------------
 
-ampcol <- scale_color_manual(values=c("no amplification"="blue","amplicon"="dark red"))
-ampfil <- scale_fill_manual(values=c("no amplification"="blue","amplicon"="dark red"))
+ampcol <- scale_color_manual(values=c("no amplification"="blue","amplicon"="dark red"),
+                             name="NGS prep method")
+ampfil <- scale_fill_manual(values=c("no amplification"="blue","amplicon"="dark red"),
+                            name="NGS prep method")
 
 
 # SP amp vs unamp ---------------------------------------------------------
@@ -176,9 +178,11 @@ spcovbox  <- ggplot(amptabcf,aes(x=ngs_prep_method,y=coverage,color=ngs_prep_met
   geom_boxplot() + 
   geom_point() + 
   geom_line(aes(group=original_id),color="grey") + 
+  theme_half_open() + panel_border() + background_grid()+
   theme(axis.title.x=element_blank(),
         axis.text.x=element_text(angle=45,hjust=1),
         legend.position="none") + ampcol +
+  ylab("Genome coverage (%)")+
   ylim(0,100) +
   facet_grid(. ~ sample_type)
 
@@ -220,9 +224,9 @@ dilutiontab$ngs_prep_method <- fct_recode(dilutiontab$ngs_prep_method,
 dilutionplot <- ggplot(dilutiontab,aes(x=start_quant,y=coverage,group=group,color=ngs_prep_method)) + 
   scale_x_log10() +
   geom_smooth(se = F,linewidth=0.3) + 
-  ylab("Genome coverage (%)") + xlab("Starting quantity (genome copies / ul)") +
-  #scale_x_log10() +
-  geom_point() + facet_grid(species ~ .) + ampcol
+  theme_half_open() + panel_border() + background_grid()+
+  ylab("Genome coverage (%)") + xlab("Starting quantity (GE/ul)") +
+  geom_point() + facet_grid(species ~ .) + ampcol + ylim(0,100)
 
 dilutionplot
 
@@ -231,8 +235,9 @@ dilutionplot
 dilutionplotTB <- ggplot(subset(dilutiontab,species=="M.tuberculosis"),aes(x=start_quant,y=coverage,group=group,color=ngs_prep_method)) + 
   scale_x_log10() +
   geom_smooth(se = F,linewidth=0.3) + 
-  ylab("Genome coverage (%)") + xlab("Starting quantity (genome copies / ul)") +
-  geom_point() + facet_grid(species ~ .) + ampcol
+  theme_half_open() + panel_border() + background_grid()+
+  ylab("Genome coverage (%)") + xlab("Starting quantity (GE/ul)") +
+  geom_point() + ampcol + ylim(0,100)
 
 dilutionplotTB
 
@@ -241,8 +246,9 @@ dilutionplotTB
 dilutionplotSP <- ggplot(subset(dilutiontab,species=="S.pneumoniae"),aes(x=start_quant,y=coverage,group=group,color=ngs_prep_method)) + 
   scale_x_log10() +
   geom_smooth(se = F,linewidth=0.3) + 
-  ylab("Genome coverage (%)") + xlab("Starting quantity (genome copies / ul)") +
-  geom_point() + facet_grid(species ~ .) + ampcol
+  theme_half_open() + panel_border() + background_grid()+
+  ylab("Genome coverage (%)") + xlab("Starting quantity (GE/ul)") +
+  geom_point() + ampcol + ylim(0,100)
 
 dilutionplotSP
 
@@ -324,10 +330,12 @@ tbcovbox  <- ggplot(amptabcf,aes(x=ngs_prep_method,y=coverage,color=ngs_prep_met
   geom_boxplot() + 
   geom_point() + 
   geom_line(aes(group=original_id),color="grey") + 
+  theme_half_open() + panel_border() + background_grid()+
   theme(axis.title.x=element_blank(),
         axis.text.x=element_text(angle=45,hjust=1),
         legend.position="none") + ampcol +
   ylim(0,100) +
+  ylab("Genome coverage (%)")+
   facet_grid(. ~ sample_type)
 
 
@@ -382,6 +390,7 @@ TBsampletab$original_id <- factor(TBsampletab$original_id,levels=samporder,order
 # plot
 sputumplot <- ggplot(TBsampletab, aes(x = original_id, y = NT_rpm, fill = taxon)) + 
   geom_bar(stat = "identity") + 
+  theme_half_open() + panel_border() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right",
         axis.title.x = element_blank()) + 
@@ -408,15 +417,16 @@ ggsave("2_combined_coverage_plot.png",dpi=400,units="mm",width=300,height=200)
 
 
 
-sputumplot + tbcovbox + dilutionplotTB + guide_area() + plot_layout(design = playout,guides="collect")
+sputumplot + tbcovbox + dilutionplotTB + guide_area() + plot_layout(design = playout,guides="collect") + plot_annotation(tag_levels='A')
 ggsave("2_combined_coverage_plot_TB.png",dpi=400,units="mm",width=300,height=200)
 
 
-playout <- "AADBB
-CCCCC"
+playout <- "AAA
+BBD
+CCC"
 
-sampletypeplot + spcovbox + dilutionplotSP + guide_area() + plot_layout(design = playout,guides="collect")
-ggsave("2_combined_coverage_plot_SP.png",dpi=400,units="mm",width=300,height=200)
+sampletypeplot + spcovbox + dilutionplotSP + guide_area() + plot_layout(design = playout,guides="collect") + plot_annotation(tag_levels='A')
+ggsave("2_combined_coverage_plot_SP.png",dpi=400,units="mm",width=300,height=300)
 
 
 spcomb <- sampletypeplot + spcovbox + guide_area() + plot_layout(design = "AACBB",guides="collect")
@@ -425,5 +435,7 @@ spcomb / tbcomb
 ggsave("2_combined_coverage_plot_preprint.png",dpi=400,units="mm",width=300,height=200)
 
 ggsave("2_combined_coverage_plot_preprint.svg",dpi=400,units="mm",width=300,height=200)
+
+
 
 
