@@ -111,12 +111,13 @@ sampletypeplot <- ggplot(SPsampletab, aes(x = original_id, y = NT_rpm, fill = ta
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right",
         axis.title.x = element_blank()) + 
-  ylab("aligned reads (NT rpm)") +
+  ylab("Aligned reads (NT rpm)") +
   facet_grid(~sample_type + ngs_prep_method, scales = "free_x", space = "free_x") +
   scale_fill_manual(values = all_cols, 
                     breaks = c("Streptococcus pneumoniae", "Streptococcus mitis",
                                "Streptococcus oralis", "Streptococcus sp. oral taxon 061",
-                               "Streptococcus sp. oral taxon 431")) +  
+                               "Streptococcus sp. oral taxon 431"), 
+                    name= "Taxon") +  
   theme(axis.text.x = ggtext::element_markdown())
 
 sampletypeplot
@@ -203,7 +204,8 @@ metatab <- rbind(metadataSP,metadataTB) %>%
   filter(!is.na(start_quant)) %>% 
   filter(!is.na(sample_dilution)) %>%
   filter(!original_id %in% c("111-2565-18")) %>%
-  filter(sample_type %in% c("Culture Isolate","DNA"))
+  filter(sample_type %in% c("Culture Isolate","DNA")) %>%
+  filter(!(is.na(ct) & ngs_prep_method=='COVIDseq')) #remove these CDC dilutions which were re-sequenced
 
 dilutiontab <- merge(metatab,covtab,by="seq_id") %>% mutate(group=paste(original_id,ngs_prep_method))
 
@@ -218,7 +220,7 @@ dilutiontab$ngs_prep_method <- fct_recode(dilutiontab$ngs_prep_method,
 dilutionplot <- ggplot(dilutiontab,aes(x=start_quant,y=coverage,group=group,color=ngs_prep_method)) + 
   scale_x_log10() +
   geom_smooth(se = F,linewidth=0.3) + 
-  ylab("genome coverage") + xlab("Concentreation (genome copies / ul)") +
+  ylab("Genome coverage (%)") + xlab("Starting quantity (genome copies / ul)") +
   #scale_x_log10() +
   geom_point() + facet_grid(species ~ .) + ampcol
 
@@ -229,7 +231,7 @@ dilutionplot
 dilutionplotTB <- ggplot(subset(dilutiontab,species=="M.tuberculosis"),aes(x=start_quant,y=coverage,group=group,color=ngs_prep_method)) + 
   scale_x_log10() +
   geom_smooth(se = F,linewidth=0.3) + 
-  ylab("genome coverage") + xlab("Concentration (genome copies / ul)") +
+  ylab("Genome coverage (%)") + xlab("Starting quantity (genome copies / ul)") +
   geom_point() + facet_grid(species ~ .) + ampcol
 
 dilutionplotTB
@@ -239,7 +241,7 @@ dilutionplotTB
 dilutionplotSP <- ggplot(subset(dilutiontab,species=="S.pneumoniae"),aes(x=start_quant,y=coverage,group=group,color=ngs_prep_method)) + 
   scale_x_log10() +
   geom_smooth(se = F,linewidth=0.3) + 
-  ylab("genome coverage") + xlab("Concentration (genome copies / ul)") +
+  ylab("Genome coverage (%)") + xlab("Starting quantity (genome copies / ul)") +
   geom_point() + facet_grid(species ~ .) + ampcol
 
 dilutionplotSP
@@ -383,10 +385,11 @@ sputumplot <- ggplot(TBsampletab, aes(x = original_id, y = NT_rpm, fill = taxon)
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right",
         axis.title.x = element_blank()) + 
-  ylab("aligned reads (NT rpm)") +
+  ylab("Aligned reads (NT rpm)") +
   facet_grid(~sample_type + ngs_prep_method, scales = "free_x", space = "free_x") +
   scale_fill_manual(values = all_cols, 
-                    breaks = c(names(cols))) +  
+                    breaks = c(names(cols)),
+                    name="Taxon") +  
   theme(axis.text.x=element_text(angle=45,hjust=1))
 
 sputumplot

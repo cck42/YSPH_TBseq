@@ -1,3 +1,5 @@
+rm(list = ls())
+
 library(tidyverse)
 library(readr)
 library(cowplot)
@@ -186,7 +188,7 @@ extr_summ <- plot_grid(sq_avg+theme(legend.position='none'),
                      rel_widths=c(1,1,.25),
                      label_x=.05)
 extr_summ
-save_plot("extr_summary.jpg",extr_summ,base_height=8,base_width=14)
+save_plot("extr_summary.svg",extr_summ,base_height=8,base_width=14)
 
 legends_sq <- plot_grid(reslegend,extrlegend,
                         sq_avg+theme(legend.position='none'),
