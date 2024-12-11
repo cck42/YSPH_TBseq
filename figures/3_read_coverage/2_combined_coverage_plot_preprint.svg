@@ -1428,7 +1428,7 @@
 <polyline points='55.59,171.24 58.33,171.24 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='55.59,126.63 58.33,126.63 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='55.59,82.02 58.33,82.02 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(18.85,134.50) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='113.10px' lengthAdjust='spacingAndGlyphs'>aligned reads (NT rpm)</text>
+<text transform='translate(18.85,134.50) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='114.32px' lengthAdjust='spacingAndGlyphs'>Aligned reads (NT rpm)</text>
 </g>
 <defs>
   <clipPath id='cpNTEwLjY3fDg0NC45MXw1LjQ4fDI4My40Ng=='>
@@ -1638,7 +1638,7 @@
 <g clip-path='url(#cpMzUxLjYxfDUxMy40N3w3Ny45MnwxOTEuMDg=)'>
 </g>
 <g clip-path='url(#cpMC4wMHw4NTAuMzl8MC4wMHw1NjYuOTM=)'>
-<text x='357.09' y='92.51' style='font-size: 11.00px; font-family: "Arial";' textLength='26.91px' lengthAdjust='spacingAndGlyphs'>taxon</text>
+<text x='357.09' y='92.51' style='font-size: 11.00px; font-family: "Arial";' textLength='30.58px' lengthAdjust='spacingAndGlyphs'>Taxon</text>
 </g>
 <g clip-path='url(#cpMzUxLjYxfDUxMy40N3w3Ny45MnwxOTEuMDg=)'>
 </g>
@@ -3236,7 +3236,7 @@
 <polyline points='55.59,448.18 58.33,448.18 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='55.59,402.52 58.33,402.52 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='55.59,356.87 58.33,356.87 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(18.85,412.49) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='113.10px' lengthAdjust='spacingAndGlyphs'>aligned reads (NT rpm)</text>
+<text transform='translate(18.85,412.49) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='114.32px' lengthAdjust='spacingAndGlyphs'>Aligned reads (NT rpm)</text>
 </g>
 <defs>
   <clipPath id='cpNjE5LjY1fDg0NC45MXwyODMuNDZ8NTYxLjQ1'>
@@ -3364,7 +3364,7 @@
 <g clip-path='url(#cpNDUxLjk3fDU5NC43NHwzMjkuOTh8NDk0Ljk5)'>
 </g>
 <g clip-path='url(#cpMC4wMHw4NTAuMzl8MC4wMHw1NjYuOTM=)'>
-<text x='457.45' y='344.57' style='font-size: 11.00px; font-family: "Arial";' textLength='26.91px' lengthAdjust='spacingAndGlyphs'>taxon</text>
+<text x='457.45' y='344.57' style='font-size: 11.00px; font-family: "Arial";' textLength='30.58px' lengthAdjust='spacingAndGlyphs'>Taxon</text>
 </g>
 <g clip-path='url(#cpNDUxLjk3fDU5NC43NHwzMjkuOTh8NDk0Ljk5)'>
 </g>
