@@ -98,8 +98,8 @@ all_cols <- c(cols, grey_cols)
 
 SPsampletab$taxon <- factor(SPsampletab$taxon_name, levels=rev(names(all_cols)), ordered=T)
 SPsampletab$ngs_prep_method <- fct_recode(SPsampletab$ngs_prep_method,
-                                       "no amplification"="Nextera XT (GLab)","amplicon"="COVIDseq")
-SPsampletab$ngs_prep_method <- factor(SPsampletab$ngs_prep_method,levels=c("no amplification","amplicon"),ordered=T)
+                                       "Unamplified"="Nextera XT (GLab)","Amplicon"="COVIDseq")
+SPsampletab$ngs_prep_method <- factor(SPsampletab$ngs_prep_method,levels=c("Unamplified","Amplicon"),ordered=T)
 
 
 
@@ -126,9 +126,9 @@ sampletypeplot
 
 # amplicon coverage colors ------------------------------------------------
 
-ampcol <- scale_color_manual(values=c("no amplification"="blue","amplicon"="dark red"),
+ampcol <- scale_color_manual(values=c("Unamplified"="blue","Amplicon"="dark red"),
                              name="NGS prep method")
-ampfil <- scale_fill_manual(values=c("no amplification"="blue","amplicon"="dark red"),
+ampfil <- scale_fill_manual(values=c("Unamplified"="blue","Amplicon"="dark red"),
                             name="NGS prep method")
 
 
@@ -143,11 +143,11 @@ amptab = rbind(metadataSP,metadataTB) %>%
   mutate(group=paste(original_id,ngs_prep_method))
 
 amptab$ngs_prep_method <- fct_recode(amptab$ngs_prep_method,
-                                     "no amplification"="Hybrid CovidSeq without amplification",
-                                     "no amplification"="Nextera XT (GLab)",
-                                     "amplicon"="Mpox/Hybrid CovidSeq",
-                                     "amplicon"="COVIDseq",
-                                     "amplicon"="Hybrid COVIDseq")
+                                     "Unamplified"="Hybrid CovidSeq without amplification",
+                                     "Unamplified"="Nextera XT (GLab)",
+                                     "Amplicon"="Mpox/Hybrid CovidSeq",
+                                     "Amplicon"="COVIDseq",
+                                     "Amplicon"="Hybrid COVIDseq")
 
 #View(amptab)
 
@@ -166,12 +166,12 @@ amptabcf <- subset(amptab,original_id %in% crosssamples)  %>%
 
 
 samporder <- amptabcf %>% 
-  filter(ngs_prep_method=="no amplification") %>% 
+  filter(ngs_prep_method=="Unamplified") %>% 
   arrange(coverage) %>% 
   pull(original_id)
 
 amptabcf$original_id <- factor(amptabcf$original_id,levels=samporder,ordered=T)
-amptabcf$ngs_prep_method <- factor(amptabcf$ngs_prep_method,levels=c("no amplification","amplicon"),ordered=T)
+amptabcf$ngs_prep_method <- factor(amptabcf$ngs_prep_method,levels=c("Unamplified","Amplicon"),ordered=T)
 
 
 spcovbox  <- ggplot(amptabcf,aes(x=ngs_prep_method,y=coverage,color=ngs_prep_method,group=ngs_prep_method)) + 
@@ -214,10 +214,10 @@ metatab <- rbind(metadataSP,metadataTB) %>%
 dilutiontab <- merge(metatab,covtab,by="seq_id") %>% mutate(group=paste(original_id,ngs_prep_method))
 
 dilutiontab$ngs_prep_method <- fct_recode(dilutiontab$ngs_prep_method,
-                                          "no amplification"="Hybrid CovidSeq without amplification",
-                                          "amplicon"="Hybrid COVIDseq",
-                                          "amplicon"="Mpox/Hybrid CovidSeq",
-                                          "amplicon"="COVIDseq")
+                                          "Unamplified"="Hybrid CovidSeq without amplification",
+                                          "Amplicon"="Hybrid COVIDseq",
+                                          "Amplicon"="Mpox/Hybrid CovidSeq",
+                                          "Amplicon"="COVIDseq")
 
 
 
@@ -288,8 +288,8 @@ amptab = rbind(metadataSP,metadataTB) %>%
         mutate(group=paste(original_id,ngs_prep_method))
 
 amptab$ngs_prep_method <- fct_recode(amptab$ngs_prep_method,
-                                       "no amplification"="Hybrid CovidSeq without amplification",
-                                       "amplicon"="Mpox/Hybrid CovidSeq",)
+                                       "Unamplified"="Hybrid CovidSeq without amplification",
+                                       "Amplicon"="Mpox/Hybrid CovidSeq",)
 
 
 # negsamples <-  amptab %>% 
@@ -308,7 +308,7 @@ amptabcf <- subset(amptab,original_id %in% crosssamples)
 
 
 samporder <- amptabcf %>% 
-                filter(ngs_prep_method=="no amplification") %>% 
+                filter(ngs_prep_method=="Unamplified") %>% 
                 arrange(coverage) %>% 
                 pull(original_id)
 
@@ -380,9 +380,9 @@ TBsampletab$taxon <- factor(TBsampletab$taxon, levels=rev(names(all_cols)), orde
 
 
 TBsampletab$ngs_prep_method <- fct_recode(TBsampletab$ngs_prep_method,
-                                          "no amplification"="Hybrid CovidSeq without amplification",
-                                          "amplicon"="Mpox/Hybrid CovidSeq")
-TBsampletab$ngs_prep_method <- factor(TBsampletab$ngs_prep_method,levels=c("no amplification","amplicon"),ordered=T)
+                                          "Unamplified"="Hybrid CovidSeq without amplification",
+                                          "Amplicon"="Mpox/Hybrid CovidSeq")
+TBsampletab$ngs_prep_method <- factor(TBsampletab$ngs_prep_method,levels=c("Unamplified","Amplicon"),ordered=T)
 
 
 TBsampletab$original_id <- factor(TBsampletab$original_id,levels=samporder,ordered=T)
