@@ -1,8 +1,8 @@
 #samples: 'data/PGCOE_Datasheet - M.tuberculosis_Seq.csv' #list .csv file containing sample names
-samples: '/home/snr28/project/rawdata/TB/TB005/TB005_samples.txt'
-readdir: '/home/snr28/project/rawdata/TB/TB005/'
-rundate: '2024-07-19'
-runname: 'TB005'
+samples: '/home/snr28/project/rawdata/TB/TB006/TB006_samples.txt'
+readdir: '/home/snr28/project/rawdata/TB/TB006/'
+rundate: '2025-01-16'
+runname: 'TB006'
 reference: '../../refs/TB.reference.fa'
 primers: '../../schemes/TB.primer.bed'
 amplicons: '../../schemes/TB.insert.bed'

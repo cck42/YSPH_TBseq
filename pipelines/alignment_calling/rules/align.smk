@@ -1,51 +1,21 @@
 
-rule cp_local_fq:
-    input:
-        read_location=os.path.join(config['readdir'],'{sample}'),
-    output:
-        R1 = 'results/rawdata/{sample}_R1.fastq.gz',
-        R2 = 'results/rawdata/{sample}_R2.fastq.gz'
-    log:
-        log = "logs/datacopy/{sample}.log"
-    group: "cplocal"
-    resources:
-        mem_mb="2G",
-        cpus_per_task=1,
-        runtime=60
-    container: None
-    shell:"""
-        #find {input.read_location}
-
-        R1=` find {input.read_location} | grep _R1_ `
-        R2=` find {input.read_location} | grep _R2_ `
-
-        echo cp $R1 {output.R1}
-        cp $R1 {output.R1}
-        
-        echo cp $R2 {output.R2}
-        cp $R2 {output.R2}
-        
-        """
 
 rule indexref:
     input:
-        reference=config['reference']
-    output:
         reference="results/ref/reference.fasta",
+    output:
         indexedref="results/ref/reference.fasta.amb"
     log:
     message: "Indexing reference"
     container: "docker://sethnr/pgcoe_bacseq:0.01"
     shell:
         """
-        cp {input.reference} {output.reference}
         bwa index {output.reference}
         """
 
 
 rule align_to_ref:
     input:
-        #read_location=os.path.join(config['readdir'],'{sample}'),
         R1 = 'results/rawdata/{sample}_R1.fastq.gz',
         R2 = 'results/rawdata/{sample}_R2.fastq.gz',
         indexedref="results/ref/reference.fasta.amb",
@@ -73,10 +43,10 @@ rule align_to_ref:
 
 rule primerclip:
     input:
-        aligned = os.path.join(config['outdir'],'align/{sample}_aligned.bam'),
+        aligned = 'results/align/{sample}_aligned.bam',
         primers = config['primers']
     output:
-        aln_trimmed= os.path.join(config['outdir'],'align/{sample}_aln_itrim.bam')
+        aln_trimmed='results/align/{sample}_aln_itrim.bam'
     group: "align"
     resources:
             mem_mb=8000,

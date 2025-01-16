@@ -9,13 +9,17 @@ READ_SUBSAMPLES=set(config['read_subsamples'])
 SAMPLES = [line.strip() for line in open(config['samples'], 'r')]
 SAMPLE1 = SAMPLES[0]
 
+TARGETS = [line.strip() for line in open(config['refs'], 'r')]
+
 #container: "docker://sethnr/pgcoe_bacseq:0.01"
+
+include: "rules/cplocal.smk"
 
 include: "rules/align.smk"
 
 include: "rules/ivar.smk"
 
-include: "rules/snippy.smk"
+#include: "rules/snippy.smk"
 
 include: "rules/mykrobe.smk"
 
@@ -185,8 +189,8 @@ rule get_metrics:
         #snippyvcf=config['outdir']+'/snippy/core.vcf',
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
         depth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
-        primers=config['primers'],
-        amplicons=config['amplicons'],
+        primers='results/refs/primers.bed',
+        amplicons='results/refs/amplicons.bed',
     output:
         #expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.tsv',
         #       program=["pileup","snippy"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
