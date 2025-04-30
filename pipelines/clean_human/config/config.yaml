@@ -1,0 +1,5 @@
+samples: '/home/snr28/project/rawdata/TB/TB006/TB006_samples.txt'
+readdir: '/home/snr28/project/rawdata/TB/TB006/'
+reference: '../../refs/TB.reference.fa'
+hostref:  '../../refs/HUMAN.reference.fa'
+outdir: 'results'

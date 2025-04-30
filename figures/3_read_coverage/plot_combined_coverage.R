@@ -5,6 +5,8 @@ library(RColorBrewer)
 library(patchwork)
 library(ggtext)
 
+library(cowplot)
+
 # data import  ------------------------------------------------------------
 
 qpcr_results <- read.table("data/qpcr_data.tsv",sep="\t",header=T) %>%
@@ -414,11 +416,13 @@ CCCC"
 
 sampletypeplot + tbcovbox + dilutionplot + guide_area() + plot_layout(design = playout,guides="collect")
 ggsave("2_combined_coverage_plot.png",dpi=400,units="mm",width=300,height=200)
+ggsave("2_combined_coverage_plot.svg",dpi=400,units="mm",width=300,height=200)
 
 
 
 sputumplot + tbcovbox + dilutionplotTB + guide_area() + plot_layout(design = playout,guides="collect") + plot_annotation(tag_levels='A')
 ggsave("2_combined_coverage_plot_TB.png",dpi=400,units="mm",width=300,height=200)
+ggsave("2_combined_coverage_plot_TB.svg",dpi=400,units="mm",width=300,height=200)
 
 
 playout <- "AAA
@@ -427,6 +431,7 @@ CCC"
 
 sampletypeplot + spcovbox + dilutionplotSP + guide_area() + plot_layout(design = playout,guides="collect") + plot_annotation(tag_levels='A')
 ggsave("2_combined_coverage_plot_SP.png",dpi=400,units="mm",width=300,height=300)
+ggsave("2_combined_coverage_plot_SP.svg",dpi=400,units="mm",width=300,height=300)
 
 
 spcomb <- sampletypeplot + spcovbox + guide_area() + plot_layout(design = "AACBB",guides="collect")
@@ -437,5 +442,6 @@ ggsave("2_combined_coverage_plot_preprint.png",dpi=400,units="mm",width=300,heig
 ggsave("2_combined_coverage_plot_preprint.svg",dpi=400,units="mm",width=300,height=200)
 
 
-
+dilutionplotTB + tbcovbox + guide_area() + plot_layout(widths=c(3,1.5,0.5),guides="collect")
+ggsave("dilution_sputum_conc_TB.svg",dpi=400,units="mm",width=300,height=200)
 

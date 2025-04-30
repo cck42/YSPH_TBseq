@@ -1,0 +1,41 @@
+import pandas as pd
+import os
+
+configfile: "config/config.yaml"
+include: "rules/common.py"
+
+SAMPLES = [line.strip() for line in open(config['samples'], 'r')]
+
+
+HOST = config['hostref']
+TARGET = config['reference']
+
+include: "rules/cplocal.smk"
+include: "rules/align.smk"
+include: "rules/stats.smk"
+
+
+localrules: all, cp_local_fq
+
+
+rule all:
+    input:
+        expand(os.path.join(config['outdir'],'align/{sample}_{human}_cleaned.tsv'),sample=SAMPLES,clean=HOST)
+        expand(os.path.join(config['outdir'],'align/{sample}_{target}_aligned.tsv'),sample=SAMPLES,target=TARGET)
+        
+
+rule catstats:
+    input:
+        flagstats = expand(os.path.join(config['outdir'],'align/{sample}_{target}_flagstats'),sample=SAMPLES,clean=[HOST,TARGET])
+    output:
+        alstats=   'results/align/alignstats.txt',
+    group: "catstats"
+    resources:
+        mem_mb=8000,
+        runtime=180,
+    log:
+        stderr="logs/depth/{target}_depths.err"
+    shell:
+        """
+        cat {input.flagstats} > {output.alstats}
+        """
