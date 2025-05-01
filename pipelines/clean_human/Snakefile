@@ -7,8 +7,8 @@ include: "rules/common.py"
 SAMPLES = [line.strip() for line in open(config['samples'], 'r')]
 
 
-HOST = config['hostref']
-TARGET = config['reference']
+HOST = config['hostname']
+TARGET = config['refname']
 
 include: "rules/cplocal.smk"
 include: "rules/align.smk"
@@ -20,7 +20,7 @@ localrules: all, cp_local_fq
 
 rule all:
     input:
-        expand(os.path.join(config['outdir'],'align/{sample}_{human}_cleaned.tsv'),sample=SAMPLES,clean=HOST)
+        expand(os.path.join(config['outdir'],'align/{sample}_{human}_cleaned.tsv'),sample=SAMPLES,clean=HOST),
         expand(os.path.join(config['outdir'],'align/{sample}_{target}_aligned.tsv'),sample=SAMPLES,target=TARGET)
         
 

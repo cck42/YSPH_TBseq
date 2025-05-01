@@ -29,11 +29,11 @@ rule cp_local_fq:
 
 rule cp_local_data:
     input:
-        refdir=config['refsdir'],
-        ampdir=config['ampsdir'],
-        refsfile=config['refs']
+        ref=config['reference'],
+        hostref=config['hostref'],
     output:
-        fa = expand('results/refs/{target}.fasta',target=TARGETS)
+        fa = expand('results/refs/{target}.fasta',target=TARGET),
+        hostfa = expand('results/refs/{target}.fasta',target=HOST)
     log:
         log = "logs/datacopy/copyrefs.log"
     resources:
@@ -44,8 +44,7 @@ rule cp_local_data:
         targets = TARGETS
     container: None
     shell:"""
-        cp -LR {input.refdir}/* results/refs/
-        cp -LR {input.ampdir}/* results/refs/
-        cp {input.refsfile} results/refs/refs.txt        
+        cp {input.ref} {output.fa}
+        cp {input.hostref} {output.hostfa}
         """
 
