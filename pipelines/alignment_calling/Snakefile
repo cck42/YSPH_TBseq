@@ -9,7 +9,7 @@ READ_SUBSAMPLES=set(config['read_subsamples'])
 SAMPLES = [line.strip() for line in open(config['samples'], 'r')]
 SAMPLE1 = SAMPLES[0]
 
-TARGETS = [line.strip() for line in open(config['refs'], 'r')]
+TARGETS = config['refs']
 
 #container: "docker://sethnr/pgcoe_bacseq:0.01"
 

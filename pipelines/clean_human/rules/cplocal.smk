@@ -39,9 +39,7 @@ rule cp_local_data:
     resources:
         mem_mb="2G",
         cpus_per_task=1,
-        runtime=60
-    params:
-        targets = TARGETS
+        runtime=60,
     container: None
     shell:"""
         cp {input.ref} {output.fa}

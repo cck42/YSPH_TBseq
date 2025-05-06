@@ -1,5 +1,6 @@
-samples: '/home/snr28/project/rawdata/TB/TB006/TB006_samples.txt'
-readdir: '/home/snr28/project/rawdata/TB/TB006/'
+#samples: '/vast/palmer/pi/grubaugh/rawdata/TB/TB006_samples.txt'
+samples: '/vast/palmer/pi/grubaugh/rawdata/TB/TB005_60-69.txt'
+readdir: '/vast/palmer/pi/grubaugh/rawdata/TB/TB005/'
 reference: '../../refs/TB.reference.fa'
 refname: 'H37RV'
 hostref:  '/vast/palmer/pi/grubaugh/datasets/pgcoe/HS/GCF_000001405.40_GRCh38.p14_genomic.fna'
