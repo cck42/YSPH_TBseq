@@ -10,7 +10,7 @@ rule indexref:
     container: "docker://sethnr/pgcoe_bacseq:0.01"
     shell:
         """
-        bwa index {output.reference}
+        bwa index {input.reference}
         """
 
 
@@ -86,17 +86,19 @@ rule subsample:
     input:
         aln_itrim_sorted= os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam')
     output:
-        subsamp=os.path.join(config['outdir'],'align/{sample}_subsamp{subsample}.bam')
+        subsamp=os.path.join(config['outdir'],'align/{sample}_subsamp.bam')
     resources:
         mem_mb=8000,
         runtime=180,
     group: "align"
+    params:
+        subsample=config['subsample']
     log:
-        stdout="logs/align/{sample}_sub_{subsample}.out",
-        stderr="logs/align/{sample}_sub_{subsample}.err",
+        stdout="logs/align/{sample}_sub.out",
+        stderr="logs/align/{sample}_sub.err",
     container: "docker://sethnr/pgcoe_bacseq:0.01"
-    message: "Selecting subsample of reads from {wildcards.sample}: {wildcards.subsample}"
+    message: "Selecting subsample of reads from {wildcards.sample}: {params.subsample}"
     shell:
         """
-        samtools view -b -s {wildcards.subsample} {input.aln_itrim_sorted} -o {output.subsamp} 1> {log.stdout} 2> {log.stderr}
+        samtools view -b -s {params.subsample} {input.aln_itrim_sorted} -o {output.subsamp} 1> {log.stdout} 2> {log.stderr}
         """

@@ -4,7 +4,6 @@ import os
 configfile: "config/config.yaml"
 include: "rules/common.py"
 
-READ_SUBSAMPLES=set(config['read_subsamples'])
 
 SAMPLES = [line.strip() for line in open(config['samples'], 'r')]
 SAMPLE1 = SAMPLES[0]
@@ -19,72 +18,47 @@ include: "rules/align.smk"
 
 include: "rules/ivar.smk"
 
-#include: "rules/snippy.smk"
+include: "rules/stats.smk"
 
 include: "rules/mykrobe.smk"
 
-#include: "rules/lineage.smk"
-
-localrules: all, cp_local_fq
+localrules: all, cp_local_fq, cp_local_data
 
 
 rule all:
     input:
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
-        basedepth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
-        #pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
-        #lineages="results/poppunk/complete"
-        #lineages="results/srst/complete"
+        genedepths='results/summary/all_genedepth.txt',
         mykrobecombined=config['outdir']+'/mykrobe/combined.csv'
-        
-        # evorha=expand(config['outdir']+'/evorha/{sample}.hapfreq',sample=SAMPLES),
-        
+
 
 rule coverage:
     input:
-        subsamp=os.path.join(config['outdir'],'align/{sample}_subsamp{subsample}.bam')
+        subsamp=os.path.join(config['outdir'],'align/{sample}_subsamp.bam')
     output:
-        coveragestats=os.path.join(config['outdir'],'align/{sample}_coverage_sub{subsample}.tsv')
+        coveragestats=os.path.join(config['outdir'],'align/{sample}_coverage_sub.tsv')
     resources:
         mem_mb=8000,
         runtime=180,
     params:
         maxdepth=0,
         minmapqual=60,
-        minbasequal=13
+        minbasequal=13,
+        subsample=config['subsample']
     container: "docker://sethnr/pgcoe_bacseq:0.01"
     log:
-        stderr="logs/align/{sample}_sub{subsample}.err"
-    message: "Computing coverage of reference for sample {wildcards.sample} with a read subsample fraction of {wildcards.subsample}"
+        stderr="logs/align/{sample}_sub.err"
+    message: "Computing coverage of reference for sample {wildcards.sample} with a read subsample fraction of {params.subsample}"
     shell:
         """
-        printf '%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n' {wildcards.sample} {wildcards.subsample} `samtools coverage -d {params.maxdepth} -q {params.minmapqual} -Q {params.minbasequal} --no-header {input.subsamp}` > {output.coveragestats} 2> {log.stderr}
+        printf '%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n' {wildcards.sample} {params.subsample} `samtools coverage -d {params.maxdepth} -q {params.minmapqual} -Q {params.minbasequal} --no-header {input.subsamp}` > {output.coveragestats} 2> {log.stderr}
         """
 
-rule mdepth:
-    input:
-        bams=expand(os.path.join(config['outdir'],'align/{sample}_aln_itrim_sorted.bam'),sample=SAMPLES)
-    output:
-        config['outdir']+'/'+config['runname']+'/all_depth.txt'
-    resources:
-        mem_mb=8000,
-        runtime=180,
-    params:
-        maxdepth=0,
-        minmapqual=60,
-        minbasequal=13
-    container: "docker://sethnr/pgcoe_bacseq:0.01"
-    log:
-        stderr="logs/depth/"+config['runname']+".err"
-    shell:
-        """
-        samtools depth -a -H {input.bams} -o {output} 2>&1 >  {log.stderr}
-        """
 
 
 rule combinedcoverage:
     input:
-        coveragestats=expand(os.path.join(config['outdir'],'align/{sample}_coverage_sub{subsample}.tsv'),sample=SAMPLES,subsample=READ_SUBSAMPLES)
+        coveragestats=expand(os.path.join(config['outdir'],'align/{sample}_coverage_sub.tsv'),sample=SAMPLES)
     output:
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv')
     resources:
@@ -155,62 +129,27 @@ rule variantfilter:
         bcftools filter -O z -o {output.vcf_filt} -i 'QUAL>10 & DP>10' {input.vcf} 1> {log.stdout} 2> {log.stderr}
         """
 
-rule evorha:
+
+rule catstats:
     input:
-        bam=config['outdir']+'/align/{sample}_aln_itrim_sorted.bam',
-        idx=config['outdir']+'/align/{sample}_aln_itrim_sorted.bam.bai',
-    params:
-        ref=config['reference'],
-        bamln=config['outdir']+'/evorha/{sample}_sorted.bam',
-        idxln=config['outdir']+'/evorha/{sample}_sorted.bam.bai',
-        prefix=config['outdir']+'/evorha/',
-        indirs=expand(config['outdir']+'/snippy/snippy_{sample}',sample=SAMPLES)
+        ampdepths=lambda wildcards: expand('results/align/{sample}_ampdepth.txt',sample=SAMPLES),
+        genedepths=lambda wildcards: expand('results/align/{sample}_genedepth.txt',sample=SAMPLES),
+        resists=lambda wildcards: expand('results/mykrobe/{sample}_mykrobe.csv',sample=SAMPLES),
+    output:
+        ampdepths= 'results/summary/all_ampdepth.txt',
+        genedepths='results/summary/all_genedepth.txt',
+        resists='results/summary/all_resists.txt',
+    group: "catstats"
     resources:
         mem_mb=8000,
-        runtime=1440,
-    container: "docker://sethnr/pgcoe_evorha:0.01"
-    output:
-        coreout = config['outdir']+'/evorha/{sample}.hapfreq',
+        runtime=180,
     log:
-        stderr="logs/evorha/{sample}.err",
-    message: "Running evorha"
+        stderr="logs/depth/all_depths.err"
     shell:
         """
-	    ln -f {input.bam} {params.bamln}
-            ln -f {input.idx} {params.idxln}
-            java -jar /jars/evorha.jar completeAnalysis {params.ref} {params.bamln} 2>&1 >> {log.stderr}
+        cat results/align/*_ampdepth.txt | sort -u  > {output.ampdepths}
+        cat results/align/*_genedepth.txt | sort -u  > {output.genedepths}
+        cat results/mykrobe/*_mykrobe.csv | sort -u > {output.resists}
         """
 
 
-
-rule get_metrics:
-    input:
-        pileupvcf=os.path.join(config['outdir'],'pileup',"all_variants_filt.vcf.gz"),
-        #snippyvcf=config['outdir']+'/snippy/core.vcf',
-        combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
-        depth=config['outdir']+'/'+config['runname']+'/all_depth.txt',
-        primers='results/refs/primers.bed',
-        amplicons='results/refs/amplicons.bed',
-    output:
-        #expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.tsv',
-        #       program=["pileup","snippy"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
-        #snippyvcf=config['outdir']+'/'+config['runname']+'/snippy_all_vars.vcf',
-        expand(config['outdir']+'/'+config['runname']+'/'+config['runname']+'_{site}_{program}_{metric}.tsv',
-               program=["pileup"], site=["primers","amplicons"],metric=["meandp","covpc","pi"]),
-        pileupvcf=config['outdir']+'/'+config['runname']+'/pileup_all_vars.vcf.gz',
-    container: "docker://sethnr/pgcoe_analysis:0.01"
-    resources:
-        mem_mb=8000,
-        runtime=240,
-	    cores=1,
-    params:
-        spprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_primers_snippy',
-        saprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_amplicons_snippy',
-        ppprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_primers_pileup',
-        paprefix=config['outdir']+'/'+config['runname']+'/'+config['runname']+'_amplicons_pileup',
-    shell:
-        """
-	    cp {input.pileupvcf} {output.pileupvcf}
-        python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.primers} --out {params.ppprefix}
-        python scripts/get_pidp_ranges.py --vcf {input.pileupvcf} --depth {input.depth} --bed {input.amplicons} --out {params.paprefix}
-        """
