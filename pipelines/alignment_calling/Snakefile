@@ -29,6 +29,7 @@ rule all:
     input:
         combinedcoverage=os.path.join(config['outdir'],config['runname'],'combinedcoverage.tsv'),
         genedepths='results/summary/all_genedepth.txt',
+        resdepths='results/summary/all_resistdepth.txt',
         mykrobecombined=config['outdir']+'/mykrobe/combined.csv'
 
 
@@ -132,12 +133,14 @@ rule variantfilter:
 
 rule catstats:
     input:
-        ampdepths=lambda wildcards: expand('results/align/{sample}_ampdepth.txt',sample=SAMPLES),
-        genedepths=lambda wildcards: expand('results/align/{sample}_genedepth.txt',sample=SAMPLES),
+        ampdepths=lambda wildcards: expand('results/stats/{sample}_ampdepth.txt',sample=SAMPLES),
+        genedepths=lambda wildcards: expand('results/stats/{sample}_genedepth.txt',sample=SAMPLES),
+        resdepths=lambda wildcards: expand('results/stats/{sample}_resistdepth.txt',sample=SAMPLES),
         resists=lambda wildcards: expand('results/mykrobe/{sample}_mykrobe.csv',sample=SAMPLES),
     output:
         ampdepths= 'results/summary/all_ampdepth.txt',
         genedepths='results/summary/all_genedepth.txt',
+        resdepths='results/summary/all_resistdepth.txt',
         resists='results/summary/all_resists.txt',
     group: "catstats"
     resources:
@@ -147,8 +150,9 @@ rule catstats:
         stderr="logs/depth/all_depths.err"
     shell:
         """
-        cat results/align/*_ampdepth.txt | sort -u  > {output.ampdepths}
-        cat results/align/*_genedepth.txt | sort -u  > {output.genedepths}
+        cat results/stats/*_ampdepth.txt | sort -u  > {output.ampdepths}
+        cat results/stats/*_genedepth.txt | sort -u  > {output.genedepths}
+        cat results/stats/*_resistdepth.txt | sort -u  > {output.resdepths}
         cat results/mykrobe/*_mykrobe.csv | sort -u > {output.resists}
         """
 
