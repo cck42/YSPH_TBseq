@@ -1,0 +1,15 @@
+samples:
+  H37Rv: seqs/H37Rv.fa
+  K.pneumoniae: seqs/K.pneumoniae.fa
+  M.canetti: seqs/M.canetti.fa
+  M.intracellulare: seqs/M.intracellulare.fa
+  PA01: seqs/PA01.fa
+  S.odontolytica: seqs/S.odontolytica.fa
+  H.influenzae: seqs/H.influenzae.fa
+  M.abscessus: seqs/M.abscessus.fa
+  M.fortuitum: seqs/M.fortuitum.fa
+  OXC141: seqs/OXC141.fa
+  S.aureus: seqs/S.aureus.fa 
+
+genera: "TB"
+bed: "TB.primer.bed"

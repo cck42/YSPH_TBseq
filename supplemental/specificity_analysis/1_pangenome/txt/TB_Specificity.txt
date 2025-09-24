@@ -1,0 +1,11 @@
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/H37Rv.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/H.influenzae.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/K.pneumoniae.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/M.abscessus.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/M.canetti.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/M.fortuitum.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/M.intracellulare.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/OXC141.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/PA01.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/S.aureus.fa
+/vast/palmer/scratch/turner/flg9/GLab/reference_genomes/TB_Specificity/S.odontolytica.fa
