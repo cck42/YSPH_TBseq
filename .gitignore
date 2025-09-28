@@ -1,5 +1,5 @@
 supplemental/specificity_analysis/3_amp_prediction/samtools_depth_indiv_primers/*.depth
-
+*.fa*
 *.DS_Store
 *.npy
 *.Rhistory
