@@ -3,6 +3,9 @@ samples:
   K.pneumoniae: seqs/K.pneumoniae.fa
   M.canetti: seqs/M.canetti.fa
   M.intracellulare: seqs/M.intracellulare.fa
+  M.kansasii: seqs/M.kansasii.fa
+  M.leprae: seqs/M.leprae.fa
+  M.bovis: seqs/M.bovis.fa
   PA01: seqs/PA01.fa
   S.odontolytica: seqs/S.odontolytica.fa
   H.influenzae: seqs/H.influenzae.fa

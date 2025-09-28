@@ -115,11 +115,13 @@ rule align_primers:
         module load SAMtools/1.21-GCC-12.2.0
 
         bowtie2 \
-        -x {params.dir}/{wildcards.sample}_indexed_ref -f {input.fwd} | samtools view -b -F 4 -F 2048 | samtools sort -o {output.fwd_aln} \
+        -x {params.dir}/{wildcards.sample}_indexed_ref -f {input.fwd} -N 1 --mp 6,2 --rdg 5,1 --rfg 5,1 -L 15 -i S,1,0.50 \
+        | samtools view -b -F 4 -F 2048 | samtools sort -o {output.fwd_aln} \
         1>> {log.stdout} 2>> {log.stderr}
         
         bowtie2 \
-        -x {params.dir}/{wildcards.sample}_indexed_ref -f {input.rev} | samtools view -b -F 4 -F 2048 | samtools sort -o {output.rev_aln} \
+        -x {params.dir}/{wildcards.sample}_indexed_ref -f {input.rev} -N 1 --mp 6,2 --rdg 5,1 --rfg 5,1 -L 15 -i S,1,0.50 \
+        | samtools view -b -F 4 -F 2048 | samtools sort -o {output.rev_aln} \
         1>> {log.stdout} 2>> {log.stderr}
         """
 
