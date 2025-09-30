@@ -1,0 +1,1 @@
+Bases covered: 113495, Estimated refs/H_influenzae.fasta coverage by amplicons: 0.0601

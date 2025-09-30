@@ -1,0 +1,1 @@
+Bases covered: 3805322, Estimated refs/M_tuberculosis.fasta coverage by amplicons: 0.8626

@@ -4,6 +4,7 @@ library(tidyverse)
 library(forcats)
 library(stringr)
 library(jsonlite)
+library(readxl)
 
 # read meta / dst ---------------------------------------------------------
 
@@ -37,54 +38,18 @@ mykrobe_combined <- mykrobe_combined %>%
 
 
 
-# 
-# drug_lookup <- read.csv("data/DataDictionaryMoldova_share_11Jan2021.csv",header=T) %>% 
-#   filter(grepl("dst",new_var)) %>%
-#   mutate(drug = gsub(" from.*","",gsub("dst from.*: ","",description))) %>%
-#   mutate(drug_short = gsub(".*dst_","",new_var)) %>%
-#   select(drug_short,drug) %>% 
-#   mutate(drug_type = case_when(drug %in% l1_2HRZE ~ "1st",
-#                                drug %in% c(l2_fluoro,l2_inject) ~ "2nd",
-#                                drug %in% others ~ "other"))
-# 
-# 
-# drug_lookup <- unique(drug_lookup)
-# 
-# moldova_dst <- read.table("data/moldova_dst_results.txt",header=T,sep="\t",na.strings = c("NA",""))
-# 
-# moldova_xpert <- moldova_dst %>% 
-#   rename(ID=tubeLabel) %>% 
-#   select(ID,uniqueID,age,MDR_phenotype,MDR_WGS,xpertRifR) %>%
-#   mutate(dst_method="xpert",
-#          drug_short="r") %>%
-#   rename(susceptibility = xpertRifR) %>%
-#   filter(!is.na(susceptibility))
-# 
-# moldova_dst <- moldova_dst %>% 
-#   pivot_longer(contains("dst_"),names_pattern = "(.*)dst_(.*)",names_to=c("dst_method","drug_short"),values_to="susceptibility") %>%
-#   rename(ID=tubeLabel) %>% 
-#   select(ID,uniqueID,age,MDR_phenotype,MDR_WGS,dst_method,drug_short,susceptibility)
-# 
-# moldova_dst <- rbind(moldova_dst,moldova_xpert)
-# rm(moldova_xpert)
-# moldova_dst <- merge(moldova_dst,unique(drug_lookup),by="drug_short",all.x=T) %>%
-#   filter(drug %in% drugorder) %>%               
-#   mutate(drug = factor(drug,levels=rev(drugorder)))              
-# moldova_dst$dst_method <- fct_recode(moldova_dst$dst_method,"liquid media"="mgit","solid media"="lj")
-# 
 
-
-# read depths -------------------------------------------------------------
+# read depths (genes) -------------------------------------------------------
 
 name_lookup <- sample_metadata %>% 
   select(Seq_ID,Original_ID) %>% 
-  rename(sample=Seq_ID,ID=Original_ID)
+  dplyr::rename(sample=Seq_ID,ID=Original_ID)
 
 genedepths <- read.table("data/all_genedepth.txt",header=T) %>%
                     filter(name!="name") %>% 
                     merge(name_lookup,by='sample')
 
-
+#get gene-to-locus mapping
 #d/l panel 20230928 from	https://figshare.com/ndownloader/files/42494211	20230928
 
 gene2res = list()
@@ -113,6 +78,16 @@ for(gene in resgenes) {
 }
 generestab
 
+
+# read depths (resist loci) -----------------------------------------------
+
+resdepths <- read.table("data/all_resistdepth.txt",header=T) %>%
+  filter(name!="name") %>% 
+  merge(name_lookup,by='sample')
+
+
+
+
 # get_relevant_samples ----------------------------------------------------
 
 
@@ -126,20 +101,20 @@ md_samples <- mykrobe_combined %>%
          NGS_Run_ID %in% c("TB001","TB003"),
          NGS_Prep_Method == 'Mpox/Hybrid CovidSeq',
          Sample_source == "Moldova") %>% 
-  rename(dst_method=NGS_Prep_Method) %>% 
+  dplyr::rename(dst_method=NGS_Prep_Method) %>% 
   filter(Template_dilution=="0.01") %>%
   pull(sample) %>% 
   unique()
 
 
-# get depth table ---------------------------------------------------------
+# get depth table (genes) ---------------------------------------------------------
 
 
 mdgenedepths <- genedepths %>% filter(sample %in% md_samples,
                       name %in% resgenes) %>%
-  rename(gene=name) %>%
-  mutate(across(all_of(c('depth','start','end')),as.numeric)) %>% 
-  mutate(length=end-start) %>% 
+  dplyr::rename(gene=name) %>%
+  dplyr::mutate(across(all_of(c('depth','start','end')),as.numeric)) %>% 
+  dplyr::mutate(length=end-start) %>% 
   select(ID,gene,length,depth) %>%
   pivot_wider(names_from=ID,values_from=depth) %>% 
   merge(generestab,by="gene") %>%
@@ -155,19 +130,45 @@ write.table(mdgenedepths,file="moldova_resistance_gene_depths.txt",sep="\t",col.
 
 pegenedepths <- genedepths %>% filter(sample %in% sputum_samples,
                                       name %in% resgenes) %>%
-  rename(gene=name) %>%
-  mutate(across(all_of(c('depth','start','end')),as.numeric)) %>% 
-  mutate(length=end-start) %>% 
+  dplyr::rename(gene=name) %>%
+  dplyr::mutate(across(all_of(c('depth','start','end')),as.numeric)) %>% 
+  dplyr::mutate(length=end-start) %>% 
   select(ID,gene,length,depth) %>%
   pivot_wider(names_from=ID,values_from=depth) %>% 
   merge(generestab,by="gene") %>%
-  mutate(resorder = gsub("Quinolones","Moxifloxacin,Levofloxacin",resistance)) %>% 
-  mutate(resorder = tolower(gsub("\\,.*","",resorder))) %>% 
-  mutate(resorder = factor(resorder,levels=drugorder)) %>%
+  dplyr::mutate(resorder = gsub("Quinolones","Moxifloxacin,Levofloxacin",resistance)) %>% 
+  dplyr::mutate(resorder = tolower(gsub("\\,.*","",resorder))) %>% 
+  dplyr::mutate(resorder = factor(resorder,levels=drugorder)) %>%
   arrange(resorder) %>% 
   select(-resorder,-length) %>% 
   relocate(resistance,.before=gene)
 
 write.table(pegenedepths,file="peru_resistance_gene_depths.txt",sep="\t",col.names=T,quote=F,row.names = F)
+
+
+# get depth table (res loci) ---------------------------------------------------------
+
+
+mdresdepths <- resdepths %>% filter(sample %in% md_samples) %>%
+  dplyr::mutate(across(all_of(c('depth','start','end')),as.numeric)) %>% 
+  dplyr::mutate(length=end-start) %>% 
+  select(ID,name,length,depth) %>%
+  pivot_wider(names_from=ID,values_from=depth)
+
+
+#View(mdresdepths)
+write.table(mdresdepths,file="moldova_resistance_locus_depths.txt",sep="\t",col.names=T,quote=F,row.names = F)
+
+
+peresdepths <- resdepths %>% filter(sample %in% sputum_samples) %>%
+  dplyr::mutate(across(all_of(c('depth','start','end')),as.numeric)) %>% 
+  dplyr::mutate(length=end-start) %>% 
+  select(ID,name,length,depth) %>%
+  pivot_wider(names_from=ID,values_from=depth)
+
+#View(peresdepths)
+
+write.table(peresdepths,file="peru_resistance_res_depths.txt",sep="\t",col.names=T,quote=F,row.names = F)
+
 
 

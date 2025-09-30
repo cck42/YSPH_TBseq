@@ -1,0 +1,4 @@
+
+for REF in `ls refs`; do 
+    echo python predict_amplicons.py -i TB.primer.bed -r refs/${REF} -o TBseq_${REF/.fasta/}
+done
