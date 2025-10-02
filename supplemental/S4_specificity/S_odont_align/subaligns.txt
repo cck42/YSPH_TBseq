@@ -1,0 +1,2 @@
+bwa mem -o TB166.bam S_odontolytica.fasta Yale-TB166_R1.fastq.gz Yale-TB166_R2.fastq.gz
+bwa mem -o TB205.bam S_odontolytica.fasta Yale-TB205_R1.fastq.gz Yale-TB205_R2.fastq.gz
