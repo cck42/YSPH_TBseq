@@ -164,8 +164,8 @@ if __name__ == "__main__":
 
     primers_bed_to_fasta(args.input, "p1.fasta", "p2.fasta")
 
-    predict_amplicons("p1.fasta", args.reference, f'{args.output}_p1', MAXLEN=3000)
-    predict_amplicons("p2.fasta", args.reference, f'{args.output}_p2', MAXLEN=3000)
+    predict_amplicons("p1.fasta", args.reference, f'{args.output}_p1', MAXLEN=4000)
+    predict_amplicons("p2.fasta", args.reference, f'{args.output}_p2', MAXLEN=4000)
 
     total_covered, coverage = estimate_genome_coverage(f'{args.output}_p1', f'{args.output}_p2', args.reference)
 
