@@ -1,0 +1,254 @@
+Sample_ID	Pathogen	Template_Dilution	Assay	FAM_Target	FAM_Ct	Cy5_Target	Cy5_Ct	starting_quantity	Run_ID	Run_Date	Notes
+A889-CE	ST3		ST3_Dual-Target	LytA	26.34	PiaB	26.79		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B042-CE	ST3		ST3_Dual-Target	LytA	28.03	PiaB	28.50		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+C677-CE	ST3		ST3_Dual-Target	LytA	25.14	PiaB	26.65		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W1526-CE	ST3		ST3_Dual-Target	LytA	31.18	PiaB	32.19		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W1695-CE	ST3		ST3_Dual-Target	LytA	32.30	PiaB	33.12		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W3317-CE	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W3371-CE	ST3		ST3_Dual-Target	LytA	27.17	PiaB	27.89		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W4034-CE	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+A889-S	ST3		ST3_Dual-Target	LytA	27.68	PiaB	28.52		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B042-S	ST3		ST3_Dual-Target	LytA	32.76	PiaB	32.92		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+C677-S	ST3		ST3_Dual-Target	LytA	30.46	PiaB	29.86		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W1526-S	ST3		ST3_Dual-Target	LytA	37.25	PiaB	37.51		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W1527-S	ST3		ST3_Dual-Target	LytA	NaN	PiaB	37.51		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W1695-S	ST3		ST3_Dual-Target	LytA	39.06	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W3317-S	ST3		ST3_Dual-Target	LytA	33.55	PiaB	33.49		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W3371-S	ST3		ST3_Dual-Target	LytA	37.62	PiaB	37.48		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W4034-S	ST3		ST3_Dual-Target	LytA	35.29	PiaB	35.82		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+A889-NP	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B042-NP	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+C677-NP	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W1527-CI	ST3		ST3_Dual-Target	LytA	15.26	PiaB	14.80		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W3317-CI	ST3		ST3_Dual-Target	LytA	14.93	PiaB	14.14		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W4034-CI	ST3		ST3_Dual-Target	LytA	17.15	PiaB	17.31		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B013-D	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B015-D	ST3		ST3_Dual-Target	LytA	32.31	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B095-D	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W1075-D	ST3		ST3_Dual-Target	LytA	33.12	PiaB	33.38		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W1527-D	ST3		ST3_Dual-Target	LytA	NaN	PiaB	35.71		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W2987-D	ST3		ST3_Dual-Target	LytA	32.01	PiaB	33.45		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W3317-D	ST3		ST3_Dual-Target	LytA	37.47	PiaB	30.87		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B013-S	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B595-S	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B015-S	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W2987-S	ST3		ST3_Dual-Target	LytA	39.84	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B687-S	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+W1075-S	ST3		ST3_Dual-Target	LytA	NaN	PiaB	38.60		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B015-NP	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B687-NP	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B013-NP	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+B687	ST3		ST3_Dual-Target	LytA	NaN	PiaB	NaN		s.pneumo_test1	2023-10-27	Default software thresholds used (no standards/pos controls)
+111-10300-18	MTB		TB	lpp2	11.06			1.44E+07	TB002	2024-01-29	
+111-5264-18	MTB		TB	lpp2	9.62			3.66E+07	TB002	2024-01-29	
+111-2108-18	MTB		TB	lpp2	8.76			6.42E+07	TB002	2024-01-29	
+111-10712-18	MTB		TB	lpp2	11.26			1.27E+07	TB002	2024-01-29	
+111-10812-18	MTB		TB	lpp2	11.36			1.19E+07	TB002	2024-01-29	
+111-2565-18	MTB		TB	lpp2	11.24			1.28E+07	TB002	2024-01-29	
+111-10960-18	MTB		TB	lpp2	11.28			1.25E+07	TB002	2024-01-29	
+111-10456-18	MTB		TB	lpp2	14.10			1.99E+06	TB002	2024-01-29	
+111-9803-18	MTB		TB	lpp2	11.29			1.24E+07	TB002	2024-01-29	
+444-2375-18	MTB		TB	lpp2	12.43			5.89E+06	TB002	2024-01-29	
+444-2394-18	MTB		TB	lpp2	11.47			1.10E+07	TB002	2024-01-29	
+444-1849-18	MTB		TB	lpp2	9.65			1.39E+08	TB003	2024-03-04	
+444-2261-18	MTB		TB	lpp2	10.76			1.75E+07	TB002	2024-01-29	
+444-2281-18	MTB		TB	lpp2	14.13			1.96E+06	TB002	2024-01-29	
+444-2588-18	MTB		TB	lpp2	11.35			1.19E+07	TB002	2024-01-29	
+444-1650-18	MTB		TB	lpp2	11.06			1.44E+07	TB002	2024-01-29	
+444-3272-18	MTB		TB	lpp2	9.54			3.88E+07	TB002	2024-01-29	
+444-3403-18	MTB		TB	lpp2	15.62			7.41E+05	TB002	2024-01-29	
+444-3322-18	MTB		TB	lpp2	10.57			1.98E+07	TB002	2024-01-29	
+444-3464-18	MTB		TB	lpp2	13.37			3.21E+06	TB002	2024-01-29	
+111-10403-18	MTB		TB	lpp2	14.22			1.84E+06	TB002	2024-01-29	
+111-8988-18	MTB		TB	lpp2	12.88			4.41E+06	TB002	2024-01-29	
+111-7998-18	MTB		TB	lpp2	14.18			1.89E+06	TB002	2024-01-29	
+111-7040-18	MTB		TB	lpp2	10.14			1.03E+08	TB003	2024-03-04	
+444-2225-18	MTB		TB	lpp2	13.11			3.80E+06	TB002	2024-01-29	
+444-2677-18	MTB		TB	lpp2	13.58			2.79E+06	TB002	2024-01-29	
+444-2543-18	MTB		TB	lpp2	12.83			4.54E+06	TB002	2024-01-29	
+444-2046-18	MTB		TB	lpp2	12.57			5.40E+06	TB002	2024-01-29	
+444-1559-18	MTB		TB	lpp2	15.83			6.46E+05	TB002	2024-01-29	
+444-2409-18	MTB		TB	lpp2	12.80			4.64E+06	TB002	2024-01-29	
+444-3404-18	MTB		TB	lpp2	12.68			5.01E+06	TB002	2024-01-29	
+444-2998-18	MTB		TB	lpp2	10.32			2.33E+07	TB002	2024-01-29	
+444-3514-18	MTB		TB	lpp2	11.61			1.01E+07	TB002	2024-01-29	
+444-3398-18	MTB		TB	lpp2	14.23			1.83E+06	TB002	2024-01-29	
+444-3082-18	MTB		TB	lpp2	12.65			5.12E+06	TB002	2024-01-29	
+444-2918-18	MTB		TB	lpp2	10.09			1.06E+08	TB003	2024-03-04	
+111-10582-18	MTB		TB	lpp2	12.66			5.07E+06	TB002	2024-01-29	
+111-10460-18	MTB		TB	lpp2	13.27			3.41E+06	TB002	2024-01-29	
+111-10713-18	MTB		TB	lpp2	12.46			5.78E+06	TB002	2024-01-29	
+111-10223-18	MTB		TB	lpp2	12.55			5.48E+06	TB002	2024-01-29	
+111-10592-18	MTB		TB	lpp2	11.06			1.44E+07	TB002	2024-01-29	
+111-10558-18	MTB		TB	lpp2	12.63			5.18E+06	TB002	2024-01-29	
+111-10693-18	MTB		TB	lpp2	14.99			1.11E+06	TB002	2024-01-29	
+444-3209-18	MTB		TB	lpp2	13.38			3.19E+06	TB002	2024-01-29	
+444-3371-18	MTB		TB	lpp2	14.01			2.12E+06	TB002	2024-01-29	
+444-3582-18	MTB		TB	lpp2	13.66			2.65E+06	TB002	2024-01-29	
+444-2848-18	MTB		TB	lpp2	13.30			3.34E+06	TB002	2024-01-29	
+111-8991-18	MTB		TB	lpp2	9.77			1.29E+08	TB003	2024-03-04	
+111-8736-18	MTB		TB	lpp2	9.85			3.16E+07	TB002	2024-01-29	
+111-8922-18	MTB		TB	lpp2	NaN			NaN	TB002	2024-01-29	
+111-8263-18	MTB		TB	lpp2	12.41			5.96E+06	TB002	2024-01-29	
+111-8492-18	MTB		TB	lpp2	8.85			6.06E+07	TB002	2024-01-29	
+111-8323-18	MTB		TB	lpp2	15.60			7.51E+05	TB002	2024-01-29	
+111-8322-18	MTB		TB	lpp2	10.00			2.87E+07	TB002	2024-01-29	
+111-8372-18	MTB		TB	lpp2	10.66			1.86E+07	TB002	2024-01-29	
+111-8885-18	MTB		TB	lpp2	8.49			7.67E+07	TB002	2024-01-29	
+111-8385-18	MTB		TB	lpp2	10.47			2.11E+07	TB002	2024-01-29	
+111-8022-18	MTB		TB	lpp2	13.56			2.83E+06	TB002	2024-01-29	
+111-8091-18	MTB		TB	lpp2	13.96			2.18E+06	TB002	2024-01-29	
+111-8884-18	MTB		TB	lpp2	8.66			2.54E+08	TB003	2024-03-04	
+111-8244-18	MTB		TB	lpp2	11.19			1.32E+07	TB002	2024-01-29	
+111-8161-18	MTB		TB	lpp2	10.51			2.05E+07	TB002	2024-01-29	
+111-8849-18	MTB		TB	lpp2	8.84			6.11E+07	TB002	2024-01-29	
+111-9435-18	MTB		TB	lpp2	14.04			2.07E+06	TB002	2024-01-29	
+111-8487-18	MTB		TB	lpp2	12.53			5.53E+06	TB002	2024-01-29	
+111-8431-18	MTB		TB	lpp2	13.64			2.69E+06	TB002	2024-01-29	
+111-8840-18	MTB		TB	lpp2	13.41			3.12E+06	TB002	2024-01-29	
+111-8764-18	MTB		TB	lpp2	10.77			1.74E+07	TB002	2024-01-29	
+111-8468-18	MTB		TB	lpp2	9.24			4.70E+07	TB002	2024-01-29	
+111-8852-18	MTB		TB	lpp2	12.14			7.14E+06	TB002	2024-01-29	
+111-8522-18	MTB		TB	lpp2	11.12			1.39E+07	TB002	2024-01-29	
+111-8366-18	MTB		TB	lpp2	11.35			4.93E+07	TB003	2024-03-04	
+111-8103-18	MTB		TB	lpp2	12.42			5.93E+06	TB002	2024-01-29	
+111-8969-18	MTB		TB	lpp2	10.26			2.42E+07	TB002	2024-01-29	
+111-8080-18	MTB		TB	lpp2	10.67			1.86E+07	TB002	2024-01-29	
+111-9974-18	MTB		TB	lpp2	10.16			2.58E+07	TB002	2024-01-29	
+111-8958-18	MTB		TB	lpp2	10.97			1.53E+07	TB002	2024-01-29	
+111-8305-18	MTB		TB	lpp2	9.33			4.43E+07	TB002	2024-01-29	
+111-8777-18	MTB		TB	lpp2	9.38			4.28E+07	TB002	2024-01-29	
+111-8951-18	MTB		TB	lpp2	9.44			4.14E+07	TB002	2024-01-29	
+111-9725-18	MTB		TB	lpp2	10.59			1.96E+07	TB002	2024-01-29	
+111-9083-18	MTB		TB	lpp2	13.04			3.98E+06	TB002	2024-01-29	
+111-8018-18	MTB		TB	lpp2	9.08			5.22E+07	TB002	2024-01-29	
+111-8900-18	MTB		TB	lpp2	8.10			3.57E+08	TB003	2024-03-04	
+444-3065-18	MTB		TB	lpp2	9.82			3.21E+07	TB002	2024-01-29	
+444-3776-18	MTB		TB	lpp2	14.75			1.31E+06	TB002	2024-01-29	
+444-3271-18	MTB		TB	lpp2	11.33			1.21E+07	TB002	2024-01-29	
+444-3866-18	MTB		TB	lpp2	12.74			4.82E+06	TB002	2024-01-29	
+444-2768-18	MTB		TB	lpp2	14.11			1.98E+06	TB002	2024-01-29	
+444-3284-18	MTB		TB	lpp2	10.39			2.22E+07	TB002	2024-01-29	
+111-5271-18	MTB		TB	lpp2	10.55			2.01E+07	TB002	2024-01-29	
+111-9037-18	MTB		TB	lpp2	11.11			1.40E+07	TB002	2024-01-29	
+111-9508-18	MTB		TB	lpp2	9.07			5.25E+07	TB002	2024-01-29	
+111-7963-18	MTB		TB	lpp2	10.20			2.52E+07	TB002	2024-01-29	
+111-5118-18	MTB		TB	lpp2	8.06			3.65E+08	TB003	2024-03-04	
+444-4076-18	MTB		TB	lpp2	12.41			2.59E+07	TB003	2024-03-04	
+Peru-1	MTB		TB	lpp2	27.84			584.717684	TB004	2024-06-10	
+Peru-2	MTB		TB	lpp2	24.02			7194.70525	TB004	2024-06-10	
+Peru-3	MTB		TB	lpp2	21.11			48601.9708	TB004	2024-06-10	
+Peru-4	MTB		TB	lpp2	20.57			69598.8056	TB004	2024-06-10	
+Peru-5	MTB		TB	lpp2	17.50			522728.892	TB004	2024-06-10	
+Peru-6	MTB		TB	lpp2	17.30			594974.684	TB004	2024-06-10	
+Peru-7	MTB		TB	lpp2	17.96			386805.495	TB004	2024-06-10	
+Peru-8	MTB		TB	lpp2	18.16			338311.332	TB004	2024-06-10	
+Peru-9	MTB		TB	lpp2	23.80			8296.52691	TB004	2024-06-10	
+Peru-10	MTB		TB	lpp2	17.28			601927.428	TB004	2024-06-10	
+Peru-11	MTB		TB	lpp2	34.55			7.11329106	TB004	2024-06-10	
+Peru-12	MTB		TB	lpp2	23.29			11656.8465	TB004	2024-06-10	
+Peru-13	MTB		TB	lpp2	34.93			5.53874601	TB004	2024-06-10	
+Peru-14	MTB		TB	lpp2	18.33			301980.336	TB004	2024-06-10	
+Peru-15	MTB		TB	lpp2	17.28			604181.881	TB004	2024-06-10	
+Peru-16	MTB		TB	lpp2	19.27			163545.59	TB004	2024-06-10	
+Peru-17	MTB		TB	lpp2	16.10			1309254.47	TB004	2024-06-10	
+Peru-18	MTB		TB	lpp2	24.51			5218.79261	TB004	2024-06-10	
+Peru-19	MTB		TB	lpp2	24.63			4822.26405	TB004	2024-06-10	
+Peru-20	MTB		TB	lpp2	20.57			69233.8227	TB004	2024-06-10	
+Peru-21	MTB		TB	lpp2	21.66			33806.7496	TB004	2024-06-10	
+Peru-22	MTB		TB	lpp2	21.96			27813.7709	TB004	2024-06-10	
+Peru-23	MTB		TB	lpp2	19.10			182768.868	TB004	2024-06-10	
+Peru-24	MTB		TB	lpp2	21.57			35905.4998	TB004	2024-06-10	
+Peru-25	MTB		TB	lpp2	14.22			4497648.77	TB004	2024-06-10	
+Peru-26	MTB		TB	lpp2	15.77			1626345.47	TB004	2024-06-10	
+Peru-27	MTB		TB	lpp2	24.67			4694.20906	TB004	2024-06-10	
+Peru-28	MTB		TB	lpp2	21.41			40051.533	TB004	2024-06-10	
+Peru-29	MTB		TB	lpp2	18.67			241808.978	TB004	2024-06-10	
+Peru-30	MTB		TB	lpp2	27.20			888.109778	TB004	2024-06-10	
+Peru-31	MTB		TB	lpp2	21.81			30670.0514	TB004	2024-06-10	
+Peru-32	MTB		TB	lpp2	21.76			31661.7591	TB004	2024-06-10	
+Peru-33	MTB		TB	lpp2	19.59			132078.977	TB004	2024-06-10	
+Peru-34	MTB		TB	lpp2	22.32			21971.4888	TB004	2024-06-10	
+Peru-35	MTB		TB	lpp2	15.81			1582648.48	TB004	2024-06-10	
+Peru-36	MTB		TB	lpp2	16.79			830194.199	TB004	2024-06-10	
+Peru-37	MTB		TB	lpp2	25.68			2420.92143	TB004	2024-06-10	
+Peru-38	MTB		TB	lpp2	17.98			380041.189	TB004	2024-06-10	
+Peru-39	MTB		TB	lpp2	34.33			8.22838806	TB004	2024-06-10	
+Peru-40	MTB		TB	lpp2	34.68			6.51461799	TB004	2024-06-10	
+AFB1	MTB		TB	lpp2	NaN				TB004	2024-06-10	
+AFB3	MTB		TB	lpp2	NaN				TB004	2024-06-10	
+AFB4	MTB		TB	lpp2	NaN	 			TB004	2024-06-10	
+AFB5	MTB		TB	lpp2	NaN				TB004	2024-06-10	
+AFB6	MTB		TB	lpp2	NaN				TB004	2024-06-10	
+AFB7	MTB		TB	lpp2	NaN				TB004	2024-06-10	
+AFB8	MTB		TB	lpp2	NaN				TB004	2024-06-10	
+AFB9	MTB		TB	lpp2	NaN				TB004	2024-06-10	
+Peru-41	MTB		TB	lpp2	19.34			154839.733	TB005	2024-07-10	
+Peru-42	MTB		TB	lpp2	18.60			256626.25	TB005	2024-07-10	
+Peru-43	MTB		TB	lpp2	20.49			70311.609	TB005	2024-07-10	
+Peru-44	MTB		TB	lpp2	20.47			71332.6551	TB005	2024-07-10	
+Peru-45	MTB		TB	lpp2	21.68			31163.203	TB005	2024-07-10	
+Peru-46	MTB		TB	lpp2	19.13			178117.826	TB005	2024-07-10	
+Peru-47	MTB		TB	lpp2	26.96			842.412762	TB005	2024-07-10	
+Peru-48	MTB		TB	lpp2	20.94			51807.2047	TB005	2024-07-10	
+Peru-49	MTB		TB	lpp2	19.43			145411.677	TB005	2024-07-10	
+Peru-50	MTB		TB	lpp2	20.83			55663.3961	TB005	2024-07-10	
+Peru-51	MTB		TB	lpp2	18.66			245859.188	TB005	2024-07-10	
+Peru-52	MTB		TB	lpp2	18.32			310986.314	TB005	2024-07-10	
+Peru-53	MTB		TB	lpp2	20.77			58066.6339	TB005	2024-07-10	
+Peru-54	MTB		TB	lpp2	20.42			73951.0446	TB005	2024-07-10	
+Peru-55	MTB		TB	lpp2	22.06			24021.5074	TB005	2024-07-10	
+Peru-56	MTB		TB	lpp2	18.59			257744.585	TB005	2024-07-10	
+Peru-57	MTB		TB	lpp2	26.98			828.871049	TB005	2024-07-10	
+Peru-58	MTB		TB	lpp2	21.59			33249.8121	TB005	2024-07-10	
+Peru-59	MTB		TB	lpp2	18.27			321880.962	TB005	2024-07-10	
+Peru-60	MTB		TB	lpp2	20.59			65844.3836	TB005	2024-07-10	
+A889-CE	S.pneumo		S.pneumo_LytA-PiaB	LytA	25.05	PiaB	26.23	8.88E+03	SP001	2024-09-23	
+B042-CE	S.pneumo		S.pneumo_LytA-PiaB	LytA	27.16	PiaB	28.21	1.95E+03	SP001	2024-09-23	
+C677-CE	S.pneumo		S.pneumo_LytA-PiaB	LytA	24.52	PiaB	25.79	1.28E+04	SP001	2024-09-23	
+W1526-CE	S.pneumo		S.pneumo_LytA-PiaB	LytA	30.47	PiaB	31.86	1.81E+02	SP001	2024-09-23	
+W1527-D	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	36.29	NA	SP001	2024-09-23	
+W1695-CE	S.pneumo		S.pneumo_LytA-PiaB	LytA	28.14	PiaB	29.26	9.62E+02	SP001	2024-09-23	
+W3317-D	S.pneumo		S.pneumo_LytA-PiaB	LytA	35.79	PiaB	30.20	2.29E+00	SP001	2024-09-23	
+W3371-CE	S.pneumo		S.pneumo_LytA-PiaB	LytA	31.63	PiaB	33.15	7.85E+01	SP001	2024-09-23	
+W4034-CE	S.pneumo		S.pneumo_LytA-PiaB	LytA	26.43	PiaB	27.71	3.26E+03	SP001	2024-09-23	
+A889-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	26.96	PiaB	27.50	2.23E+03	SP001	2024-09-23	
+B042-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	32.24	PiaB	32.90	5.08E+01	SP001	2024-09-23	
+C677-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	29.70	PiaB	29.87	3.12E+02	SP001	2024-09-23	
+W1526-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	36.91	PiaB	37.10	1.757	SP001	2024-09-23	
+W1527-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	37.65	NA	SP001	2024-09-23	
+W1695-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	38.12	PiaB	40.22	7.56E-01	SP001	2024-09-23	
+W3317-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	33.09	PiaB	33.88	2.74E+01	SP001	2024-09-23	
+W3371-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	37.87	PiaB	38.04	8.89E-01	SP001	2024-09-23	
+W4034-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	34.45	PiaB	35.11	1.04E+01	SP001	2024-09-23	
+A889-NP	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP001	2024-09-23	
+B042-NP	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP001	2024-09-23	
+C677-NP	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP001	2024-09-23	
+W1527-CI	S.pneumo		S.pneumo_LytA-PiaB	LytA	14.26	PiaB	14.22	2.03E+07	SP001	2024-09-23	
+W3317-CI	S.pneumo		S.pneumo_LytA-PiaB	LytA	14.03	PiaB	14.08	2.40E+07	SP001	2024-09-23	
+W4034-CI	S.pneumo		S.pneumo_LytA-PiaB	LytA	16.30	PiaB	17.19	4.68E+06	SP001	2024-09-23	
+B013-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP001	2024-09-23	
+B595-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+B015-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	39.81	PiaB	NaN	1.80E-01	SP002	2024-09-23	
+W2987-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	38.36	PiaB	NaN	0.505588	SP002	2024-09-23	
+B687-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+W1075-S	S.pneumo		S.pneumo_LytA-PiaB	LytA	38.22	PiaB	NaN	0.557383	SP002	2024-09-23	
+B687N-NP	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+B013N-NP	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+B015N-NP	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+B595-D	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+B013-D	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+B015-D	S.pneumo		S.pneumo_LytA-PiaB	LytA	30.52	PiaB	NaN	136.0042	SP002	2024-09-23	
+W1075-D	S.pneumo		S.pneumo_LytA-PiaB	LytA	31.74	PiaB	33.72	56.90911	SP002	2024-09-23	
+W2987-D	S.pneumo		S.pneumo_LytA-PiaB	LytA	30.31	PiaB	33.79	157.459	SP002	2024-09-23	
+B687	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+NEC1-GREEN	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+NEC2-THICK	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+NEC3-THIN	S.pneumo		S.pneumo_LytA-PiaB	LytA	NaN	PiaB	NaN	NA	SP002	2024-09-23	
+NEC4-YELLOW	S.pneumo		S.pneumo_LytA-PiaB	LytA	37.42	PiaB	NaN	9.90E-01	SP002	2024-09-23	
+CDC	S.pneumo		S.pneumo_LytA-PiaB	LytA	15.32	PiaB	16.74	6.97E+06	SP002	2024-09-23	
+H54	S.pneumo		S.pneumo_LytA-PiaB	LytA	13.86	PiaB	15.29	1.97E+07	SP002	2024-09-23	
+H74	S.pneumo		S.pneumo_LytA-PiaB	LytA	14.63	PiaB	16.06	1.14E+07	SP002	2024-09-23	
+H141	S.pneumo		S.pneumo_LytA-PiaB	LytA	14.86	PiaB	16.48	9.68E+06	SP002	2024-09-23	
+H136	S.pneumo		S.pneumo_LytA-PiaB	LytA	14.74	PiaB	17.29	1.05E+07	SP002	2024-09-23	
+H122	S.pneumo		S.pneumo_LytA-PiaB	LytA	15.09	PiaB	17.09	8.22E+06	SP002	2024-09-23	
