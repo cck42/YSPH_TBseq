@@ -1,8 +1,8 @@
-## Bacterial Amplicon Sequencing
+## TB-seq: *M tuberculosis* Amplicon Sequencing
 
 Created by Chaney Kalinich, Freddy Gonzalez, and Seth Redmond (Grubaugh Lab)
 
-This repo contains data, figures, and code related to the development of amplicon sequencing for *S. pneumoniae* and *M. tuberculosis*.
+This repo contains data, figures, and code related to the development and validation of a whole-genome amplicon sequencing panel for *M. tuberculosis*.
 
 ### Data
 
