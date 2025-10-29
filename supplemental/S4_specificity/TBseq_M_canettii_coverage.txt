@@ -1,1 +1,0 @@
-Bases covered: 3436447, Estimated refs/M_canettii.fasta coverage by amplicons: 0.7753

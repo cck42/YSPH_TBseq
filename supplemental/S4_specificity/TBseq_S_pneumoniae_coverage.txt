@@ -1,1 +1,0 @@
-Bases covered: 102084, Estimated refs/S_pneumoniae.fasta coverage by amplicons: 0.0501
