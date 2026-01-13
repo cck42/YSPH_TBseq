@@ -1,1 +1,0 @@
-Bases covered: 124588, Estimated refs/P_aeruginosa.fasta coverage by amplicons: 0.0199

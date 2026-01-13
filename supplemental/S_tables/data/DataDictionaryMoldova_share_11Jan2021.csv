@@ -1,0 +1,72 @@
+﻿new_var,description,Additional Notes
+uniqueID,"unique participant ID adapted from F089 ID ""-A"" and ""-B"" used to distinguish between participants with same F089 ID, participants with missing F089 data given name missingF089_##",
+tubeLabel,unique tube label sent to TGen,
+firstSpecimen,"used date_specimenCollection to identify first specimen, chose the specimen with greater coverage estimate for specimens collected on the same day","1=first specimen provided by participant or specimen with greatest coveragte estimate if same day, 0=follow-up specimens provided by participant"
+gender,participant gender from the Form 06,"1 = male, 2 = female"
+age,age of individual from the Form 089,
+date_specimenCollection,"specimen collection date adapted from F06 specimen collection date; shipment no. 2 F06 specimen collection dates provided in both MDY and DMY format; where not obvious, used 1) constraint that dates had to be before Jul-31-2019 (final date in shipment no. 3), 2) used distance from F089 specimen collection date to decide whether F06 date was provided in MDY or DMY, 3) where none of the above could clarify, assumed MDY format",
+MDR_phenotype,MDR phenotype determined by results of drug-sensitivity testing on MGIT or LJ culture,"1=MDR by MGIT OR LJ, 0 = not MDR by MGIT AND LJ, NA=unable to determine MDR by MGIT AND LJ"
+MDR_WGS,MDR phenotype determined by results of WGS,"1=MDR, 0 = not MDR"
+denumire,Town/village name of participant residence from the Form 089 (Form 06 if Form 089 address is missing),
+regiune,Region name of participant residence from the Form 089 (Form 06 if Form 089 address is missing),
+regiuneDenumire,Region name + two white spaces + town/village name of participant residence from the Form 089 (Form 06 if Form 089 address is missing),
+long,"Longitude of centroid of town/village of participant residence (regiuneDenumire), primarily from ESRI geolocator",
+lat,"Latitude of centroid of town/village of participant residence (regiuneDenumire), primarily from ESRI geolocator",
+outsideMoldova,whether an individual has resided outside of moldova more than 3 months in past year from the Form 089,"1=yes, 0=no, NA=missing data"
+date_dx,diagnosis date for current case of active/relapsed disease from the Form 089,discrepancies exist b/w this and other dates
+tb_type,case type from the Form 089,"1 = new case, 2 = relapse, 3 = return from default, 4 = treatment failure, 5 = chronic, 6 = initiated treatment abroad, 21 = SSM negtive relapse, 22 = extrapulmonary relapse"
+tb_mainLocation,main localization of disease from the Form 089,"1 = pulmonary; 2-13 are extrapulmonary: 2=tracheobronchitis/larynx, 3=pleura, 4= intrathoracic lymph nodes, 5=peripheral lymph nodes, 6=osteoarticular (spondylitis), 7=osteoarticular (other locations), 8=CNS (meningitis), 9=SN (other locations), 10=urogenital, 11=generalized, 12=gastrointestinal tract, 13=other forms"
+tb_secLocation,secondary localization of disease; many missing values from the Form 089L,"1 = pulmonary, 2 - 13 are extrapulmonary forms "
+date_prevTx,start date of previous tuberculosis treatment from the Form 089,discrepancies exist b/w this and other dates
+tb_initTx,initiated treatment from the Form 089,"1 = yes, 2 = postmortem, 41 = temporarily left, 42 = emigrated, 43 = other"
+date_startTx,current treatment start date from the Form 089,discrepancies exist b/w this and other dates
+tb_referralFrom,by whom the individual was refered to TB specialist from the Form 089L,"71 = GP, with symptoms, 72 = GP, prophylactic control, 81 = other specialist, symptomatic, 82 = other specialist, prophylactic control, 2 = no referral, 9 = control at penitentiary arrival"
+hopsitalized,whether an individual was hospitalized for their TB from the Form 089,"1=yes, 0=no, NA=missing data"
+smear,results of smear microscopy from the Form 06,"1=yes, 0=no, NA=missing data"
+smearDegreePos,microscopy degree of positivty from the Form 06,"1 = 1 -9/100; 2 = 1+, 3 = 2+, 4 = 3+, NA=missing data"
+cultureDegreePos,culture degree of positivity from the Form 06,"1 = 1 -9/100; 2 = 1+, 3 = 2+, 4 = 3+; NA=missing data"
+xpert,Xpert results from the Form 089,"1=positive, 0=negative, NA=missing data"
+xpertRifR,rifampacin drug sensitivity results Xpert the Form 089,"S = sensitive, R = resistant, NA=missing data"
+tb_inst,specialized institution under which patient received care the Form 089,
+urban,whether the individual resides in an urban area the Form 089,"1=yes, 0=no, NA=missing data"
+homeless,whether the individual resides is homeless the Form 089,"1=yes, 0=no, NA=missing data"
+occupation,occuption the Form 089,"1 = employed, 2 = disabled, 3 = retired, 4 = student, 5 = unemployed"
+monetaryAssistance,whether the individual receives monetary assistance the Form 089,"1=yes, 0=no, NA=missing data"
+education,individual's education level the Form 089,"1 = primary, 2 = secondary, 3 = specialized secondary, 4 = higher education, 5 = no education"
+livingConditions, the Form 089,"1=satisfactory, 0=unsatisfactory, NA=missing data"
+previouslyPrisoner,whether the individual was previously incarcerated; this does NOT mean that the individual was a prisoner at the time of study the Form 089,"1 = yes, 0 = no, NA=missing data"
+hhcontacts,number of household contacts the Form 089,
+hhcontactsU18,number of household contacts under 18 the Form 089,
+hotspot,whether the case occurred in a hotspot the Form 089,"1=yes, 0=no, NA=missing data"
+labName,name of laboratory from the Form 06,
+ljdst_h,dst from LJ culture: isoniazid from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_r,dst from LJ culture: rifampicin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_e,dst from LJ culture: ethambutol from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_s,dst from LJ culture: streptomycin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_eto,dst from LJ culture: ethionamide from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_ofx,dst from LJ culture: ofloxocin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_lfx,dst from LJ culture: levofloxacin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_mfx,dst from LJ culture: moxifloxacin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_cm,dst from LJ culture: capreomycin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_cs,dst from LJ culture: cycloserine from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_ps,dst from LJ culture: para-aminosalicylic acid (paser) from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_am,dst from LJ culture: amikacin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_amxClv,dst from LJ culture: amoxicillin-clavulanic acid from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+ljdst_bdq,dst from LJ culture: bedaquiline from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_h,dst from MGIT culture: isoniazid from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_r,dst from MGIT culture: rifampicin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_e,dst from MGIT culture: ethambutol from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_s,dst from MGIT culture: streptomycin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_z,dst from MGIT culture: pyrazinamide from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_eto,dst from MGIT culture: ethionamide from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_km,dst from MGIT culture: kanamycin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_ofx,dst from MGIT culture: ofloxocin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_lfx,dst from MGIT culture: levofloxacin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_mfx,dst from MGIT culture: moxifloxacin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_cm,dst from MGIT culture: capreomycin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_cls,dst from MGIT culture: cycloserine from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_am,dst from MGIT culture: amikacin from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_lzd,dst from MGIT culture: linezolid from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_amxClv,dst from MGIT culture: amoxicillin-clavulanic acid from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_bqd,dst from MGIT culture: bedaquiline from the Form 06,"S = sensitive, R = resistant, NA=missing data"
+mgitdst_dlm,dst from MGIT culture: delamanid from the Form 06,"S = sensitive, R = resistant, NA=missing data"

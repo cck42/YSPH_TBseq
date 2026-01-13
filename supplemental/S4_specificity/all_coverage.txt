@@ -1,0 +1,8 @@
+Bases covered: 113495, Estimated refs/H_influenzae.fasta coverage by amplicons: 0.0601
+Bases covered: 168446, Estimated refs/K_pneumoniae.fasta coverage by amplicons: 0.0310
+Bases covered: 3436447, Estimated refs/M_canettii.fasta coverage by amplicons: 0.7753
+Bases covered: 3805322, Estimated refs/M_tuberculosis.fasta coverage by amplicons: 0.8626
+Bases covered: 124588, Estimated refs/P_aeruginosa.fasta coverage by amplicons: 0.0199
+Bases covered: 39597, Estimated refs/S_aureus.fasta coverage by amplicons: 0.0138
+Bases covered: 248743, Estimated refs/S_odontolytica.fasta coverage by amplicons: 0.1013
+Bases covered: 102084, Estimated refs/S_pneumoniae.fasta coverage by amplicons: 0.0501
